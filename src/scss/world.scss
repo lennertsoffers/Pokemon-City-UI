@@ -1,0 +1,35 @@
+.world {
+    background-color: #ddd;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: none;
+
+    .layer {
+        position: absolute;
+        height: 3072px;
+        width: 3072px;
+        user-select: none;
+
+        .chunk {
+            border: 1px solid black;
+            height: 512px;
+            width: 512px;
+            overflow: hidden;
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            display: grid;
+            grid-template-columns: repeat(16, 32px);
+
+            div.tile {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}
