@@ -1,0 +1,3 @@
+export const TILE_DIMENSION = 32;
+export const CHUNK_DIMENSION = 16;
+export const CHUNK_PIXELS = TILE_DIMENSION * CHUNK_DIMENSION;

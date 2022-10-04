@@ -1,0 +1,14 @@
+import LayerType from "../../types/LayerType";
+import Chunk from "./Chunk";
+
+const Layer = ({ layerData }: { layerData: LayerType }) => {
+    return (
+        <div className="layer">
+            {layerData.chunks.map((chunk, index) => (
+                <Chunk key={index} chunkData={chunk} />
+            ))}
+        </div>
+    );
+};
+
+export default Layer;
