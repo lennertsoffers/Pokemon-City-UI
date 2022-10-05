@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import ToolbarReducer from "./ToolbarReducer";
+import ModalReducer from "./ModalReducer";
 
 const CombinedReducer = combineReducers({
-    toolbar: ToolbarReducer,
+    modal: ModalReducer,
 });
 
 export default CombinedReducer;

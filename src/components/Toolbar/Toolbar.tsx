@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import { OPEN_ACTIONS_MENU, OPEN_BUILD_MENU, OPEN_CITIZENS_MENU } from "../../redux/actions/ToolbarActions";
+import { useDispatch } from "react-redux";
+import { OPEN_MODAL } from "../../redux/actions/ModalActions";
+import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 
 const Toolbar = () => {
     const dispatch = useDispatch();
-    const toolbarState = useSelector((state: { toolbar: any }) => state.toolbar);
 
-    const handleBuildClick = () => dispatch(OPEN_BUILD_MENU);
-    const handleActionsClick = () => dispatch(OPEN_ACTIONS_MENU);
-    const handleCitizensClick = () => dispatch(OPEN_CITIZENS_MENU);
+    const handleBuildClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.BUILD_MODAL));
+    const handleActionsClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.ACTIONS_MODAL));
+    const handleCitizensClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
 
     return (
         <div className="toolbar">
@@ -24,7 +24,6 @@ const Toolbar = () => {
                             <button onClick={handleCitizensClick}>CITIZENS</button>
                         </li>
                     </ul>
-                    <div>{toolbarState}</div>
                 </nav>
             </div>
         </div>
