@@ -1,0 +1,21 @@
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    padding: 100px;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+
+    .modal--inner {
+        background-color: #fff;
+        height: 100%;
+        border-radius: 10px;
+        padding: 20px;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

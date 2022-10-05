@@ -14,6 +14,8 @@ const World = () => {
 
         const worldElement = world.current;
 
+        // We don't make a state because updating the state on every mouseMove event
+        // is more demanding than reading the scroll position of the element
         const newX = worldElement.scrollLeft - e.movementX;
         const newY = worldElement.scrollTop - e.movementY;
 
