@@ -1,6 +1,9 @@
 enum ActionTypeEnum {
     OPEN_MODAL = "OPEN_MODAL",
     CLOSE_MODAL = "CLOSE_MODAL",
+    LOAD_BUILDING_DATA = "LOAD_BUILDING_DATA",
+    LOAD_MAP_DATA = "LOAD_MAP_DATA",
+    CREATE_BUILDING = "CREATE_BUILDING",
 }
 
 export default ActionTypeEnum;

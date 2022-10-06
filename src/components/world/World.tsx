@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import MapDataType from "../../types/MapDataType";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CREATE_BUILDING, LOAD_MAP_DATA } from "../../redux/actions/MapActions";
 import { CHUNK_PIXELS } from "./Constants";
 import Layer from "./Layer";
 import MapData from "./map";
 
 const World = () => {
-    const [worldData, setWorldData] = useState<MapDataType | null>(null);
     const world = useRef<any>(null);
+    const dispatch = useDispatch();
+    const mapData = useSelector((state: any) => state.mapData);
 
     const mouseMoveHandler = (e: any) => {
         if (e.buttons !== 1) return;
@@ -23,18 +25,21 @@ const World = () => {
     };
 
     useEffect(() => {
-        setWorldData(MapData);
+        dispatch(LOAD_MAP_DATA(MapData));
+        dispatch(CREATE_BUILDING(null));
+    }, [dispatch]);
 
+    useEffect(() => {
         if (world.current == null) return;
-        if (worldData == null) return;
+        if (mapData == null) return;
 
         const worldElement = world.current;
         worldElement.style.display = "block";
-        worldElement.scrollTo((CHUNK_PIXELS * worldData.chunksX) / 2 - window.innerWidth / 2, (CHUNK_PIXELS * worldData.chunksY) / 2 - window.innerHeight / 2);
-    }, [worldData]);
+        worldElement.scrollTo((CHUNK_PIXELS * mapData.chunksX) / 2 - window.innerWidth / 2, (CHUNK_PIXELS * mapData.chunksY) / 2 - window.innerHeight / 2);
+    }, [mapData]);
 
     const data: JSX.Element[] | String = (() => {
-        if (worldData != null) return worldData.layers.map((layer, index) => <Layer key={index} layerData={layer} />);
+        if (mapData != null) return mapData.layers.map((layer: any, index: any) => <Layer key={index} layerData={layer} />);
         else return "Loading...";
     })();
 

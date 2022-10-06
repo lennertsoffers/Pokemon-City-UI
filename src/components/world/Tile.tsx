@@ -1,10 +1,14 @@
 import { TILE_DIMENSION } from "./Constants";
 
-const Tile = ({ tileId }: { tileId: number }) => {
+const Tile = ({ tileId, tileIndex, chunkPosition, layerId }: { tileId: number; tileIndex: number; chunkPosition: { x: number; y: number }; layerId: number }) => {
     const x = (tileId - 1) * -TILE_DIMENSION;
 
     const tileClickHandler = () => {
-        console.log(tileId);
+        console.log({
+            layer: layerId,
+            chunk: chunkPosition,
+            tile: tileIndex,
+        });
     };
 
     return (
