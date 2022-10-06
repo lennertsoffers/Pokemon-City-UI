@@ -17,7 +17,7 @@ const BuildModal = () => {
             <div className="buildModal--inner">
                 <div>
                     <h2>Houses</h2>
-                    <div>
+                    <div className="buildingSelector">
                         {buildingData.houses.map((houseData: HouseDataType, index) => (
                             <HouseDataCard key={index} houseData={houseData} />
                         ))}
