@@ -1,9 +1,29 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import BuildingStateType from "../../../types/BuildingStateType";
+import HouseDataType from "../../../types/HouseDataType";
 import Modal from "../Modal";
+import HouseDataCard from "./HouseDataCard";
 
 const BuildModal = () => {
+    const { buildingData }: BuildingStateType = useSelector((state: any) => state.building);
+
+    useEffect(() => {
+        console.log(buildingData);
+    }, [buildingData]);
+
     return (
-        <Modal title="test" onOpen={() => console.log("c")} onClose={() => console.log("c")}>
-            <div>asdf</div>
+        <Modal title="Build">
+            <div className="buildModal--inner">
+                <div>
+                    <h2>Houses</h2>
+                    <div>
+                        {buildingData.houses.map((houseData: HouseDataType, index) => (
+                            <HouseDataCard key={index} houseData={houseData} />
+                        ))}
+                    </div>
+                </div>
+            </div>
         </Modal>
     );
 };

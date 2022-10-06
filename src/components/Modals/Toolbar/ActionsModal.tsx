@@ -2,7 +2,7 @@ import Modal from "../Modal";
 
 const ActionsModal = () => {
     return (
-        <Modal title="test" onOpen={() => console.log("c")} onClose={() => console.log("c")}>
+        <Modal title="test">
             <div>asdf</div>
         </Modal>
     );

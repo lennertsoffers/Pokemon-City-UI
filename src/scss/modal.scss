@@ -16,6 +16,19 @@
         header {
             display: flex;
             justify-content: space-between;
+            height: 50px;
+        }
+
+        .modal--inner__children {
+            height: calc(100% - 50px);
+
+            .buildModal--inner {
+                border-radius: 10px;
+                overflow: auto;
+                background-color: #eee;
+                height: 100%;
+                padding: 10px;
+            }
         }
     }
 }

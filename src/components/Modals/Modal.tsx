@@ -19,10 +19,10 @@ const Modal = (properties: ModalProperties) => {
         <div className="modal" onClick={handleClickPage}>
             <div className="modal--inner">
                 <header>
-                    <div>{properties.title}</div>
+                    <h1>{properties.title}</h1>
                     <div onClick={handleClose}>X</div>
                 </header>
-                {properties.children}
+                <div className="modal--inner__children">{properties.children}</div>
             </div>
         </div>
     );
