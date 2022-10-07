@@ -8,6 +8,7 @@ import CombinedReducer from "./redux/reducers/CombinedReducer";
 function App() {
     const store = configureStore({
         reducer: CombinedReducer,
+        middleware: [],
     });
 
     return (

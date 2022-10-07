@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import BuildingStateType from "../../../types/BuildingStateType";
 import HouseDataType from "../../../types/HouseDataType";
@@ -7,10 +6,6 @@ import HouseDataCard from "./HouseDataCard";
 
 const BuildModal = () => {
     const { buildingData }: BuildingStateType = useSelector((state: any) => state.building);
-
-    useEffect(() => {
-        console.log(buildingData);
-    }, [buildingData]);
 
     return (
         <Modal title="Build">
