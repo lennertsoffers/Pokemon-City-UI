@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CHUNK_PIXELS } from "../../config";
-import { LOAD_MAP_DATA } from "../../redux/actions/MapActions";
-import CombinedState from "../../types/interfaces/states/CombinedState";
-import BuildablePlacement from "../../types/interfaces/world/BuildablePlacement";
-import Building from "./Building";
+import { CHUNK_PIXELS } from "../../../config/config";
+import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
+import BuildablePlacement from "../../../types/interfaces/world/BuildablePlacement";
+import LayerData from "../../../types/interfaces/world/LayerData";
+import Building from "../building/Building";
 import Layer from "./Layer";
 import map from "./map";
 
@@ -41,14 +42,14 @@ const World = () => {
         worldElement.scrollTo((CHUNK_PIXELS * mapData.chunksX) / 2 - window.innerWidth / 2, (CHUNK_PIXELS * mapData.chunksY) / 2 - window.innerHeight / 2);
     }, [mapData]);
 
-    const data: JSX.Element[] | String = (() => {
-        if (mapData != null) return mapData.layers.map((layer: any, index: any) => <Layer key={index} layerData={layer} />);
+    const layers: JSX.Element[] | String = (() => {
+        if (mapData != null) return mapData.layers.map((layerData: LayerData, index: any) => <Layer key={index} layerData={layerData} />);
         else return "Loading...";
     })();
 
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
-            {data}
+            <div>{layers}</div>
             <div className="buildings">{buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Building data={placement} key={index} />)}</div>
         </div>
     );

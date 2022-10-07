@@ -1,4 +1,4 @@
-import { CHUNK_DIMENSION } from "../config";
+import { CHUNK_DIMENSION } from "../config/config";
 import Position from "../types/interfaces/world/Position";
 
 const ChunkUtils = (() => {

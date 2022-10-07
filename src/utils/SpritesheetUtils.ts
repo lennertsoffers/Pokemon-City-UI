@@ -1,4 +1,4 @@
-import { TILES_IN_ROW } from "../config";
+import { TILES_IN_ROW } from "../config/config";
 import SpritesheetLocation from "../types/interfaces/spritesheet/SpritesheetLocation";
 
 const SpritesheetUtils = (() => {

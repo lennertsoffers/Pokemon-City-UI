@@ -1,4 +1,4 @@
-import MapData from "../../types/interfaces/world/MapData";
+import MapData from "../../../types/interfaces/world/MapData";
 
 const map: MapData = {
     layers: [
