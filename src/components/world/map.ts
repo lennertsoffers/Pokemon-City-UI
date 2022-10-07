@@ -1,6 +1,6 @@
-import MapDataType from "../../types/MapDataType";
+import MapData from "../../types/interfaces/world/MapData";
 
-const MapData: MapDataType = {
+const map: MapData = {
     layers: [
         {
             chunks: [
@@ -411,4 +411,4 @@ const MapData: MapDataType = {
     chunksY: 6,
 };
 
-export default MapData;
+export default map;

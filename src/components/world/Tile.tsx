@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DESELECT_BUILDING } from "../../redux/actions/BuildingSelectorActions";
-import { CREATE_BUILDING } from "../../redux/actions/MapActions";
+import { TILE_WIDTH } from "../../config";
+import { CREATE_BUILDING } from "../../redux/actions/BuildablePlacementActions";
+import { DESELECT_BUILDING } from "../../redux/actions/BuildableSelectorActions";
+import CombinedState from "../../types/interfaces/states/CombinedState";
 import ChunkUtils from "../../utils/ChunkUtils";
-import { TILE_DIMENSION } from "./Constants";
 
 const Tile = ({ tileId, tileIndex, chunkPosition, layerId, spritesheet }: { tileId: number; tileIndex: number; chunkPosition: { x: number; y: number }; layerId: number; spritesheet: string }) => {
-    const x = (tileId - 1) * -TILE_DIMENSION;
-    const selectedBuildingType = useSelector((state: any) => state.buildingSelector.type);
+    const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const dispatch = useDispatch();
+    const x = (tileId - 1) * -TILE_WIDTH;
 
     const tileClickHandler = () => {
         console.log({
@@ -19,7 +20,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition, layerId, spritesheet }: { tile
     };
 
     const build = () => {
-        if (selectedBuildingType != null) {
+        if (selectedBuildable != null) {
             dispatch(
                 CREATE_BUILDING({
                     bottomRightPosition: ChunkUtils.tileIndexToPosition(tileIndex),

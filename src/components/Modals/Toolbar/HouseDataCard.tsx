@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
-import { SELECT_BUILDING } from "../../../redux/actions/BuildingSelectorActions";
+import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
-import HouseDataType from "../../../types/HouseDataType";
+import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
 
-const HouseDataCard = ({ houseData }: { houseData: HouseDataType }) => {
+const HouseDataCard = ({ houseData }: { houseData: StaticHouseData }) => {
     const dispatch = useDispatch();
 
     const handleClick = () => {

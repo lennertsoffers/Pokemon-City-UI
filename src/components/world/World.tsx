@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CHUNK_PIXELS } from "../../config";
 import { LOAD_MAP_DATA } from "../../redux/actions/MapActions";
-import BuildingPlacementType from "../../types/BuildingPlacementType";
-import LayerType from "../../types/LayerType";
+import CombinedState from "../../types/interfaces/states/CombinedState";
+import BuildablePlacement from "../../types/interfaces/world/BuildablePlacement";
 import Building from "./Building";
-import { CHUNK_PIXELS } from "./Constants";
 import Layer from "./Layer";
-import MapData from "./map";
+import map from "./map";
 
 const World = () => {
     const world = useRef<any>(null);
     const dispatch = useDispatch();
-    const mapData = useSelector((state: any) => state.mapData);
-    const buildings = useSelector((state: any) => state.building.buildingMap);
+    const mapData = useSelector((state: CombinedState) => state.mapState.mapData);
+    const buildablePlacements = useSelector((state: CombinedState) => state.buildablePlacementState.buildablePlacements);
 
     const mouseMoveHandler = (e: any) => {
         if (e.buttons !== 1) return;
@@ -29,7 +29,7 @@ const World = () => {
     };
 
     useEffect(() => {
-        dispatch(LOAD_MAP_DATA(MapData));
+        dispatch(LOAD_MAP_DATA(map));
     }, [dispatch]);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const World = () => {
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
             {data}
-            <div className="buildings">{buildings !== undefined && buildings.map((placement: BuildingPlacementType, index: number) => <Building data={placement} key={index} />)}</div>
+            <div className="buildings">{buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Building data={placement} key={index} />)}</div>
         </div>
     );
 };

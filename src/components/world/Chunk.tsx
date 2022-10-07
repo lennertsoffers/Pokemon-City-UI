@@ -1,8 +1,8 @@
-import ChunkType from "../../types/ChunkType";
-import { CHUNK_DIMENSION } from "./Constants";
+import { CHUNK_DIMENSION } from "../../config";
+import ChunkData from "../../types/interfaces/world/ChunkData";
 import Tile from "./Tile";
 
-const Chunk = ({ chunkData, layerId, spritesheet }: { chunkData: ChunkType; layerId: number; spritesheet: string }) => {
+const Chunk = ({ chunkData, layerId, spritesheet }: { chunkData: ChunkData; layerId: number; spritesheet: string }) => {
     const x = (chunkData.x / CHUNK_DIMENSION) * 100;
     const y = (chunkData.y / CHUNK_DIMENSION) * 100;
 

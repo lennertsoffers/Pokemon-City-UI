@@ -1,4 +1,4 @@
-interface BuildableDataType {
+interface StaticBuildableData {
     name: string;
     xpWhenFinished: number;
     price: number;
@@ -7,4 +7,4 @@ interface BuildableDataType {
     height: number;
 }
 
-export default BuildableDataType;
+export default StaticBuildableData;

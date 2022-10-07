@@ -1,9 +1,8 @@
-import { CHUNK_DIMENSION, TILE_WIDTH } from "../../config";
-import BuildingPlacementType from "../../types/BuildingPlacementType";
+import { CHUNK_DIMENSION, CHUNK_PIXELS, TILE_WIDTH } from "../../config";
+import BuildablePlacement from "../../types/interfaces/world/BuildablePlacement";
 import SpritesheetUtils from "../../utils/SpritesheetUtils";
-import { CHUNK_PIXELS } from "./Constants";
 
-const Building = ({ data }: { data: BuildingPlacementType }) => {
+const Building = ({ data }: { data: BuildablePlacement }) => {
     const dimensions = SpritesheetUtils.getDimension(data.spritesheetLocation);
     const x = (data.chunkPosition.x / CHUNK_DIMENSION) * 100;
     const y = (data.chunkPosition.y / CHUNK_DIMENSION) * 100;
