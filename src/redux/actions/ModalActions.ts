@@ -1,4 +1,4 @@
-import ActionTypeEnum from "../../types/enums/ActionTypeEnum";
+import ActionTypeEnum from "./ActionTypeEnum";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 
 export const OPEN_MODAL = (modal: ModalTypeEnum) => ({ type: ActionTypeEnum.OPEN_MODAL, modal: modal });

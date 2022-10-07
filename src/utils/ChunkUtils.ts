@@ -1,8 +1,8 @@
-import { CHUNK_DIMENSION } from "../config";
-import PositionType from "../types/PositionType";
+import { CHUNK_DIMENSION } from "../config/config";
+import Position from "../types/interfaces/world/Position";
 
 const ChunkUtils = (() => {
-    const tileIndexToPosition = (tileIndex: number): PositionType => ({
+    const tileIndexToPosition = (tileIndex: number): Position => ({
         x: tileIndex % CHUNK_DIMENSION,
         y: Math.floor(tileIndex / CHUNK_DIMENSION),
     });

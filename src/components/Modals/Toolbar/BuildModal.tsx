@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import BuildingStateType from "../../../types/BuildingStateType";
-import HouseDataType from "../../../types/HouseDataType";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
+import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
 import Modal from "../Modal";
 import HouseDataCard from "./HouseDataCard";
 
 const BuildModal = () => {
-    const { buildingData }: BuildingStateType = useSelector((state: any) => state.building);
+    const houseData: Array<StaticHouseData> = useSelector((state: CombinedState) => state.staticDataState.staticHouseData);
 
     return (
         <Modal title="Build">
@@ -13,7 +13,7 @@ const BuildModal = () => {
                 <div>
                     <h2>Houses</h2>
                     <div className="buildingSelector">
-                        {buildingData.houses.map((houseData: HouseDataType, index) => (
+                        {houseData.map((houseData: StaticHouseData, index) => (
                             <HouseDataCard key={index} houseData={houseData} />
                         ))}
                     </div>

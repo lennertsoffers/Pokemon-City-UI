@@ -1,6 +1,4 @@
-import BuildingPlacementType from "../../types/BuildingPlacementType";
-import ActionTypeEnum from "../../types/enums/ActionTypeEnum";
-import MapDataType from "../../types/MapDataType";
+import MapData from "../../types/interfaces/world/MapData";
+import ActionTypeEnum from "./ActionTypeEnum";
 
-export const CREATE_BUILDING = (data: BuildingPlacementType) => ({ type: ActionTypeEnum.CREATE_BUILDING, data: data });
-export const LOAD_MAP_DATA = (data: MapDataType) => ({ type: ActionTypeEnum.LOAD_MAP_DATA, data: data });
+export const LOAD_MAP_DATA = (data: MapData) => ({ type: ActionTypeEnum.LOAD_MAP_DATA, data: data });

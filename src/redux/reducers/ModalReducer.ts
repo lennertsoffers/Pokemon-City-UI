@@ -1,5 +1,6 @@
-import ActionTypeEnum from "../../types/enums/ActionTypeEnum";
+import ActionTypeEnum from "../actions/ActionTypeEnum";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
+import ModalState from "../../types/interfaces/states/ModalState";
 
 const getClosedModalVisiblity = () => {
     let modalVisibility: any = {};
@@ -16,7 +17,9 @@ const getClosedModalVisiblity = () => {
     return modalVisibility;
 };
 
-const ModalReducer = (state = { modalVisibility: getClosedModalVisiblity() }, action: { type: ActionTypeEnum; modal: ModalTypeEnum }) => {
+const initialState: ModalState = { modalVisibilityMap: getClosedModalVisiblity() };
+
+const ModalReducer = (state = initialState, action: { type: ActionTypeEnum; modal: ModalTypeEnum }) => {
     let newVisibility;
 
     switch (action.type) {
@@ -26,14 +29,14 @@ const ModalReducer = (state = { modalVisibility: getClosedModalVisiblity() }, ac
 
             return {
                 ...state,
-                modalVisibility: newVisibility,
+                modalVisibilityMap: newVisibility,
             };
         case ActionTypeEnum.CLOSE_MODAL:
             newVisibility = getClosedModalVisiblity();
 
             return {
                 ...state,
-                modalVisibility: newVisibility,
+                modalVisibilityMap: newVisibility,
             };
         default:
             return state;

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { CLOSE_MODAL } from "../../redux/actions/ModalActions";
-import ModalProperties from "../../types/ModalProperties";
+import ModalProperties from "../../types/interfaces/world/ModalProperties";
 
 const Modal = (properties: ModalProperties) => {
     const dispatch = useDispatch();
