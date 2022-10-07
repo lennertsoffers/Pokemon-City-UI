@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CREATE_BUILDING, LOAD_MAP_DATA } from "../../redux/actions/MapActions";
+import { LOAD_MAP_DATA } from "../../redux/actions/MapActions";
+import BuildingPlacementType from "../../types/BuildingPlacementType";
+import LayerType from "../../types/LayerType";
+import Building from "./Building";
 import { CHUNK_PIXELS } from "./Constants";
 import Layer from "./Layer";
 import MapData from "./map";
@@ -9,6 +12,7 @@ const World = () => {
     const world = useRef<any>(null);
     const dispatch = useDispatch();
     const mapData = useSelector((state: any) => state.mapData);
+    const buildings = useSelector((state: any) => state.building.buildingMap);
 
     const mouseMoveHandler = (e: any) => {
         if (e.buttons !== 1) return;
@@ -26,7 +30,6 @@ const World = () => {
 
     useEffect(() => {
         dispatch(LOAD_MAP_DATA(MapData));
-        dispatch(CREATE_BUILDING(null));
     }, [dispatch]);
 
     useEffect(() => {
@@ -46,6 +49,7 @@ const World = () => {
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
             {data}
+            <div className="buildings">{buildings !== undefined && buildings.map((placement: BuildingPlacementType, index: number) => <Building data={placement} key={index} />)}</div>
         </div>
     );
 };

@@ -1,8 +1,18 @@
+import { useDispatch } from "react-redux";
+import { SELECT_BUILDING } from "../../../redux/actions/BuildingSelectorActions";
+import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import HouseDataType from "../../../types/HouseDataType";
 
 const HouseDataCard = ({ houseData }: { houseData: HouseDataType }) => {
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        dispatch(SELECT_BUILDING(houseData));
+        dispatch(CLOSE_MODAL);
+    };
+
     return (
-        <div className="houseCard">
+        <div className="houseCard" onClick={handleClick}>
             <div>
                 <img src={"./assets/images/" + houseData.name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase() + ".png"} alt="house" />
             </div>
