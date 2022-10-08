@@ -40,6 +40,7 @@ const World = () => {
 
         const worldElement = world.current;
 
+        const backgroundImage = "house_spritesheet";
         const location = selectedBuildable.spritesheetLocation;
 
         const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
@@ -51,14 +52,26 @@ const World = () => {
 
         worldElement.querySelector(".buildingActionWrapper").innerHTML = `
             <div style="
+                background-position: ${-dimensions.offsetLeft * TILE_WIDTH}px ${-dimensions.offsetTop}px;
+                background-image: url(./assets/spritesheets/${backgroundImage}.png);
                 transform: translate(${bottomRightWorldPosition.x * TILE_WIDTH - displayWidth + TILE_WIDTH}px, ${bottomRightWorldPosition.y * TILE_WIDTH - displayHeight + TILE_WIDTH}px);
                 width: ${displayWidth}px;
                 height: ${displayHeight}px;
-                border: 3px solid #000;
                 position: absolute;
                 left: 50%;
                 top: 50%;
-            "/>
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                opacity: 0.85;
+            ">
+                <div style="
+                    border: 4px dashed rgba(150, 0, 0, 0.8);
+                    background-color: rgba(255, 0, 0, 0.3);
+                    height: ${selectedBuildable.height * TILE_WIDTH}px;
+                    width: ${selectedBuildable.width * TILE_WIDTH}px;
+                "/>
+            </div>
         `;
     };
 
@@ -74,6 +87,13 @@ const World = () => {
         worldElement.style.display = "block";
         worldElement.scrollTo((CHUNK_PIXELS * mapData.chunksX) / 2 - window.innerWidth / 2, (CHUNK_PIXELS * mapData.chunksY) / 2 - window.innerHeight / 2);
     }, [mapData]);
+
+    useEffect(() => {
+        if (selectedBuildable != null) return;
+        if (world.current == null) return;
+
+        world.current.querySelector(".buildingActionWrapper").innerHTML = "";
+    }, [selectedBuildable]);
 
     const layers: JSX.Element[] | String = (() => {
         if (mapData != null) return mapData.layers.map((layerData: LayerData, index: any) => <Layer key={index} layerData={layerData} showLocationForBuildable={showLocationForBuildable} />);
