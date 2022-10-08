@@ -10,6 +10,7 @@ import CombinedReducer from "./redux/reducers/CombinedReducer";
 AxiosConfig.configure();
 const store = configureStore({
     reducer: CombinedReducer,
+    middleware: [],
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);

@@ -13,6 +13,13 @@
         pointer-events: none;
     }
 
+    .buildingActionWrapper {
+        position: absolute;
+        height: 3072px;
+        width: 3072px;
+        pointer-events: none;
+    }
+
     .layer {
         position: absolute;
         height: 3072px;
@@ -20,7 +27,7 @@
         user-select: none;
 
         .chunk {
-            border: 1px solid black;
+            // border: 1px solid black;
             height: 512px;
             width: 512px;
             overflow: hidden;
@@ -34,6 +41,8 @@
             grid-template-columns: repeat(16, 32px);
 
             div.tile {
+                // border: 1px solid black;
+
                 width: 32px;
                 height: 32px;
             }

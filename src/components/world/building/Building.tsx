@@ -7,6 +7,8 @@ const Building = ({ data }: { data: BuildablePlacement }) => {
     const x = (data.chunkPosition.x / CHUNK_DIMENSION) * 100;
     const y = (data.chunkPosition.y / CHUNK_DIMENSION) * 100;
 
+    console.log(dimensions.offsetTop);
+
     return (
         <div
             style={{
