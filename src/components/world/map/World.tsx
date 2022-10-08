@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CHUNK_PIXELS, TILE_WIDTH } from "../../../config/config";
+import { CHUNK_PIXELS, FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
 import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
@@ -40,8 +40,8 @@ const World = () => {
 
         const worldElement = world.current;
 
-        const backgroundImage = "house_spritesheet";
         const location = selectedBuildable.spritesheetLocation;
+        const spritesheet = selectedBuildable.spritesheet ? selectedBuildable.spritesheet : FALLBACK_SPRITESHEET;
 
         const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
         const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
@@ -53,7 +53,7 @@ const World = () => {
         worldElement.querySelector(".buildingActionWrapper").innerHTML = `
             <div style="
                 background-position: ${-dimensions.offsetLeft * TILE_WIDTH}px ${-dimensions.offsetTop}px;
-                background-image: url(./assets/spritesheets/${backgroundImage}.png);
+                background-image: url(./assets/spritesheets/${spritesheet}.png);
                 transform: translate(${bottomRightWorldPosition.x * TILE_WIDTH - displayWidth + TILE_WIDTH}px, ${bottomRightWorldPosition.y * TILE_WIDTH - displayHeight + TILE_WIDTH}px);
                 width: ${displayWidth}px;
                 height: ${displayHeight}px;
@@ -63,6 +63,7 @@ const World = () => {
                 display: flex;
                 flex-direction: column;
                 justify-content: end;
+                align-items: center;
                 opacity: 0.85;
             ">
                 <div style="
