@@ -1,4 +1,5 @@
 import { CHUNK_DIMENSION } from "../config/config";
+import SpritesheetDimension from "../types/interfaces/spritesheet/SpriteSheetDimension";
 import Position from "../types/interfaces/world/Position";
 
 const ChunkUtils = (() => {
@@ -35,11 +36,23 @@ const ChunkUtils = (() => {
         };
     };
 
+    /**
+     * Takes a tile position and uses this as the center of the building
+     * Based on the dimensions of the building in the spritesheet, the bottom right world tile is returned
+     */
+    const toBottomRightWorldPosition = (worldPosition: Position, dimensions: SpritesheetDimension): Position => {
+        return {
+            x: worldPosition.x + Math.floor(dimensions.width / 2),
+            y: worldPosition.y + Math.floor(dimensions.height / 2),
+        };
+    };
+
     return {
         tileIndexToPosition,
         positionToIndex,
         toWorldPosition,
         toChunkPositionAndTileIndex,
+        toBottomRightWorldPosition,
     };
 })();
 
