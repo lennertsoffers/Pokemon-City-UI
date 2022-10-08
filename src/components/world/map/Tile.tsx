@@ -4,9 +4,10 @@ import { TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
+import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
 
-const Tile = ({ tileId, tileIndex, chunkPosition }: { tileId: number; tileIndex: number; chunkPosition: { x: number; y: number } }) => {
+const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: any }) => {
     const self = useRef<any>(null);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition }: { tileId: number; tileIndex:
         if (self.current == null) return;
         if (selectedBuildable == null) return;
 
-        self.current.style.opacity = 0.5;
+        showLocationForBuildable(tileIndex, chunkPosition);
     };
 
     const mouseLeaveHandler = () => {
@@ -57,6 +58,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition }: { tileId: number; tileIndex:
 
     return (
         <div
+            data-index={tileIndex}
             ref={self}
             onClick={tileClickHandler}
             onMouseEnter={mouseEnterHandler}

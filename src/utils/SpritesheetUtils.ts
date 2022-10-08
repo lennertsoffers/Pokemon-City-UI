@@ -1,8 +1,9 @@
 import { TILES_IN_ROW } from "../config/config";
+import SpritesheetDimension from "../types/interfaces/spritesheet/SpriteSheetDimension";
 import SpritesheetLocation from "../types/interfaces/spritesheet/SpritesheetLocation";
 
 const SpritesheetUtils = (() => {
-    const getDimension = (spritesheetLocation: SpritesheetLocation) => {
+    const getDimension = (spritesheetLocation: SpritesheetLocation): SpritesheetDimension => {
         // Offset from the most left tile of the spritesheet
         const offsetLeft = spritesheetLocation.topLeft % TILES_IN_ROW;
         const offsetTop = Math.floor((spritesheetLocation.topLeft / TILES_IN_ROW) * 32);

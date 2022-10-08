@@ -1,7 +1,8 @@
 interface SpritesheetDimension {
     width: number;
     height: number;
-    offset: number;
+    offsetTop: number;
+    offsetLeft: number;
 }
 
 export default SpritesheetDimension;
