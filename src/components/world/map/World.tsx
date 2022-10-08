@@ -1,6 +1,6 @@
 import { DOMElement, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CHUNK_PIXELS } from "../../../config/config";
+import { CHUNK_DIMENSION, CHUNK_PIXELS, TILE_WIDTH } from "../../../config/config";
 import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import SpritesheetLocation from "../../../types/interfaces/spritesheet/SpritesheetLocation";
@@ -42,35 +42,31 @@ const World = () => {
 
         const location: SpritesheetLocation = {
             topLeft: 144,
-            bottomRight: 255,
+            bottomRight: 206,
         };
         const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
 
         const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
-
-        const topLeftWorldPosition: Position = {
-            x: worldPosition.x - Math.floor(dimensions.width / 2),
-            y: worldPosition.y - Math.floor(dimensions.height / 2),
-        };
 
         const bottomRightWorldPosition: Position = {
             x: worldPosition.x + Math.floor(dimensions.width / 2),
             y: worldPosition.y + Math.floor(dimensions.height / 2),
         };
 
-        document.querySelectorAll(".tile").forEach((tile: any) => (tile.style.opacity = 1));
+        const displayWidth = dimensions.width * 32;
+        const displayHeight = dimensions.height * 32;
 
-        for (let x = topLeftWorldPosition.x; x <= bottomRightWorldPosition.x; x++) {
-            for (let y = topLeftWorldPosition.y; y <= bottomRightWorldPosition.y; y++) {
-                const tileWorldPosition: Position = { x: x, y: y };
-                const tileChunkAndIndex = ChunkUtils.toChunkPositionAndTileIndex(tileWorldPosition);
-                // const tileDomElement = worldElement.querySelector(
-                //     `.layer[data-id="1"] .chunk[data-x="${tileChunkAndIndex.chunkPosition.x}"][data-y="${tileChunkAndIndex.chunkPosition.y}"] .tile[data-index="${tileChunkAndIndex.tileIndex}"]`
-                // );
-                // tileDomElement.style.opacity = 0.5;
-                console.log(1);
-            }
-        }
+        worldElement.querySelector(".buildingActionWrapper").innerHTML = `
+            <div style="
+                transform: translate(${bottomRightWorldPosition.x * 32 - displayWidth + 32}px, ${bottomRightWorldPosition.y * 32 - displayHeight + 32}px);
+                width: ${displayWidth}px;
+                height: ${displayHeight}px;
+                border: 3px solid #000;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+            "></div>
+        `;
 
         // console.log({
         //     index: tileIndex,
@@ -101,6 +97,7 @@ const World = () => {
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
             <div className="layers">{layers}</div>
             <div className="buildings">{buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Building data={placement} key={index} />)}</div>
+            <div className="buildingActionWrapper"></div>
         </div>
     );
 };
