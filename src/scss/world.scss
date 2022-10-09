@@ -11,6 +11,10 @@
         height: 3072px;
         width: 3072px;
         pointer-events: none;
+
+        > div > div {
+            pointer-events: all;
+        }
     }
 
     .buildingActionWrapper {

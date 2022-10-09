@@ -9,7 +9,7 @@ import LayerData from "../../../types/interfaces/world/LayerData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
-import Building from "../building/Building";
+import Buildable from "../buildable/Buildable";
 import Layer from "./Layer";
 import map from "./map";
 
@@ -104,7 +104,9 @@ const World = () => {
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
             <div className="layers">{layers}</div>
-            <div className="buildings">{buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Building data={placement} key={index} />)}</div>
+            <div className="buildings">
+                {buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Buildable buildablePlacement={placement} key={index} />)}
+            </div>
             <div className="buildingActionWrapper"></div>
         </div>
     );

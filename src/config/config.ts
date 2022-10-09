@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:8080/api";
+export const BASE_URL = "http://127.0.0.1:8080";
 export const SPRITESHEET_WIDTH = 256;
 export const TILE_WIDTH = 32;
 export const TILES_IN_ROW = SPRITESHEET_WIDTH / TILE_WIDTH;
@@ -11,3 +11,6 @@ export const SELLING_SPRITESHEET = "selling_spritesheet";
 export const SERVICE_SPRITESHEET = "service_spritesheet";
 export const SOCIAL_SPRITESHEET = "social_spritesheet";
 export const FALLBACK_SPRITESHEET = "unknown_texture";
+
+export const BEARER_TOKEN =
+    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMZW5uZXJ0MSIsInJvbGVzIjpbIlJPTEVfUExBWUVSIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9hdXRoL2xvZ2luIiwiZXhwIjoxNjY1MzgzMjU3fQ.fPJlTGJJLOrH-_O5u7YzgySRbIG_9VHbblVzW06DpCk";
