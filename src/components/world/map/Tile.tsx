@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TILE_WIDTH } from "../../../config/config";
+import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
@@ -31,6 +31,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         if (selectedBuildable == null) return;
 
         const location = selectedBuildable.spritesheetLocation;
+        const spritesheet = selectedBuildable.spritesheet ? selectedBuildable.spritesheet : FALLBACK_SPRITESHEET;
 
         const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
         const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
@@ -43,7 +44,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
             CREATE_BUILDING({
                 bottomRightPosition: buildingPosition,
                 spritesheetLocation: location,
-                spriteSheet: "house_spritesheet",
+                spriteSheet: spritesheet,
                 chunkPosition: buildingChunkPosition,
             })
         );
