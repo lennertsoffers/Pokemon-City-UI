@@ -15,7 +15,6 @@ const Chunk = ({ chunkData, showLocationForBuildable }: { chunkData: ChunkData; 
                 transform: `translate(${x}%, ${y}%)`,
             }}
         >
-            <div style={{ position: "absolute", top: "13px", left: "10px", fontWeight: "bold", fontSize: "50px" }}>{chunkData.x.toString() + " " + chunkData.y.toString()}</div>
             {chunkData.data.map((tileId, index) => (
                 <Tile key={index} tileIndex={index} tileId={tileId} chunkPosition={{ x: chunkData.x, y: chunkData.y }} showLocationForBuildable={showLocationForBuildable} />
             ))}

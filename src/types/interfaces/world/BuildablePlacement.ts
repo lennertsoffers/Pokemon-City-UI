@@ -2,10 +2,10 @@ import SpritesheetLocation from "../spritesheet/SpritesheetLocation";
 import Position from "./Position";
 
 interface BuildablePlacement {
+    buildableId: number;
     spritesheetLocation: SpritesheetLocation;
-    spriteSheet: string;
-    bottomRightPosition: Position;
-    chunkPosition: Position;
+    spritesheet: string;
+    position: Position;
 }
 
 export default BuildablePlacement;

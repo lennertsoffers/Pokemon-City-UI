@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
+import { UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
+import ActionEnum from "../../../types/enums/ActionEnum";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import Position from "../../../types/interfaces/world/Position";
@@ -11,12 +13,22 @@ import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 
 const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: any }) => {
     const self = useRef<any>(null);
+    const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const dispatch = useDispatch();
     const x = (tileId - 1) * -TILE_WIDTH;
 
     const tileClickHandler = () => {
-        tryBuild();
+        switch (selectedAction) {
+            case ActionEnum.BUILD:
+                return tryBuild();
+            case ActionEnum.MOVE:
+                return console.log("move");
+            case ActionEnum.DEMOLISH:
+                return console.log("demolish");
+            case ActionEnum.NONE:
+                return console.log("none");
+        }
     };
 
     const mouseEnterHandler = () => {
@@ -36,19 +48,17 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
         const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
         const bottomRightWorldPosition = ChunkUtils.toBottomRightWorldPosition(worldPosition, dimensions);
-        const bottomRightChunkAndTile = ChunkUtils.toChunkPositionAndTileIndex(bottomRightWorldPosition);
-        const buildingPosition = ChunkUtils.tileIndexToPosition(bottomRightChunkAndTile.tileIndex);
-        const buildingChunkPosition = bottomRightChunkAndTile.chunkPosition;
 
         dispatch(
             CREATE_BUILDING({
-                bottomRightPosition: buildingPosition,
+                buildableId: 200,
                 spritesheetLocation: location,
-                spriteSheet: spritesheet,
-                chunkPosition: buildingChunkPosition,
+                spritesheet: spritesheet,
+                position: bottomRightWorldPosition,
             })
         );
         dispatch(DESELECT_BUILDING);
+        dispatch(UNSELECT_ACTION);
     };
 
     return (
