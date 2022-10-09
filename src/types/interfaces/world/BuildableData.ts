@@ -1,4 +1,5 @@
 import SpritesheetLocation from "../spritesheet/SpritesheetLocation";
+import Position from "./Position";
 
 interface BuildableData {
     id: number;
@@ -9,9 +10,10 @@ interface BuildableData {
     unlockedAtLevel: number;
     height: number;
     width: number;
-    location: Location;
-    buildableTypeEnum: string;
+    location: Position;
     spritesheetLocation: SpritesheetLocation;
+    buildableTypeEnum: string;
+    specialisationType: string;
 }
 
 export default BuildableData;

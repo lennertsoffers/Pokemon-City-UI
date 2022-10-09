@@ -7,8 +7,6 @@ const initialState: BuildablePlacementState = { buildablePlacements: [] };
 const BuildablePlacementReducer = (state: BuildablePlacementState = initialState, action: { type: ActionTypeEnum; data: BuildablePlacement | Array<BuildablePlacement> }) => {
     switch (action.type) {
         case ActionTypeEnum.LOAD_BUILDINGS:
-            console.log(action.data);
-
             return {
                 ...state,
                 buildablePlacements: action.data,

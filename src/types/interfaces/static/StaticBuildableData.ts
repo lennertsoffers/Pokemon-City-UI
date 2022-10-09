@@ -9,6 +9,7 @@ interface StaticBuildableData {
     height: number;
     spritesheetLocation: SpritesheetLocation;
     spritesheet: string;
+    type: string;
 }
 
 export default StaticBuildableData;

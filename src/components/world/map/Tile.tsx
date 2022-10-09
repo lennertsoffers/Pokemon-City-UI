@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
@@ -7,8 +8,10 @@ import { UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
+import BuildableData from "../../../types/interfaces/world/BuildableData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
+import BuildablePlacementMapper from "../../../utils/mappers/BuildablePlacementMapper";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 
 const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: any }) => {
@@ -49,16 +52,21 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
         const bottomRightWorldPosition = ChunkUtils.toBottomRightWorldPosition(worldPosition, dimensions);
 
-        dispatch(
-            CREATE_BUILDING({
-                buildableId: 200,
-                spritesheetLocation: location,
-                spritesheet: spritesheet,
-                position: bottomRightWorldPosition,
+        const body = {
+            name: selectedBuildable.name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase(),
+            x: bottomRightWorldPosition.x,
+            y: bottomRightWorldPosition.y,
+            buildableType: selectedBuildable.type,
+        };
+
+        axios
+            .post("/api/buildables/build", body)
+            .then(({ data }: { data: BuildableData }) => {
+                dispatch(CREATE_BUILDING(BuildablePlacementMapper.toBuildablePlacement(data)));
+                dispatch(DESELECT_BUILDING);
+                dispatch(UNSELECT_ACTION);
             })
-        );
-        dispatch(DESELECT_BUILDING);
-        dispatch(UNSELECT_ACTION);
+            .catch((error) => console.log(error.response.data));
     };
 
     return (
