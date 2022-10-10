@@ -1,11 +1,7 @@
-import SpritesheetLocation from "../spritesheet/SpritesheetLocation";
-import Position from "./Position";
+import BuildableData from "./BuildableData";
 
-interface BuildablePlacement {
-    buildableId: number;
-    spritesheetLocation: SpritesheetLocation;
+interface BuildablePlacement extends BuildableData {
     spritesheet: string;
-    position: Position;
 }
 
 export default BuildablePlacement;

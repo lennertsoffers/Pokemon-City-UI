@@ -1,4 +1,4 @@
-import { TILES_IN_ROW } from "../config/config";
+import { COOKING_SPRITESHEET, FALLBACK_SPRITESHEET, HOUSE_SPRITESHEET, SELLING_SPRITESHEET, SERVICE_SPRITESHEET, SOCIAL_SPRITESHEET, TILES_IN_ROW } from "../config/config";
 import SpritesheetDimension from "../types/interfaces/spritesheet/SpriteSheetDimension";
 import SpritesheetLocation from "../types/interfaces/spritesheet/SpritesheetLocation";
 
@@ -20,8 +20,31 @@ const SpritesheetUtils = (() => {
         };
     };
 
+    const getCorrespondingSpritesheet = (buildableType: string, specialisationType: string): string => {
+        switch (buildableType) {
+            case "HOUSE":
+                return HOUSE_SPRITESHEET;
+            case "COMPANY":
+                switch (specialisationType) {
+                    case "COOKING":
+                        return COOKING_SPRITESHEET;
+                    case "SOCIAL":
+                        return SOCIAL_SPRITESHEET;
+                    case "SERVICE":
+                        return SERVICE_SPRITESHEET;
+                    case "SELLING":
+                        return SELLING_SPRITESHEET;
+                    default:
+                        return FALLBACK_SPRITESHEET;
+                }
+            default:
+                return FALLBACK_SPRITESHEET;
+        }
+    };
+
     return {
         getDimension,
+        getCorrespondingSpritesheet,
     };
 })();
 
