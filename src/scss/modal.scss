@@ -53,6 +53,32 @@
                     }
                 }
             }
+
+            .citizenModal--inner {
+                border-radius: 10px;
+                overflow: auto;
+                background-color: #eee;
+                height: 100%;
+                padding: 20px 0;
+
+                display: flex;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+
+                .citizenCard {
+                    flex: 1 1;
+                    min-width: 300px;
+                    padding: 20px;
+                    border-radius: 10px;
+                    background-color: #fff;
+                    margin: 20px;
+
+                    img {
+                        min-width: 100px;
+                        max-width: 100px;
+                    }
+                }
+            }
         }
     }
 }

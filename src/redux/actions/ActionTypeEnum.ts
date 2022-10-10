@@ -18,6 +18,8 @@ enum ActionTypeEnum {
 
     SELECT_ACTION = "SELECT_ACTION",
     UNSELECT_ACTION = "UNSELECT_ACTION",
+
+    LOAD_CITIZENS = "LOAD_CITIZENS",
 }
 
 export default ActionTypeEnum;

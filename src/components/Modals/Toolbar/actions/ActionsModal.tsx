@@ -18,7 +18,7 @@ const ActionsModal = () => {
     };
 
     return (
-        <Modal title="test">
+        <Modal title="Actions">
             <div>
                 <button onClick={handleMoveClick}>MOVE</button>
                 <button onClick={handleDemolishClick}>DEMOLISH</button>
