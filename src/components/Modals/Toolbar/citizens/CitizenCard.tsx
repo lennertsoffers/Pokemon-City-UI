@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { SELECT_CITIZEN } from "../../../../redux/actions/CitizenSelectorActions";
 import { OPEN_MODAL } from "../../../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../../../types/enums/ModalTypeEnum";
 import CitizenData from "../../../../types/interfaces/citizens/CitizenData";
@@ -8,6 +9,7 @@ const CitizenCard = ({ citizenData }: { citizenData: CitizenData }) => {
     const dispatch = useDispatch();
 
     const handleCitizenClick = () => {
+        dispatch(SELECT_CITIZEN(citizenData.id));
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZEN_ASSIGNMENT_MODAL));
     };
 
