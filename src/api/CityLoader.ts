@@ -16,7 +16,6 @@ const CityLoader = (() => {
     const initalize = () => {
         _loadStaticData();
         loadBuildables();
-        loadCitizens();
     };
 
     const loadBuildables = () => {
@@ -35,6 +34,15 @@ const CityLoader = (() => {
         });
     };
 
+    const getCompaniesWithEmployees = async () => {
+        try {
+            const response = await axios.get("/api/companies");
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const _loadStaticData = () => {
         axios
             .get("/api/buildables/data")
@@ -49,6 +57,9 @@ const CityLoader = (() => {
     return {
         setup,
         initalize,
+        loadBuildables,
+        loadCitizens,
+        getCompaniesWithEmployees,
     };
 })();
 

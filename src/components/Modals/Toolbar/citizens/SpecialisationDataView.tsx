@@ -4,7 +4,6 @@ import ProgressBar from "./ProgressBar";
 const SpecialisationDataView = ({ specialisationData, maxSpecialisationData }: { specialisationData: SpecialisationData; maxSpecialisationData: SpecialisationData }) => {
     return (
         <div>
-            <div>Specialisation</div>
             <div>
                 <div>
                     <div>COOKING</div>
