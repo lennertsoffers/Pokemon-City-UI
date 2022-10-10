@@ -1,5 +1,5 @@
-import AssignedCitizenData from "../../../../types/interfaces/citizens/AssignedCitizenData";
-import CitizenAssignmentData from "../../../../types/interfaces/citizens/CitizenAssignmentData";
+import AssignedCitizenData from "../../../types/interfaces/citizens/AssignedCitizenData";
+import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
 import CitizenCard from "../citizens/CitizenCard";
 import EmptyEmployeeSpace from "./EmptyEmployeeSpace";
 

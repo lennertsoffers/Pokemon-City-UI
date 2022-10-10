@@ -1,4 +1,4 @@
-import SpecialisationData from "../../../../types/interfaces/citizens/SpecialisationData";
+import SpecialisationData from "../../../types/interfaces/citizens/SpecialisationData";
 import ProgressBar from "./ProgressBar";
 
 const SpecialisationDataView = ({ specialisationData, maxSpecialisationData }: { specialisationData: SpecialisationData; maxSpecialisationData: SpecialisationData }) => {

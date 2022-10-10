@@ -1,5 +1,5 @@
-import { HOUSE_SPRITESHEET } from "../../../../config/config";
-import StaticHouseData from "../../../../types/interfaces/static/StaticHouseData";
+import { HOUSE_SPRITESHEET } from "../../../config/config";
+import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
 import BuildableCard from "./BuildableCard";
 
 const HouseDataCard = ({ houseData }: { houseData: StaticHouseData }) => {

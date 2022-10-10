@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import CitizenData from "../../../../types/interfaces/citizens/CitizenData";
-import CombinedState from "../../../../types/interfaces/states/CombinedState";
-import Modal from "../../Modal";
+import CitizenData from "../../../types/interfaces/citizens/CitizenData";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
+import Modal from "../Modal";
 import CitizenCard from "./CitizenCard";
 
 const CitizensModal = () => {

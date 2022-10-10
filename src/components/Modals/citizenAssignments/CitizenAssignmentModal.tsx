@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import CityLoader from "../../../../api/CityLoader";
-import CitizenAssignmentData from "../../../../types/interfaces/citizens/CitizenAssignmentData";
-import Modal from "../../Modal";
+import CityLoader from "../../../api/CityLoader";
+import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
+import Modal from "../Modal";
 import CitizenAssignmentCard from "./CitizenAssignmentCard";
 
 const CitizenAssignmentModal = () => {

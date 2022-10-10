@@ -1,5 +1,5 @@
-import StaticCompanyData from "../../../../types/interfaces/static/StaticCompanyData";
-import SpritesheetUtils from "../../../../utils/SpritesheetUtils";
+import StaticCompanyData from "../../../types/interfaces/static/StaticCompanyData";
+import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 import BuildableCard from "./BuildableCard";
 
 const CompanyDataCard = ({ companyData }: { companyData: StaticCompanyData }) => {

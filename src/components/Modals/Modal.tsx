@@ -12,6 +12,10 @@ const Modal = (properties: ModalProperties) => {
     };
 
     const handleClose = () => {
+        if (properties.onClose) {
+            properties.onClose();
+        }
+
         dispatch(CLOSE_MODAL);
     };
 

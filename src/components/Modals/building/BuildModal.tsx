@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import CombinedState from "../../../../types/interfaces/states/CombinedState";
-import StaticCompanyData from "../../../../types/interfaces/static/StaticCompanyData";
-import StaticDecorationData from "../../../../types/interfaces/static/StaticDecorationData";
-import StaticHouseData from "../../../../types/interfaces/static/StaticHouseData";
-import Modal from "../../Modal";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
+import StaticCompanyData from "../../../types/interfaces/static/StaticCompanyData";
+import StaticDecorationData from "../../../types/interfaces/static/StaticDecorationData";
+import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
+import Modal from "../Modal";
 import CompanyDataCard from "./CompanyDataCard";
 import HouseDataCard from "./HouseDataCard";
 

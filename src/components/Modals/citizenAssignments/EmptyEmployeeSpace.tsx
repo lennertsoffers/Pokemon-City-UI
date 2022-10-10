@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import CityLoader from "../../../../api/CityLoader";
-import CombinedState from "../../../../types/interfaces/states/CombinedState";
+import CityLoader from "../../../api/CityLoader";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
 
 const EmptyEmployeeSpace = ({ companyId, updateCitizenAssignments }: { companyId: number; updateCitizenAssignments: any }) => {
     const citizenId = useSelector((state: CombinedState) => state.citizenSelectorState.citizenId);

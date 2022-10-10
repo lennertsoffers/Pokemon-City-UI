@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { SELECT_CITIZEN } from "../../../../redux/actions/CitizenSelectorActions";
-import { OPEN_MODAL } from "../../../../redux/actions/ModalActions";
-import ModalTypeEnum from "../../../../types/enums/ModalTypeEnum";
-import CitizenData from "../../../../types/interfaces/citizens/CitizenData";
+import { SELECT_CITIZEN } from "../../../redux/actions/CitizenSelectorActions";
+import { OPEN_MODAL } from "../../../redux/actions/ModalActions";
+import ModalTypeEnum from "../../../types/enums/ModalTypeEnum";
+import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import SpecialisationDataView from "./SpecialisationDataView";
 
 const CitizenCard = ({ citizenData }: { citizenData: CitizenData }) => {
