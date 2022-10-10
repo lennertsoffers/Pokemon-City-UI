@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import BuildablePlacementReducer from "./BuildablePlacementReducer";
 import BuildableSelectorReducer from "./BuildableSelectorReducer";
+import CitizenReducer from "./CitizenReducer";
 import MapReducer from "./MapReducer";
 import ModalReducer from "./ModalReducer";
 import SelectedActionReducer from "./SelectedActionReducer";
@@ -13,6 +14,7 @@ const CombinedReducer = combineReducers({
     modalState: ModalReducer,
     staticDataState: StaticDataReducer,
     selectedActionState: SelectedActionReducer,
+    citizenState: CitizenReducer,
 });
 
 export default CombinedReducer;
