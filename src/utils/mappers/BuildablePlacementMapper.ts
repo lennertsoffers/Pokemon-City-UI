@@ -5,10 +5,8 @@ import SpritesheetUtils from "../SpritesheetUtils";
 const BuildablePlacementMapper = (() => {
     const toBuildablePlacement = (buildableData: BuildableData): BuildablePlacement => {
         return {
-            buildableId: buildableData.id,
-            position: buildableData.location,
+            ...buildableData,
             spritesheet: SpritesheetUtils.getCorrespondingSpritesheet(buildableData.buildableTypeEnum, buildableData.specialisationType),
-            spritesheetLocation: buildableData.spritesheetLocation,
         };
     };
 

@@ -9,6 +9,8 @@ import { LOAD_STATIC_COMPANY_DATA, LOAD_STATIC_DECORATION_DATA, LOAD_STATIC_HOUS
 import BuildableData from "./types/interfaces/world/BuildableData";
 import BuildablePlacementMapper from "./utils/mappers/BuildablePlacementMapper";
 
+// TODO - When dragging, do not listen to other events that use the mouse
+
 function App() {
     const dispatch = useDispatch();
 
