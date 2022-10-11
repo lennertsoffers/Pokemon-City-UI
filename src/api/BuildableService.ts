@@ -3,6 +3,8 @@ import axios from "axios";
 import { DEMOLISH_BUILDING } from "../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../redux/actions/ModalActions";
+import { LOAD_USER_DATA } from "../redux/actions/UserActions";
+import UserService from "./UserService";
 
 const BuildableService = (() => {
     let store: Store;
@@ -22,6 +24,7 @@ const BuildableService = (() => {
             .then((response) => {
                 console.log(response.data);
                 store.dispatch(DEMOLISH_BUILDING(buildableId));
+                UserService.loadUserData();
             })
             .catch((error) => console.log(error.response.data))
             .finally(() => {
