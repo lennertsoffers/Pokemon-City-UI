@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { CLOSE_MODAL } from "../../../../redux/actions/ModalActions";
-import { SELECT_ACTION } from "../../../../redux/actions/SelectedActionActions";
-import ActionEnum from "../../../../types/enums/ActionEnum";
-import Modal from "../../Modal";
+import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
+import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
+import ActionEnum from "../../../types/enums/ActionEnum";
+import Modal from "../Modal";
 
 const ActionsModal = () => {
     const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { SELECT_BUILDING } from "../../../../redux/actions/BuildableSelectorActions";
-import { CLOSE_MODAL } from "../../../../redux/actions/ModalActions";
-import { SELECT_ACTION } from "../../../../redux/actions/SelectedActionActions";
-import ActionEnum from "../../../../types/enums/ActionEnum";
+import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
+import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
+import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
+import ActionEnum from "../../../types/enums/ActionEnum";
 
 const BuildableCard = (properties: any) => {
     const dispatch = useDispatch();

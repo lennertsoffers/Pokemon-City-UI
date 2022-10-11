@@ -1,12 +1,17 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import BuildableService from "../../../api/BuildableService";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
+import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
+import { OPEN_MODAL } from "../../../redux/actions/ModalActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
+import ModalTypeEnum from "../../../types/enums/ModalTypeEnum";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildablePlacement from "../../../types/interfaces/world/BuildablePlacement";
 import Position from "../../../types/interfaces/world/Position";
+import BuildablePlacementMapper from "../../../utils/mappers/BuildablePlacementMapper";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 
 const Buildable = ({ buildablePlacement }: { buildablePlacement: BuildablePlacement }) => {
@@ -28,20 +33,12 @@ const Buildable = ({ buildablePlacement }: { buildablePlacement: BuildablePlacem
     const handleDemolish = () => {
         // TODO - Handle response and error
 
-        console.log("demolish");
-
-        // axios
-        //     .delete(`/api/buildables/demolish`, {
-        //         data: {
-        //             buildableId: buildablePlacement.id,
-        //             citizenIds: [10, 20],
-        //         },
-        //     })
-        //     .then((response) => {
-        //         console.log(response.data);
-        //         dispatch(DEMOLISH_BUILDING(buildablePlacement.id));
-        //     })
-        //     .catch((error) => console.log(error.response.data));
+        if (buildablePlacement.buildableTypeEnum === "HOUSE") {
+            dispatch(SELECT_BUILDING(BuildablePlacementMapper.toStaticBuildableData(buildablePlacement), buildablePlacement.id));
+            dispatch(OPEN_MODAL(ModalTypeEnum.SELECT_CITIZEN_TO_DEMOLISH_MODAL));
+        } else {
+            BuildableService.demolishBuildable(buildablePlacement.id);
+        }
     };
 
     const handleMove = () => {

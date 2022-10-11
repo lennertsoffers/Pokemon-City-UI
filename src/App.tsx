@@ -1,6 +1,7 @@
 import { Store } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { useStore } from "react-redux";
+import BuildableService from "./api/BuildableService";
 import CityLoader from "./api/CityLoader";
 import ModalContainer from "./components/Modals/ModalContainer";
 import Toolbar from "./components/toolbar/Toolbar";
@@ -20,6 +21,7 @@ function App() {
         //     .then((response) => console.log(response));
 
         CityLoader.setup(store);
+        BuildableService.initalize(store);
         CityLoader.initalize();
     });
 

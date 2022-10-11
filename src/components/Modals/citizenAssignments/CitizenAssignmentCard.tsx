@@ -1,9 +1,9 @@
-import AssignedCitizenData from "../../../../types/interfaces/citizens/AssignedCitizenData";
-import CitizenAssignmentData from "../../../../types/interfaces/citizens/CitizenAssignmentData";
+import AssignedCitizenData from "../../../types/interfaces/citizens/AssignedCitizenData";
+import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
 import CitizenCard from "../citizens/CitizenCard";
 import EmptyEmployeeSpace from "./EmptyEmployeeSpace";
 
-const CitizenAssignmentCard = ({ citizenAssignmentData }: { citizenAssignmentData: CitizenAssignmentData }) => {
+const CitizenAssignmentCard = ({ citizenAssignmentData, updateCitizenAssignments }: { citizenAssignmentData: CitizenAssignmentData; updateCitizenAssignments: any }) => {
     const amountOfEmployees = citizenAssignmentData.employees.length;
     const spacesAvailable = citizenAssignmentData.maxAssignedCitizens - amountOfEmployees;
 
@@ -24,7 +24,7 @@ const CitizenAssignmentCard = ({ citizenAssignmentData }: { citizenAssignmentDat
                 </div>
             </div>
             <div className="employeeData">
-                {spacesAvailable > 0 && <EmptyEmployeeSpace companyId={citizenAssignmentData.id} />}
+                {spacesAvailable > 0 && <EmptyEmployeeSpace companyId={citizenAssignmentData.id} updateCitizenAssignments={updateCitizenAssignments} />}
                 <div className="assignedCitizens">
                     {citizenAssignmentData.employees.map((assignedCitizenData: AssignedCitizenData) => (
                         <CitizenCard citizenData={assignedCitizenData} key={assignedCitizenData.id} />

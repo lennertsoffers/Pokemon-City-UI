@@ -43,6 +43,15 @@ const CityLoader = (() => {
         }
     };
 
+    const getUnassignedCitizens = async () => {
+        try {
+            const response = await axios.get("/api/citizens/unassigned");
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const _loadStaticData = () => {
         axios
             .get("/api/buildables/data")
@@ -60,6 +69,7 @@ const CityLoader = (() => {
         loadBuildables,
         loadCitizens,
         getCompaniesWithEmployees,
+        getUnassignedCitizens,
     };
 })();
 

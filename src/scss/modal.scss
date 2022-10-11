@@ -135,6 +135,44 @@
                     margin-bottom: 0;
                 }
             }
+
+            .buildableDemolishModal--inner {
+                height: 100%;
+
+                .citizenDataCards {
+                    border-radius: 10px;
+                    overflow: auto;
+                    background-color: #eee;
+                    height: calc(100% - 50px);
+                    padding: 20px 0;
+
+                    display: flex;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+
+                    .citizenCard {
+                        flex: 1 1;
+                        min-width: 300px;
+                        padding: 20px;
+                        border-radius: 10px;
+                        background-color: #fff;
+                        margin: 20px;
+                    }
+                }
+
+                .confirmDemolishButton {
+                    height: 50px;
+
+                    button {
+                        background-color: lightblue;
+                        border: none;
+                        margin-top: 10px;
+                        border-radius: 10px;
+                        height: 40px;
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
 }

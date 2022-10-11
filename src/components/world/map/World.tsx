@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHUNK_PIXELS, FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
 import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
+import ActionEnum from "../../../types/enums/ActionEnum";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildablePlacement from "../../../types/interfaces/world/BuildablePlacement";
@@ -19,6 +20,7 @@ const World = () => {
     const mapData = useSelector((state: CombinedState) => state.mapState.mapData);
     const buildablePlacements = useSelector((state: CombinedState) => state.buildablePlacementState.buildablePlacements);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
+    const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
 
     const mouseMoveHandler = (e: any) => {
         if (e.buttons !== 1) return;
@@ -37,6 +39,7 @@ const World = () => {
     const showLocationForBuildable = (tileIndex: number, chunkPosition: Position) => {
         if (world.current == null) return;
         if (selectedBuildable == null) return;
+        if (selectedAction !== ActionEnum.BUILD && selectedAction !== ActionEnum.MOVE) return;
 
         const worldElement = world.current;
 
