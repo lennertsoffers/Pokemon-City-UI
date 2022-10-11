@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import SpecialisationDataView from "../citizens/SpecialisationDataView";
 
-const CitizenDataCard = ({ citizenData, handleCitizenClick }: { citizenData: CitizenData; handleCitizenClick: any }) => {
+const CitizenDataCard = ({ citizenData, handleCitizenClick, preSelected }: { citizenData: CitizenData; handleCitizenClick: any; preSelected: boolean }) => {
     const [selected, setSelected] = useState<boolean>(false);
 
     const handleCitizenDataClick = () => {
         setSelected(!selected);
         handleCitizenClick(citizenData.id);
     };
+
+    useEffect(() => setSelected(preSelected), [preSelected]);
 
     return (
         <div

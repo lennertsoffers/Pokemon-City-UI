@@ -6,6 +6,7 @@ import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActio
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
+import CitizenUtils from "../../../utils/CitizenUtils";
 import Modal from "../Modal";
 import CitizenDataCard from "./CitizenDataCard";
 
@@ -19,7 +20,13 @@ const BuildableDemolishModal = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        CityLoader.getUnassignedCitizens().then((data) => setUnassignedCitizens(data));
+        CityLoader.getUnassignedCitizens().then((data) => {
+            // Sorts on total amount of maxspecialisationdata
+            const sortedCitizenData = data.sort(
+                (a: CitizenData, b: CitizenData) => CitizenUtils.totalSpecialisationData(a.maxSpecialisationData) - CitizenUtils.totalSpecialisationData(b.maxSpecialisationData)
+            );
+            setUnassignedCitizens(sortedCitizenData);
+        });
     });
 
     if (!selectedBuildable || !selectedBuildableId) return <div>Not Found</div>;
@@ -54,6 +61,13 @@ const BuildableDemolishModal = () => {
         console.log(`Select ${amoutOfCitizensLeftToDelete} citizens more`);
     };
 
+    const handleSelectWorstClick = () => {
+        setSelectedCitizens([]);
+
+        const amountToSelect = staticHouseData.numberOfCitizens;
+        setSelectedCitizens(unassignedCitizens.map((citizen) => citizen.id).slice(0, amountToSelect));
+    };
+
     const handleClose = () => {
         dispatch(DESELECT_BUILDING);
     };
@@ -63,11 +77,12 @@ const BuildableDemolishModal = () => {
             <div className="buildableDemolishModal--inner">
                 <div className="citizenDataCards">
                     {unassignedCitizens.map((citizenData: CitizenData) => (
-                        <CitizenDataCard citizenData={citizenData} handleCitizenClick={handleCitizenClick} key={citizenData.id} />
+                        <CitizenDataCard preSelected={selectedCitizens.includes(citizenData.id)} citizenData={citizenData} handleCitizenClick={handleCitizenClick} key={citizenData.id} />
                     ))}
                 </div>
-                <div className="confirmDemolishButton">
+                <div className="buttons">
                     <button onClick={handleConfirmDemolishClick}>Demolish</button>
+                    <button onClick={handleSelectWorstClick}>Select Worst</button>
                 </div>
             </div>
         </Modal>
