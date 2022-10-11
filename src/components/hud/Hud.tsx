@@ -1,8 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_MODAL } from "../../redux/actions/ModalActions";
+import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
 
 const Hud = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
+    const dispatch = useDispatch();
+
+    const handleCityNameClick = () => {
+        dispatch(OPEN_MODAL(ModalTypeEnum.CHANGE_CITY_NAME_MODAL));
+    };
+
+    const handleCitizensClick = () => {
+        dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
+    };
 
     // TODO - Loader
     if (!userData) return <div>Loading...</div>;
@@ -15,13 +26,13 @@ const Hud = () => {
                     <div>LV. {userData.level}</div>
                 </div>
             </div>
-            <div className="hud__center">
+            <div className="hud__center" onClick={handleCityNameClick}>
                 <div>{userData.cityName}</div>
             </div>
             <div className="hud__right">
                 <div>
                     <div>€{userData.money}</div>
-                    <div>👨‍👩‍👦‍👦{userData.citizens}</div>
+                    <div onClick={handleCitizensClick}>👨‍👩‍👦‍👦{userData.citizens}</div>
                     <div>🌟{userData.satisfaction}</div>
                 </div>
             </div>

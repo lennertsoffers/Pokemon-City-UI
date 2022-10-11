@@ -5,6 +5,7 @@ import BuildModal from "./building/BuildModal";
 import CitizenAssignmentModal from "./citizenAssignments/CitizenAssignmentModal";
 import CitizensModal from "./citizens/CitizensModal";
 import BuildableDemolishModal from "./demolish/BuildableDemolishModal";
+import ChangeCityNameModal from "./user/ChangeCityNameModal";
 
 const ModalContainer = () => {
     const modalVisibilityMap = useSelector((state: CombinedState) => state.modalState.modalVisibilityMap);
@@ -16,6 +17,7 @@ const ModalContainer = () => {
             {modalVisibilityMap.CITIZENS_MODAL && <CitizensModal />}
             {modalVisibilityMap.CITIZEN_ASSIGNMENT_MODAL && <CitizenAssignmentModal />}
             {modalVisibilityMap.SELECT_CITIZEN_TO_DEMOLISH_MODAL && <BuildableDemolishModal />}
+            {modalVisibilityMap.CHANGE_CITY_NAME_MODAL && <ChangeCityNameModal />}
         </div>
     );
 };

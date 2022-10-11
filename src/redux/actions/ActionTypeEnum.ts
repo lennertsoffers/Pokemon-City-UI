@@ -25,6 +25,7 @@ enum ActionTypeEnum {
     LOAD_CITIZENS = "LOAD_CITIZENS",
 
     LOAD_USER_DATA = "LOAD_USER_DATA",
+    UPDATE_CITY_NAME = "UPDATE_CITY_NAME",
 }
 
 export default ActionTypeEnum;

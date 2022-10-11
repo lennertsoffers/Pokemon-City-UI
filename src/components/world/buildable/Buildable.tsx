@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
 import UserService from "../../../api/UserService";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
-import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { OPEN_MODAL } from "../../../redux/actions/ModalActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
