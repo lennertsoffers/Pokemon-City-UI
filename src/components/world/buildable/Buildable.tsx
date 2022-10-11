@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
+import UserService from "../../../api/UserService";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
-import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { OPEN_MODAL } from "../../../redux/actions/ModalActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
@@ -49,7 +49,10 @@ const Buildable = ({ buildablePlacement }: { buildablePlacement: BuildablePlacem
         // TODO - Handle response and error
         axios
             .get(`/api/incomeBuildings/collectRent/${buildablePlacement.id}`)
-            .then((response) => console.log(response.data))
+            .then((response) => {
+                UserService.loadUserData();
+                console.log(response.data);
+            })
             .catch((error) => console.log(error.response.data));
     };
 

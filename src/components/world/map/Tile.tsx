@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import UserService from "../../../api/UserService";
 import { TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING, MOVE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING as UNSELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
@@ -67,6 +68,8 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
                 dispatch(UNSELECT_BUILDING);
                 dispatch(UNSELECT_ACTION);
 
+                UserService.loadUserData();
+
                 // TODO - Handle building success
             })
             .catch((error) => {
@@ -99,6 +102,8 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
                 dispatch(MOVE_BUILDING(body));
                 dispatch(UNSELECT_BUILDING);
                 dispatch(UNSELECT_ACTION);
+
+                UserService.loadUserData();
 
                 // TODO - Handle building success
             })
