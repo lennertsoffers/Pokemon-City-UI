@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useStore } from "react-redux";
 import BuildableService from "./api/BuildableService";
 import CityLoader from "./api/CityLoader";
+import UserService from "./api/UserService";
+import Hud from "./components/hud/Hud";
 import ModalContainer from "./components/Modals/ModalContainer";
 import Toolbar from "./components/toolbar/Toolbar";
 import World from "./components/world/map/World";
@@ -22,12 +24,16 @@ function App() {
 
         CityLoader.setup(store);
         BuildableService.initalize(store);
+        UserService.initialize(store);
+
+        UserService.loadUserData();
         CityLoader.initalize();
     });
 
     return (
         <div className="game">
             <World />
+            <Hud />
             <Toolbar />
             <ModalContainer />
         </div>

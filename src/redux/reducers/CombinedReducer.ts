@@ -7,6 +7,7 @@ import MapReducer from "./MapReducer";
 import ModalReducer from "./ModalReducer";
 import SelectedActionReducer from "./SelectedActionReducer";
 import StaticDataReducer from "./StaticDataReducer";
+import UserReducer from "./UserReducer";
 
 const CombinedReducer = combineReducers({
     buildablePlacementState: BuildablePlacementReducer,
@@ -17,6 +18,7 @@ const CombinedReducer = combineReducers({
     selectedActionState: SelectedActionReducer,
     citizenState: CitizenReducer,
     citizenSelectorState: CitizenSelectorReducer,
+    userState: UserReducer,
 });
 
 export default CombinedReducer;
