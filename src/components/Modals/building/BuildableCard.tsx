@@ -3,13 +3,14 @@ import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
+import StaticBuildableData from "../../../types/interfaces/static/StaticBuildableData";
+import StringUtils from "../../../utils/StringUtils";
 
-const BuildableCard = (properties: any) => {
+const BuildableCard = ({ buildableData, onClick, children }: { buildableData: StaticBuildableData; onClick: Function; children: Array<JSX.Element> }) => {
     const dispatch = useDispatch();
-    const buildableData = properties.buildableData;
 
     const handleClick = () => {
-        properties.onClick();
+        onClick();
 
         dispatch(SELECT_BUILDING(buildableData));
         dispatch(SELECT_ACTION(ActionEnum.BUILD));
@@ -19,13 +20,13 @@ const BuildableCard = (properties: any) => {
     return (
         <div className="buildingCard" onClick={handleClick}>
             <div>
-                <img src={"./assets/images/" + buildableData.name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase() + ".png"} alt="buildable" />
+                <img src={"./assets/images/" + StringUtils.toConstantName(buildableData.name) + ".png"} alt="buildable" />
             </div>
             <div>{buildableData.name}</div>
             <div>€{buildableData.price}</div>
             <div>{buildableData.xpWhenFinished}XP</div>
             <div>{buildableData.unlockedAtLevel}</div>
-            {properties.children}
+            {children}
             <div>
                 {buildableData.width}x{buildableData.height}
             </div>

@@ -1,22 +1,20 @@
-import axios from "axios";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserService from "../../../api/UserService";
+import BuildableService from "../../../api/BuildableService";
+import DataLoader from "../../../api/DataLoader";
 import { TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING, MOVE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING as UNSELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
-import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildableData from "../../../types/interfaces/world/BuildableData";
 import buildableMoveData from "../../../types/interfaces/world/BuildableMoveData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
 import BuildablePlacementMapper from "../../../utils/mappers/BuildablePlacementMapper";
-import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 
-const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: any }) => {
+const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: Function }) => {
     const self = useRef<any>(null);
     const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
@@ -31,9 +29,8 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
             case ActionEnum.MOVE:
                 return tryMove();
             case ActionEnum.DEMOLISH:
-                return console.log("demolish");
             case ActionEnum.NONE:
-                return console.log("none");
+                return;
         }
     };
 
@@ -48,35 +45,15 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         if (self.current == null) return;
         if (selectedBuildable == null) return;
 
-        const location = selectedBuildable.spritesheetLocation;
+        const bottomRightWorldPosition = ChunkUtils.getRightCornerWorldPosition(selectedBuildable.spritesheetLocation, chunkPosition, tileIndex);
 
-        const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
-        const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
-        const bottomRightWorldPosition = ChunkUtils.toBottomRightWorldPosition(worldPosition, dimensions);
+        BuildableService.buildBuildable(bottomRightWorldPosition, selectedBuildable, (data: BuildableData) => {
+            dispatch(CREATE_BUILDING(BuildablePlacementMapper.toBuildablePlacement(data)));
+            dispatch(UNSELECT_BUILDING);
+            dispatch(UNSELECT_ACTION);
 
-        const body = {
-            name: selectedBuildable.name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase(),
-            x: bottomRightWorldPosition.x,
-            y: bottomRightWorldPosition.y,
-            buildableType: selectedBuildable.type,
-        };
-
-        axios
-            .post("/api/buildables/build", body)
-            .then(({ data }: { data: BuildableData }) => {
-                dispatch(CREATE_BUILDING(BuildablePlacementMapper.toBuildablePlacement(data)));
-                dispatch(UNSELECT_BUILDING);
-                dispatch(UNSELECT_ACTION);
-
-                UserService.loadUserData();
-
-                // TODO - Handle building success
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-
-                // TODO - Handle building fail
-            });
+            DataLoader.loadUserData();
+        });
     };
 
     const tryMove = () => {
@@ -84,34 +61,15 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         if (selectedBuildable == null) return;
         if (!selectedBuildableId) return;
 
-        const location = selectedBuildable.spritesheetLocation;
+        const bottomRightWorldPosition = ChunkUtils.getRightCornerWorldPosition(selectedBuildable.spritesheetLocation, chunkPosition, tileIndex);
 
-        const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
-        const worldPosition: Position = ChunkUtils.toWorldPosition(chunkPosition, tileIndex);
-        const bottomRightWorldPosition = ChunkUtils.toBottomRightWorldPosition(worldPosition, dimensions);
+        BuildableService.moveBuildable(selectedBuildableId, bottomRightWorldPosition, (buildableMoveData: buildableMoveData) => {
+            dispatch(MOVE_BUILDING(buildableMoveData));
+            dispatch(UNSELECT_BUILDING);
+            dispatch(UNSELECT_ACTION);
 
-        const body: buildableMoveData = {
-            id: selectedBuildableId,
-            x: bottomRightWorldPosition.x,
-            y: bottomRightWorldPosition.y,
-        };
-
-        axios
-            .put(`/api/buildables/move`, body)
-            .then(() => {
-                dispatch(MOVE_BUILDING(body));
-                dispatch(UNSELECT_BUILDING);
-                dispatch(UNSELECT_ACTION);
-
-                UserService.loadUserData();
-
-                // TODO - Handle building success
-            })
-            .catch((error) => {
-                console.log(error.response.data);
-
-                // TODO - Handle building fail
-            });
+            DataLoader.loadUserData();
+        });
     };
 
     return (

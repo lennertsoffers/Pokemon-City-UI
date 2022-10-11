@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
-import UserService from "../../../api/UserService";
+import DataLoader from "../../../api/DataLoader";
+import IncomeBuildingService from "../../../api/IncomeBuildingService";
 import { FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
-import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
+import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
+import { DESELECT_BUILDING, SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { OPEN_MODAL } from "../../../redux/actions/ModalActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
 import ModalTypeEnum from "../../../types/enums/ModalTypeEnum";
@@ -31,13 +32,20 @@ const Buildable = ({ buildablePlacement }: { buildablePlacement: BuildablePlacem
     };
 
     const handleDemolish = () => {
-        // TODO - Handle response and error
-
         if (buildablePlacement.buildableTypeEnum === "HOUSE") {
             dispatch(SELECT_BUILDING(BuildablePlacementMapper.toStaticBuildableData(buildablePlacement), buildablePlacement.id));
             dispatch(OPEN_MODAL(ModalTypeEnum.SELECT_CITIZEN_TO_DEMOLISH_MODAL));
         } else {
-            BuildableService.demolishBuildable(buildablePlacement.id);
+            BuildableService.demolishBuildable(
+                buildablePlacement.id,
+                () => {
+                    dispatch(DEMOLISH_BUILDING(buildablePlacement.id));
+                    DataLoader.loadUserData();
+                },
+                () => {
+                    dispatch(DESELECT_BUILDING);
+                }
+            );
         }
     };
 
@@ -46,14 +54,7 @@ const Buildable = ({ buildablePlacement }: { buildablePlacement: BuildablePlacem
     };
 
     const handleCollect = () => {
-        // TODO - Handle response and error
-        axios
-            .get(`/api/incomeBuildings/collectRent/${buildablePlacement.id}`)
-            .then((response) => {
-                UserService.loadUserData();
-                console.log(response.data);
-            })
-            .catch((error) => console.log(error.response.data));
+        IncomeBuildingService.collect(buildablePlacement.id, () => DataLoader.loadUserData());
     };
 
     const pointerEvents = selectedBuildable ? "none" : "all";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import SpecialisationDataView from "../citizens/SpecialisationDataView";
 
-const CitizenDataCard = ({ citizenData, handleCitizenClick, preSelected }: { citizenData: CitizenData; handleCitizenClick: any; preSelected: boolean }) => {
+const CitizenDataCard = ({ citizenData, handleCitizenClick, preSelected }: { citizenData: CitizenData; handleCitizenClick: Function; preSelected: boolean }) => {
     const [selected, setSelected] = useState<boolean>(false);
 
     const handleCitizenDataClick = () => {

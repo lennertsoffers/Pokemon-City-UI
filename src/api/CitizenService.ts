@@ -1,18 +1,13 @@
-import { Store } from "@reduxjs/toolkit";
 import axios from "axios";
-import { LOAD_CITIZENS } from "../redux/actions/CitizenActions";
 
 const CitizenService = (() => {
-    let store: Store;
-
-    const initialize = (storeParam: Store) => {
-        store = storeParam;
-    };
-
-    const loadCitizens = () => {
-        axios.get("/api/citizens").then((response) => {
-            store.dispatch(LOAD_CITIZENS(response.data));
-        });
+    const getCitizens = async () => {
+        try {
+            const { data } = await axios.get("/api/citizens");
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const getUnassignedCitizens = async () => {
@@ -24,10 +19,24 @@ const CitizenService = (() => {
         }
     };
 
+    const assignCitizen = async (citizenId: number, companyId: number, successCallback: Function) => {
+        const data = {
+            citizenId: citizenId,
+            companyId: companyId,
+        };
+
+        try {
+            await axios.put("/api/citizens/assign", data);
+            successCallback();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return {
-        initialize,
-        loadCitizens,
+        getCitizens,
         getUnassignedCitizens,
+        assignCitizen,
     };
 })();
 

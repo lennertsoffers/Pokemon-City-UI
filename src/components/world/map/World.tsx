@@ -23,16 +23,16 @@ const World = () => {
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
 
-    const mouseMoveHandler = (e: any) => {
-        if (e.buttons !== 1) return;
+    const mouseMoveHandler = (event: React.MouseEvent) => {
+        if (event.buttons !== 1) return;
         if (world.current == null) return;
 
         const worldElement = world.current;
 
         // We don't make a state because updating the state on every mouseMove event
         // is more demanding than reading the scroll position of the element
-        const newX = worldElement.scrollLeft - e.movementX;
-        const newY = worldElement.scrollTop - e.movementY;
+        const newX = worldElement.scrollLeft - event.movementX;
+        const newY = worldElement.scrollTop - event.movementY;
 
         world.current.scrollTo(newX, newY);
     };
@@ -105,12 +105,12 @@ const World = () => {
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
             <div className="layers">
-                {mapData.layers.map((layerData: LayerData, index: any) => (
-                    <Layer key={index} layerData={layerData} showLocationForBuildable={showLocationForBuildable} />
+                {mapData.layers.map((layerData: LayerData) => (
+                    <Layer key={layerData.id} layerData={layerData} showLocationForBuildable={showLocationForBuildable} />
                 ))}
             </div>
             <div className="buildings">
-                {buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Buildable buildablePlacement={placement} key={index} />)}
+                {buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement) => <Buildable buildablePlacement={placement} key={placement.id} />)}
             </div>
             <div className="buildingActionWrapper"></div>
         </div>

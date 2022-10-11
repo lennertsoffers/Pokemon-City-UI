@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
+import LoadingModal from "../LoadingModal";
 import Modal from "../Modal";
 
 const StatisticsModal = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
 
-    // TODO - Handle loading
-    if (!userData) return <div>Loading...</div>;
-
+    if (!userData) return <LoadingModal />;
     return (
         <Modal title={"Stats"}>
             <div>
@@ -17,7 +16,9 @@ const StatisticsModal = () => {
                 </div>
                 <div>
                     <div>{userData.cityName}:</div>
-                    <div>👨‍👩‍👦‍👦{userData.citizens}</div>
+                    <div>
+                        👨‍👩‍👦‍👦{userData.citizens} - {userData.employedCitizens} employed
+                    </div>
                     <div>🌟{userData.satisfaction}</div>
                 </div>
                 <div>

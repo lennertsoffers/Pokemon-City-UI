@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import CitizenService from "../../api/CitizenService";
+import DataLoader from "../../api/DataLoader";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 
@@ -9,7 +9,7 @@ const Toolbar = () => {
     const handleBuildClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.BUILD_MODAL));
     const handleActionsClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.ACTIONS_MODAL));
     const handleCitizensClick = () => {
-        CitizenService.loadCitizens();
+        DataLoader.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
 

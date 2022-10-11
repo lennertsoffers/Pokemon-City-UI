@@ -7,6 +7,7 @@ interface UserData {
     level: number;
     money: number;
     citizens: number;
+    employedCitizens: number;
     satisfaction: number;
     cityName: string;
     statistics: UserStatistics;

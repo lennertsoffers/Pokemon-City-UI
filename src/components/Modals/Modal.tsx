@@ -5,8 +5,9 @@ import ModalProperties from "../../types/interfaces/world/ModalProperties";
 const Modal = (properties: ModalProperties) => {
     const dispatch = useDispatch();
 
-    const handleClickPage = (e: any) => {
-        if (e.target.classList.contains("modal")) {
+    const handleClickPage = (event: React.MouseEvent) => {
+        if (!event.target) return;
+        if ((event.target as Element).classList.contains("modal")) {
             handleClose();
         }
     };

@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import CitizenService from "../../api/CitizenService";
+import DataLoader from "../../api/DataLoader";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
+import Loading from "../Loading";
 
 const Hud = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
@@ -17,13 +18,11 @@ const Hud = () => {
     };
 
     const handleCitizensClick = () => {
-        CitizenService.loadCitizens();
+        DataLoader.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
 
-    // TODO - Loader
-    if (!userData) return <div>Loading...</div>;
-
+    if (!userData) return <Loading />;
     return (
         <div className="hud">
             <div className="hud__left">

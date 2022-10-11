@@ -1,24 +1,13 @@
-import axios from "axios";
 import { useSelector } from "react-redux";
+import CitizenService from "../../../api/CitizenService";
 import CompanyService from "../../../api/CompanyService";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 
-const EmptyEmployeeSpace = ({ companyId, updateCitizenAssignments }: { companyId: number; updateCitizenAssignments: any }) => {
+const EmptyEmployeeSpace = ({ companyId, updateCitizenAssignments }: { companyId: number; updateCitizenAssignments: Function }) => {
     const citizenId = useSelector((state: CombinedState) => state.citizenSelectorState.citizenId);
 
     const handleClick = () => {
-        axios
-            .put("/api/citizens/assign", {
-                citizenId: citizenId,
-                companyId: companyId,
-            })
-            .then(() => {
-                console.log("Citizen assigned");
-                updateCitizenAssignments();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if (citizenId) CitizenService.assignCitizen(citizenId, companyId, updateCitizenAssignments);
 
         CompanyService.getCompaniesWithEmployees();
     };
