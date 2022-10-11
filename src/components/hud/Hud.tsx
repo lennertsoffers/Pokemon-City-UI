@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import CityLoader from "../../api/CityLoader";
+import CitizenService from "../../api/CitizenService";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
@@ -17,7 +17,7 @@ const Hud = () => {
     };
 
     const handleCitizensClick = () => {
-        CityLoader.loadCitizens();
+        CitizenService.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
 

@@ -1,0 +1,11 @@
+.loading {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    color: #fff;
+    font-size: 30px;
+    line-height: 100vh;
+    text-align: center;
+    z-index: 1000;
+}

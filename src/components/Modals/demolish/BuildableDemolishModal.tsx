@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
-import CityLoader from "../../../api/CityLoader";
+import CitizenService from "../../../api/CitizenService";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
@@ -20,7 +20,7 @@ const BuildableDemolishModal = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        CityLoader.getUnassignedCitizens().then((data) => {
+        CitizenService.getUnassignedCitizens().then((data) => {
             // Sorts on total amount of maxspecialisationdata
             const sortedCitizenData = data.sort(
                 (a: CitizenData, b: CitizenData) => CitizenUtils.totalSpecialisationData(a.maxSpecialisationData) - CitizenUtils.totalSpecialisationData(b.maxSpecialisationData)

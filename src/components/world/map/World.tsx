@@ -10,6 +10,7 @@ import LayerData from "../../../types/interfaces/world/LayerData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
+import Loading from "../../Loading";
 import Buildable from "../buildable/Buildable";
 import Layer from "./Layer";
 import map from "./map";
@@ -99,14 +100,15 @@ const World = () => {
         world.current.querySelector(".buildingActionWrapper").innerHTML = "";
     }, [selectedBuildable]);
 
-    const layers: JSX.Element[] | String = (() => {
-        if (mapData != null) return mapData.layers.map((layerData: LayerData, index: any) => <Layer key={index} layerData={layerData} showLocationForBuildable={showLocationForBuildable} />);
-        else return "Loading...";
-    })();
+    if (!mapData) return <Loading />;
 
     return (
         <div ref={world} onMouseMove={mouseMoveHandler} className="world">
-            <div className="layers">{layers}</div>
+            <div className="layers">
+                {mapData.layers.map((layerData: LayerData, index: any) => (
+                    <Layer key={index} layerData={layerData} showLocationForBuildable={showLocationForBuildable} />
+                ))}
+            </div>
             <div className="buildings">
                 {buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement, index: number) => <Buildable buildablePlacement={placement} key={index} />)}
             </div>

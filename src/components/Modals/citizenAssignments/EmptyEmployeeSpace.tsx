@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import CityLoader from "../../../api/CityLoader";
+import CompanyService from "../../../api/CompanyService";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 
 const EmptyEmployeeSpace = ({ companyId, updateCitizenAssignments }: { companyId: number; updateCitizenAssignments: any }) => {
@@ -20,7 +20,7 @@ const EmptyEmployeeSpace = ({ companyId, updateCitizenAssignments }: { companyId
                 console.log(error);
             });
 
-        CityLoader.getCompaniesWithEmployees();
+        CompanyService.getCompaniesWithEmployees();
     };
 
     return <div onClick={handleClick} className="emptyEmployeeSpace"></div>;

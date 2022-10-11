@@ -1,16 +1,41 @@
 import { Store } from "@reduxjs/toolkit";
 import axios from "axios";
-import { DEMOLISH_BUILDING } from "../redux/actions/BuildablePlacementActions";
+import { DEMOLISH_BUILDING, LOAD_BUILDINGS } from "../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../redux/actions/ModalActions";
-import { LOAD_USER_DATA } from "../redux/actions/UserActions";
+import { LOAD_STATIC_HOUSE_DATA, LOAD_STATIC_COMPANY_DATA, LOAD_STATIC_DECORATION_DATA } from "../redux/actions/StaticDataActions";
+import BuildableData from "../types/interfaces/world/BuildableData";
+import BuildablePlacementMapper from "../utils/mappers/BuildablePlacementMapper";
 import UserService from "./UserService";
 
 const BuildableService = (() => {
     let store: Store;
 
-    const initalize = (storeParam: Store) => {
+    const initialize = (storeParam: Store) => {
         store = storeParam;
+    };
+
+    const loadStaticBuildableData = async () => {
+        try {
+            const { data } = await axios.get("/api/buildables/data");
+
+            store.dispatch(LOAD_STATIC_HOUSE_DATA(data.houses));
+            store.dispatch(LOAD_STATIC_COMPANY_DATA(data.companies));
+            store.dispatch(LOAD_STATIC_DECORATION_DATA(data.decorations));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const loadBuildables = async () => {
+        try {
+            const { data } = await axios.get("/api/buildables");
+
+            const placements = data.map((buildableData: BuildableData) => BuildablePlacementMapper.toBuildablePlacement(buildableData));
+            store.dispatch(LOAD_BUILDINGS(placements));
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const demolishBuildable = (buildableId: number, citizenIds?: Array<number>) => {
@@ -34,7 +59,9 @@ const BuildableService = (() => {
     };
 
     return {
-        initalize,
+        initialize,
+        loadStaticBuildableData,
+        loadBuildables,
         demolishBuildable,
     };
 })();
