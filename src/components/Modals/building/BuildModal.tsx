@@ -18,7 +18,7 @@ const BuildModal = () => {
                 <div>
                     <h2>Houses</h2>
                     <div className="buildingSelector">
-                        {houseData.map((houseData: StaticHouseData, index) => (
+                        {houseData.map((houseData: StaticHouseData, index: number) => (
                             <HouseDataCard key={index} houseData={houseData} />
                         ))}
                     </div>
@@ -26,7 +26,7 @@ const BuildModal = () => {
                 <div>
                     <h2>Companies</h2>
                     <div className="buildingSelector">
-                        {companyData.map((companyData: StaticCompanyData, index) => (
+                        {companyData.map((companyData: StaticCompanyData, index: number) => (
                             <CompanyDataCard key={index} companyData={companyData} />
                         ))}
                     </div>

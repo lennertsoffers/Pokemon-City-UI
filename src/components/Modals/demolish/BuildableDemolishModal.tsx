@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
-import CityLoader from "../../../api/CityLoader";
+import CitizenService from "../../../api/CitizenService";
+import DataLoader from "../../../api/DataLoader";
+import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
+import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
 import CitizenUtils from "../../../utils/CitizenUtils";
+import LoadingModal from "../LoadingModal";
 import Modal from "../Modal";
 import CitizenDataCard from "./CitizenDataCard";
 
 const BuildableDemolishModal = () => {
+    const [loading, setLoading] = useState<boolean>(true);
     const [unassignedCitizens, setUnassignedCitizens] = useState<Array<CitizenData>>([]);
     const [selectedCitizens, setSelectedCitizens] = useState<Array<number>>([]);
     const selectedBuildableState = useSelector((state: CombinedState) => state.buildableSelectorState);
@@ -19,21 +24,24 @@ const BuildableDemolishModal = () => {
     const selectedBuildable = selectedBuildableState.selectedBuildable;
     const dispatch = useDispatch();
 
+    const staticHouseData: StaticHouseData | undefined = staticHouseDataList.find((houseData: StaticHouseData) => houseData.name === selectedBuildable?.name);
+
+    /**
+     * Loads all citizen data and sorts on total amount of maxSpecialisationData
+     */
+    const loadCitizens = useCallback(async () => {
+        const unassignedCitizens = await CitizenService.getUnassignedCitizens();
+        unassignedCitizens.sort((a: CitizenData, b: CitizenData) => CitizenUtils.totalSpecialisationData(a.maxSpecialisationData) - CitizenUtils.totalSpecialisationData(b.maxSpecialisationData));
+        setUnassignedCitizens(unassignedCitizens);
+
+        setLoading(false);
+    }, []);
+
     useEffect(() => {
-        CityLoader.getUnassignedCitizens().then((data) => {
-            // Sorts on total amount of maxspecialisationdata
-            const sortedCitizenData = data.sort(
-                (a: CitizenData, b: CitizenData) => CitizenUtils.totalSpecialisationData(a.maxSpecialisationData) - CitizenUtils.totalSpecialisationData(b.maxSpecialisationData)
-            );
-            setUnassignedCitizens(sortedCitizenData);
-        });
+        loadCitizens();
     });
 
-    if (!selectedBuildable || !selectedBuildableId) return <div>Not Found</div>;
-
-    const staticHouseData: StaticHouseData | undefined = staticHouseDataList.find((houseData: StaticHouseData) => houseData.name === selectedBuildable.name);
-
-    if (!staticHouseData) return <div>Not Found</div>;
+    if (!selectedBuildable || !selectedBuildableId || !staticHouseData || loading) return <LoadingModal />;
 
     const amoutOfCitizensLeftToDelete = staticHouseData.numberOfCitizens - selectedCitizens.length;
 
@@ -54,11 +62,22 @@ const BuildableDemolishModal = () => {
 
     const handleConfirmDemolishClick = () => {
         if (amoutOfCitizensLeftToDelete === 0) {
-            BuildableService.demolishBuildable(selectedBuildableId, selectedCitizens);
+            BuildableService.demolishBuildable(
+                selectedBuildableId,
+                () => {
+                    dispatch(DEMOLISH_BUILDING(selectedBuildableId));
+                    DataLoader.loadUserData();
+                },
+                () => {
+                    dispatch(DESELECT_BUILDING);
+                    dispatch(CLOSE_MODAL);
+                },
+                selectedCitizens
+            );
+        } else {
+            // TODO - Handle wrong amount of citizens selected
+            console.log(`Select ${amoutOfCitizensLeftToDelete} citizens more`);
         }
-
-        // TODO - Handle wrong amount of citizens selected
-        console.log(`Select ${amoutOfCitizensLeftToDelete} citizens more`);
     };
 
     const handleSelectWorstClick = () => {

@@ -2,7 +2,7 @@ import { CHUNK_DIMENSION } from "../../../config/config";
 import ChunkData from "../../../types/interfaces/world/ChunkData";
 import Tile from "./Tile";
 
-const Chunk = ({ chunkData, showLocationForBuildable }: { chunkData: ChunkData; showLocationForBuildable: any }) => {
+const Chunk = ({ chunkData, showLocationForBuildable }: { chunkData: ChunkData; showLocationForBuildable: Function }) => {
     const x = (chunkData.x / CHUNK_DIMENSION) * 100;
     const y = (chunkData.y / CHUNK_DIMENSION) * 100;
 

@@ -1,9 +1,10 @@
 import AssignedCitizenData from "../../../types/interfaces/citizens/AssignedCitizenData";
 import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
+import StringUtils from "../../../utils/StringUtils";
 import CitizenCard from "../citizens/CitizenCard";
 import EmptyEmployeeSpace from "./EmptyEmployeeSpace";
 
-const CitizenAssignmentCard = ({ citizenAssignmentData, updateCitizenAssignments }: { citizenAssignmentData: CitizenAssignmentData; updateCitizenAssignments: any }) => {
+const CitizenAssignmentCard = ({ citizenAssignmentData, updateCitizenAssignments }: { citizenAssignmentData: CitizenAssignmentData; updateCitizenAssignments: Function }) => {
     const amountOfEmployees = citizenAssignmentData.employees.length;
     const spacesAvailable = citizenAssignmentData.maxAssignedCitizens - amountOfEmployees;
 
@@ -12,7 +13,7 @@ const CitizenAssignmentCard = ({ citizenAssignmentData, updateCitizenAssignments
             <div className="companyData">
                 <div>
                     <div>
-                        <img src={"./assets/images/" + citizenAssignmentData.name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase() + ".png"} alt="buildable" />
+                        <img src={"./assets/images/" + StringUtils.toConstantName(citizenAssignmentData.name) + ".png"} alt="buildable" />
                     </div>
                 </div>
                 <div>

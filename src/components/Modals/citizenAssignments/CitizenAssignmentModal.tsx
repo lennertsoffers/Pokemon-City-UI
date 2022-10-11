@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CityLoader from "../../../api/CityLoader";
+import CompanyService from "../../../api/CompanyService";
 import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
 import Modal from "../Modal";
 import CitizenAssignmentCard from "./CitizenAssignmentCard";
@@ -8,7 +8,7 @@ const CitizenAssignmentModal = () => {
     const [citizenAssignments, setCitizenAssignments] = useState<Array<CitizenAssignmentData>>([]);
 
     const updateCitizenAssignments = () => {
-        CityLoader.getCompaniesWithEmployees().then((data) => setCitizenAssignments(data));
+        CompanyService.getCompaniesWithEmployees().then((data) => setCitizenAssignments(data));
     };
 
     useEffect(() => {

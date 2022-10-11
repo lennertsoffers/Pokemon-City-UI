@@ -1,9 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CityService from "../../../api/CityService";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import { UPDATE_CITY_NAME } from "../../../redux/actions/UserActions";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
+import LoadingModal from "../LoadingModal";
 import Modal from "../Modal";
 
 const ChangeCityNameModal = () => {
@@ -11,21 +12,15 @@ const ChangeCityNameModal = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
     const [cityNameText, setCityNameText] = useState<string>("");
 
-    const handleCityNameChange = (event: any) => {
-        setCityNameText(event.target.value);
+    const handleCityNameChange = (event: React.FormEvent<HTMLInputElement>) => {
+        setCityNameText(event.currentTarget.value);
     };
 
     const handleSaveNameClick = () => {
-        axios
-            .post("/api/city/changeName", { name: cityNameText.trim() })
-            .then(({ data }: { data: string }) => {
-                dispatch(UPDATE_CITY_NAME(data));
-                dispatch(CLOSE_MODAL);
-            })
-            .catch((error) => {
-                // TODO - Handle Error
-                console.log(error);
-            });
+        CityService.changeName(cityNameText.trim(), (data: string) => {
+            dispatch(UPDATE_CITY_NAME(data));
+            dispatch(CLOSE_MODAL);
+        });
     };
 
     useEffect(() => {
@@ -33,8 +28,7 @@ const ChangeCityNameModal = () => {
         else setCityNameText(userData.cityName);
     }, [userData]);
 
-    // TODO - Handle Loading
-    if (!userData) return <div>Loading...</div>;
+    if (!userData) return <LoadingModal />;
     return (
         <Modal title={"Change name of city"}>
             <div>

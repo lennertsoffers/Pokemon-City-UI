@@ -1,7 +1,7 @@
 import LayerData from "../../../types/interfaces/world/LayerData";
 import Chunk from "./Chunk";
 
-const Layer = ({ layerData, showLocationForBuildable }: { layerData: LayerData; showLocationForBuildable: any }) => {
+const Layer = ({ layerData, showLocationForBuildable }: { layerData: LayerData; showLocationForBuildable: Function }) => {
     return (
         <div className="layer" data-id={layerData.id}>
             {layerData.chunks.map((chunk, index) => (

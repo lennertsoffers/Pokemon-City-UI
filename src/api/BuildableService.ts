@@ -1,40 +1,83 @@
-import { Store } from "@reduxjs/toolkit";
 import axios from "axios";
-import { DEMOLISH_BUILDING } from "../redux/actions/BuildablePlacementActions";
-import { DESELECT_BUILDING } from "../redux/actions/BuildableSelectorActions";
-import { CLOSE_MODAL } from "../redux/actions/ModalActions";
-import { LOAD_USER_DATA } from "../redux/actions/UserActions";
-import UserService from "./UserService";
+import StaticBuildableData from "../types/interfaces/static/StaticBuildableData";
+import StaticCompanyData from "../types/interfaces/static/StaticCompanyData";
+import StaticDecorationData from "../types/interfaces/static/StaticDecorationData";
+import StaticHouseData from "../types/interfaces/static/StaticHouseData";
+import BuildableMoveData from "../types/interfaces/world/BuildableMoveData";
+import Position from "../types/interfaces/world/Position";
+import StringUtils from "../utils/StringUtils";
 
 const BuildableService = (() => {
-    let store: Store;
-
-    const initalize = (storeParam: Store) => {
-        store = storeParam;
+    const getStaticBuildableData = async () => {
+        try {
+            const { data }: { data: { houses: Array<StaticHouseData>; companies: Array<StaticCompanyData>; decorations: Array<StaticDecorationData> } } = await axios.get("/api/buildables/data");
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    const demolishBuildable = (buildableId: number, citizenIds?: Array<number>) => {
-        let data: { buildableId: number; citizenIds?: Array<number> } = {
+    const getBuildables = async () => {
+        try {
+            const { data } = await axios.get("/api/buildables");
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const buildBuildable = async (position: Position, buildableData: StaticBuildableData, successCallback: Function) => {
+        const body = {
+            name: StringUtils.toConstantName(buildableData.name),
+            x: position.x,
+            y: position.y,
+            buildableType: buildableData.type,
+        };
+
+        try {
+            const { data } = await axios.post("/api/buildables/build", body);
+            successCallback(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const moveBuildable = async (buildableId: number, position: Position, successCallback: Function) => {
+        const body: BuildableMoveData = {
+            id: buildableId,
+            x: position.x,
+            y: position.y,
+        };
+
+        try {
+            await axios.put(`/api/buildables/move`, body);
+            successCallback(body);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const demolishBuildable = async (buildableId: number, successCallback: Function, finalCallback: Function, citizenIds?: Array<number>) => {
+        let body: { buildableId: number; citizenIds?: Array<number> } = {
             buildableId: buildableId,
         };
-        if (citizenIds) data.citizenIds = citizenIds;
+        if (citizenIds) body.citizenIds = citizenIds;
 
-        axios
-            .delete(`/api/buildables/demolish`, { data })
-            .then((response) => {
-                console.log(response.data);
-                store.dispatch(DEMOLISH_BUILDING(buildableId));
-                UserService.loadUserData();
-            })
-            .catch((error) => console.log(error.response.data))
-            .finally(() => {
-                store.dispatch(DESELECT_BUILDING);
-                store.dispatch(CLOSE_MODAL);
-            });
+        try {
+            await axios.delete(`/api/buildables/demolish`, { data: body });
+            successCallback();
+        } catch (error) {
+            console.log(error);
+        } finally {
+            finalCallback();
+        }
     };
 
     return {
-        initalize,
+        getStaticBuildableData,
+        getBuildables,
+        buildBuildable,
+        moveBuildable,
         demolishBuildable,
     };
 })();
