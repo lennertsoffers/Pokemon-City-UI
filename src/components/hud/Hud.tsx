@@ -27,13 +27,13 @@ const Hud = () => {
             <div className="hud__left">
                 <UserInfo onClick={handleUserClick} username={userData.username} level={userData.level} />
             </div>
-            <div className="hud__center">
+            <div>
                 <CityName cityName={userData.cityName} />
             </div>
             <div className="hud__right">
                 <div>
                     <ValueBox value={`€${userData.money}`} />
-                    <ValueBox value={`👨‍👩‍👦‍👦${userData.citizens}`} onClick={handleCitizensClick} />
+                    <ValueBox value={`👨‍👩‍👦‍👦${userData.citizens}`} onClick={handleCitizensClick} link={true} />
                     <ValueBox value={`🌟${userData.satisfaction}`} />
                 </div>
             </div>

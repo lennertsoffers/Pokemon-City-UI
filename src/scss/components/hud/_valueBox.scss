@@ -1,0 +1,31 @@
+.valueBox {
+    margin-left: 20px;
+    padding: 10px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    pointer-events: all;
+
+    .valueBox--background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+
+        > img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .valueBox--foreground {
+        position: relative;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.valueBox--link {
+    cursor: pointer;
+}

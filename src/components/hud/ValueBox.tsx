@@ -1,4 +1,4 @@
-const ValueBox = ({ value, onClick }: { value: string | number; onClick?: Function }) => {
+const ValueBox = ({ value, onClick, link }: { value: string | number; onClick?: Function; link?: boolean }) => {
     const handleValueBoxClick = () => {
         if (!onClick) return;
 
@@ -6,11 +6,11 @@ const ValueBox = ({ value, onClick }: { value: string | number; onClick?: Functi
     };
 
     return (
-        <div onClick={handleValueBoxClick}>
-            <div className="hud__right--background">
+        <div className={`valueBox ${link ? "valueBox--link" : ""}`} onClick={handleValueBoxClick}>
+            <div className="valueBox--background">
                 <img src="./assets/ui/databox.png" alt="valuebox" />
             </div>
-            <div className="hud__right--foreground">
+            <div className="valueBox--foreground">
                 <div>{value}</div>
             </div>
         </div>

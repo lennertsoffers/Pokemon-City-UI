@@ -6,14 +6,14 @@ const UserInfo = ({ onClick, username, level }: { onClick: Function; username: s
     };
 
     return (
-        <div onClick={handleClick}>
-            <div className="hud__left--background">
-                <img src="./assets/ui/user.png" alt="user" />
+        <div className="userInfo" onClick={handleClick}>
+            <div className="userInfo--background">
+                <img src="./assets/ui/user.png" alt="userinfo" />
             </div>
-            <div className="hud__left--foreground">
+            <div className="userInfo--foreground">
                 <div>
                     <div>{username}</div>
-                    <div>LV. {level}</div>
+                    <div>{level}</div>
                 </div>
             </div>
         </div>

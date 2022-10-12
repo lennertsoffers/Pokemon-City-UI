@@ -22,11 +22,11 @@ const CityName = ({ cityName }: { cityName: string }) => {
     };
 
     return (
-        <div>
-            <div className="hud__center--background">
+        <div className="cityName">
+            <div className="cityName--background">
                 <img src="./assets/ui/city_name_box.png" alt="city_name_box" />
             </div>
-            <div className="hud__center--foreground">
+            <div className="cityName--foreground">
                 <input type="text" value={cityNameText} onChange={handleCityNameChange} onBlur={handleCityNameBlur} />
             </div>
         </div>
