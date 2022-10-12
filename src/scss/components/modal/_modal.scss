@@ -17,148 +17,145 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    padding: 100px;
     background-color: rgba(0, 0, 0, 0.3);
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
 
     .modal--inner {
-        background-color: #fff;
-        height: 100%;
-        border-radius: 10px;
-        padding: 20px;
+        position: relative;
+        width: 80vw;
+        height: 0;
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            height: 50px;
+        background-color: #fff;
+
+        .modal--inner--background {
+            position: absolute;
+            width: 100%;
+
+            img {
+                width: 100%;
+            }
         }
 
-        .modal--inner__children {
-            height: calc(100% - 50px);
+        .modal--inner--foreground {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
 
-            .buildModal--inner {
-                border-radius: 10px;
-                overflow: auto;
-                background-color: #eee;
-                height: 100%;
-                padding: 20px 0;
+            .modal--inner__children {
+                position: relative;
+                width: 100%;
 
-                h2 {
-                    margin: 0 20px;
-                }
+                .statisticsModal {
+                    padding: 3%;
+                    width: 100%;
+                    height: calc(80vw / 1276 * 443);
 
-                .buildingSelector {
-                    display: flex;
-                    justify-content: flex-start;
-                    flex-wrap: wrap;
-                }
+                    > h2 {
+                        @include font-dogica-bold-large;
+                        height: 30px;
+                    }
 
-                .buildingCard {
-                    flex: 1 1;
-                    min-width: 300px;
-                    padding: 20px;
-                    border-radius: 10px;
-                    background-color: #fff;
-                    margin: 20px;
+                    .statisticsModal__username {
+                        position: absolute;
+                        bottom: 10%;
+                        right: 8%;
+                        text-align: center;
+                        width: calc(80vw / 4);
+                        height: calc(100% / 8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
 
-                    img {
-                        min-width: 100px;
-                        max-width: 100px;
+                        > div {
+                            @include font-dogica-bold-large;
+                        }
+                    }
+
+                    .statisticsModal__scrollDown {
+                        position: absolute;
+                        bottom: 8%;
+                        right: 42%;
+                        transform: rotate(90deg);
+                        z-index: 1;
+                        cursor: pointer;
+                    }
+
+                    .statisticsModal__data {
+                        width: calc(80vw / 1.8);
+                        height: calc(100% - 30px);
+                        overflow-y: scroll;
+                        position: relative;
+
+                        .statisticsModal__data__section {
+                            width: 80%;
+                            margin-bottom: 20px;
+                            padding-left: 3px;
+
+                            .statisticsModal__data__topic {
+                                display: flex;
+                                padding-bottom: 3px;
+
+                                > div:first-of-type {
+                                    width: 50%;
+                                }
+
+                                > div:last-of-type {
+                                    width: 50%;
+                                }
+                            }
+
+                            .statisticsModal__data__topic:hover {
+                                background-color: rgba(0, 0, 0, 0.1);
+                            }
+                        }
+                    }
+
+                    .statisticsModal__data::-webkit-scrollbar {
+                        display: none;
                     }
                 }
-            }
 
-            .citizenModal--inner {
-                border-radius: 10px;
-                overflow: auto;
-                background-color: #eee;
-                height: 100%;
-                padding: 20px 0;
-
-                display: flex;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-
-                .citizenCard {
-                    flex: 1 1;
-                    min-width: 300px;
-                    padding: 20px;
+                .buildModal--inner {
                     border-radius: 10px;
-                    background-color: #fff;
-                    margin: 20px;
-                }
-            }
+                    overflow: auto;
+                    background-color: #eee;
+                    height: 100%;
+                    padding: 20px 0;
 
-            .citizenAssignmentModal--inner {
-                display: flex;
-                flex-direction: column;
-                border-radius: 10px;
-                overflow: auto;
-                background-color: #eee;
-                height: 100%;
-                padding: 20px;
+                    h2 {
+                        margin: 0 20px;
+                    }
 
-                .citizenAssignmentDataWrapper {
-                    min-height: 300px;
-                    margin-bottom: 20px;
-                    background-color: #fff;
-                    border-radius: 10px;
-                    padding: 20px;
-                    display: flex;
-                    overflow-x: auto;
-
-                    .companyData {
+                    .buildingSelector {
                         display: flex;
-                        flex-direction: row;
-                        height: 100%;
+                        justify-content: flex-start;
+                        flex-wrap: wrap;
+                    }
+
+                    .buildingCard {
+                        flex: 1 1;
                         min-width: 300px;
-                        max-width: 300px;
+                        padding: 20px;
+                        border-radius: 10px;
+                        background-color: #fff;
+                        margin: 20px;
 
                         img {
                             min-width: 100px;
                             max-width: 100px;
-                            margin-right: 20px;
-                        }
-                    }
-
-                    .employeeData {
-                        height: 100%;
-                        display: flex;
-                        flex-direction: row;
-
-                        .emptyEmployeeSpace {
-                            margin-left: 20px;
-                            width: 300px;
-                            background-color: #ccc;
-                            height: 100%;
-                            border-radius: 10px;
-                        }
-
-                        .assignedCitizens {
-                            display: flex;
-
-                            .citizenCard {
-                                width: 300px;
-                                margin-left: 20px;
-                            }
                         }
                     }
                 }
 
-                .citizenAssignmentDataWrapper:last-of-type {
-                    margin-bottom: 0;
-                }
-            }
-
-            .buildableDemolishModal--inner {
-                height: 100%;
-
-                .citizenDataCards {
+                .citizenModal--inner {
                     border-radius: 10px;
                     overflow: auto;
                     background-color: #eee;
-                    height: calc(100% - 50px);
+                    height: 100%;
                     padding: 20px 0;
 
                     display: flex;
@@ -175,16 +172,102 @@
                     }
                 }
 
-                .confirmDemolishButton {
-                    height: 50px;
+                .citizenAssignmentModal--inner {
+                    display: flex;
+                    flex-direction: column;
+                    border-radius: 10px;
+                    overflow: auto;
+                    background-color: #eee;
+                    height: 100%;
+                    padding: 20px;
 
-                    button {
-                        background-color: lightblue;
-                        border: none;
-                        margin-top: 10px;
+                    .citizenAssignmentDataWrapper {
+                        min-height: 300px;
+                        margin-bottom: 20px;
+                        background-color: #fff;
                         border-radius: 10px;
-                        height: 40px;
-                        width: 100%;
+                        padding: 20px;
+                        display: flex;
+                        overflow-x: auto;
+
+                        .companyData {
+                            display: flex;
+                            flex-direction: row;
+                            height: 100%;
+                            min-width: 300px;
+                            max-width: 300px;
+
+                            img {
+                                min-width: 100px;
+                                max-width: 100px;
+                                margin-right: 20px;
+                            }
+                        }
+
+                        .employeeData {
+                            height: 100%;
+                            display: flex;
+                            flex-direction: row;
+
+                            .emptyEmployeeSpace {
+                                margin-left: 20px;
+                                width: 300px;
+                                background-color: #ccc;
+                                height: 100%;
+                                border-radius: 10px;
+                            }
+
+                            .assignedCitizens {
+                                display: flex;
+
+                                .citizenCard {
+                                    width: 300px;
+                                    margin-left: 20px;
+                                }
+                            }
+                        }
+                    }
+
+                    .citizenAssignmentDataWrapper:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .buildableDemolishModal--inner {
+                    height: 100%;
+
+                    .citizenDataCards {
+                        border-radius: 10px;
+                        overflow: auto;
+                        background-color: #eee;
+                        height: calc(100% - 50px);
+                        padding: 20px 0;
+
+                        display: flex;
+                        justify-content: flex-start;
+                        flex-wrap: wrap;
+
+                        .citizenCard {
+                            flex: 1 1;
+                            min-width: 300px;
+                            padding: 20px;
+                            border-radius: 10px;
+                            background-color: #fff;
+                            margin: 20px;
+                        }
+                    }
+
+                    .confirmDemolishButton {
+                        height: 50px;
+
+                        button {
+                            background-color: lightblue;
+                            border: none;
+                            margin-top: 10px;
+                            border-radius: 10px;
+                            height: 40px;
+                            width: 100%;
+                        }
                     }
                 }
             }
