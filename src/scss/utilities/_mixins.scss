@@ -1,0 +1,47 @@
+// FONTS //
+
+// Dogica
+@mixin font-dogica {
+    font-family: "dogica", monospace;
+    font-size: $font-size-dogica;
+    line-height: $line-height-dogica;
+    letter-spacing: $letter-spacing-dogica;
+}
+
+@mixin font-dogica-large {
+    font-family: "dogica", monospace;
+    font-size: $font-size-dogica-large;
+    line-height: $line-height-dogica-large;
+    letter-spacing: $letter-spacing-dogica;
+}
+
+@mixin font-dogica-bold {
+    font-family: "dogica", monospace;
+    font-size: $font-size-dogica;
+    line-height: $line-height-dogica;
+    letter-spacing: $letter-spacing-dogica-bold;
+    font-weight: bold;
+}
+
+@mixin font-dogica-bold-large {
+    font-family: "dogica", monospace;
+    font-size: $font-size-dogica-large;
+    line-height: $line-height-dogica-large;
+    letter-spacing: $letter-spacing-dogica-bold;
+    font-weight: bold;
+}
+
+// VT323
+@mixin font-VT323 {
+    font-family: "VT323", monospace;
+    font-size: $font-size-VT323;
+    line-height: $line-height-VT323;
+    letter-spacing: $letter-spacing-VT323;
+}
+
+@mixin font-VT323-large {
+    font-family: "VT323", monospace;
+    font-size: $font-size-VT323-large;
+    line-height: $line-height-VT323-large;
+    letter-spacing: $letter-spacing-VT323;
+}

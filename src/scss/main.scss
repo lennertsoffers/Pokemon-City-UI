@@ -1,87 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
-@import "world.scss";
-@import "modal.scss";
-@import "progressBar.scss";
-@import "hud.scss";
-@import "loading.scss";
+// Utilities
+@import "utilities/variables";
+@import "utilities/mixins";
 
-@font-face {
-    font-family: "dogica";
-    src: url("../assets/font/dogica.ttf") format("truetype");
-}
+// Base
+@import "base/reset";
+@import "base/typography";
+@import "base/default";
 
-@font-face {
-    font-family: "dogica";
-    src: url("../assets/font/dogicabold.ttf") format("truetype");
-    font-weight: bold;
-}
-
-.dogica {
-    font-family: "dogica", monospace;
-    letter-spacing: -3px;
-}
-
-.dogica-bold {
-    font-family: "dogica", monospace;
-    letter-spacing: -2px;
-    font-weight: bold;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: auto;
-    font-size: 14px;
-    line-height: 18px;
-    @extend .dogica;
-}
-
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-}
-
-.game {
-    .toolbar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        padding: 20px;
-
-        .toolbar--inner {
-            background-color: #fff;
-            height: 100%;
-            width: 100%;
-            border-radius: 10px;
-
-            nav {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                padding: 10px;
-
-                ul {
-                    width: 50%;
-                    display: flex;
-                    justify-content: space-between;
-                    list-style-type: none;
-
-                    li {
-                        button {
-                            @extend .dogica-bold;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+// Components
+@import "components/world/world";
+@import "components/modal/modal";
+@import "components/toolbar/toolbar";
+@import "components/citizen/progressBar";
+@import "components/hud/hud";
+@import "components/loading";
