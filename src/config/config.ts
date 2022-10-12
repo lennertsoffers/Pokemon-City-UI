@@ -13,4 +13,4 @@ export const SOCIAL_SPRITESHEET = "social_spritesheet";
 export const FALLBACK_SPRITESHEET = "unknown_texture";
 
 export const BEARER_TOKEN =
-    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMZW5uZXJ0Iiwicm9sZXMiOlsiUk9MRV9QTEFZRVIiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVnaXN0ZXIiLCJleHAiOjE2NjU1NTU5MjZ9.eQwr8bjrw8aCpiHHsuciFVaK7Uo0FnX7kYita1e1TrA";
+    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMZW5uZXJ0Iiwicm9sZXMiOlsiUk9MRV9QTEFZRVIiXSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvbG9naW4iLCJleHAiOjE2NjU2MTczOTZ9.-nEdEMZlnjJ9jI2vEgqTxOF14OxBYzQKqKgxy-c_zUk";

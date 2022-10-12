@@ -1,14 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 @import "world.scss";
 @import "modal.scss";
 @import "progressBar.scss";
 @import "hud.scss";
 @import "loading.scss";
 
+@font-face {
+    font-family: "dogica";
+    src: url("../assets/font/dogica.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "dogica";
+    src: url("../assets/font/dogicabold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+.dogica {
+    font-family: "dogica", monospace;
+    letter-spacing: -3px;
+}
+
+.dogica-bold {
+    font-family: "dogica", monospace;
+    letter-spacing: -2px;
+    font-weight: bold;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: auto;
+    font-size: 14px;
+    line-height: 18px;
+    @extend .dogica;
 }
 
 body {
@@ -48,6 +74,12 @@ code {
                     display: flex;
                     justify-content: space-between;
                     list-style-type: none;
+
+                    li {
+                        button {
+                            @extend .dogica-bold;
+                        }
+                    }
                 }
             }
         }
