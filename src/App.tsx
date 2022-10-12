@@ -8,6 +8,7 @@ import ModalContainer from "./components/Modals/ModalContainer";
 import Toolbar from "./components/toolbar/Toolbar";
 import World from "./components/world/map/World";
 
+// TODO - Citizens not reloading on opening modal
 // TODO - When dragging, do not listen to other events that use the mouse
 
 function App() {

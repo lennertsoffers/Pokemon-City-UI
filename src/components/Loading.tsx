@@ -1,7 +1,10 @@
 const Loading = () => {
     return (
         <div className="loading">
-            <div>Loading...</div>
+            <div>
+                <div>Loading...</div>
+                <img src="./assets/gif/loading.gif" alt="loading-gif" />
+            </div>
         </div>
     );
 };
