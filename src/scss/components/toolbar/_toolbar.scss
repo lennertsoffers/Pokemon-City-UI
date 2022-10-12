@@ -4,25 +4,52 @@
     left: 0;
     width: 100%;
     height: 100px;
-    padding: 20px;
+    padding: 10px 25vw;
 
     .toolbar--inner {
-        background-color: #fff;
         height: 100%;
         width: 100%;
         border-radius: 10px;
+        position: relative;
 
-        nav {
+        .toolbar--inner__background {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
             display: flex;
-            justify-content: space-between;
-            padding: 10px;
+
+            > img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .toolbar--inner__foreground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
 
             ul {
-                width: 50%;
+                width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
+                align-items: center;
                 list-style-type: none;
+
+                > li {
+                    @include hover-pointer;
+
+                    > div > button {
+                        background-color: transparent;
+                        border: none;
+                        @include font-dogica-large;
+                    }
+                }
             }
         }
     }

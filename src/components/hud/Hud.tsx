@@ -27,18 +27,51 @@ const Hud = () => {
         <div className="hud">
             <div className="hud__left">
                 <div onClick={handleUserClick}>
-                    <div>{userData.username}</div>
-                    <div>LV. {userData.level}</div>
+                    <div className="hud__left--background">
+                        <img src="./assets/ui/user.png" alt="user" />
+                    </div>
+                    <div className="hud__left--foreground">
+                        <div>
+                            <div>{userData.username}</div>
+                            <div>LV. {userData.level}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="hud__center" onClick={handleCityNameClick}>
-                <div>{userData.cityName}</div>
+                <div className="hud__center--background">
+                    <img src="./assets/ui/city_name_box.png" alt="city_name_box" />
+                </div>
+                <div className="hud__center--foreground">
+                    <div>{userData.cityName}</div>
+                </div>
             </div>
             <div className="hud__right">
                 <div>
-                    <div>€{userData.money}</div>
-                    <div onClick={handleCitizensClick}>👨‍👩‍👦‍👦{userData.citizens}</div>
-                    <div>🌟{userData.satisfaction}</div>
+                    <div>
+                        <div className="hud__right--background">
+                            <img src="./assets/ui/databox.png" alt="money" />
+                        </div>
+                        <div className="hud__right--foreground">
+                            <div>€{userData.money}</div>
+                        </div>
+                    </div>
+                    <div className="hud__right__citizens" onClick={handleCitizensClick}>
+                        <div className="hud__right--background">
+                            <img src="./assets/ui/databox.png" alt="citizens" />
+                        </div>
+                        <div className="hud__right--foreground">
+                            <div>👨‍👩‍👦‍👦{userData.citizens}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="hud__right--background">
+                            <img src="./assets/ui/databox.png" alt="satisfaction" />
+                        </div>
+                        <div className="hud__right--foreground">
+                            <div>🌟{userData.satisfaction}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

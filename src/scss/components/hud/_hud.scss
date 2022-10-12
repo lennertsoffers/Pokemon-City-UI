@@ -7,31 +7,79 @@
     justify-content: space-between;
     padding: 10px;
     user-select: none;
+    pointer-events: none;
+    align-items: start;
 
     .hud__left {
         width: 100%;
 
         > div {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            width: 150px;
+            position: relative;
+            width: 200px;
+
+            .hud__left--background {
+                position: absolute;
+
+                img {
+                    width: 200px;
+                }
+            }
+
+            .hud__left--foreground {
+                width: 100%;
+                height: 150px;
+                position: relative;
+                z-index: 1;
+                display: flex;
+                justify-content: center;
+                align-items: end;
+                pointer-events: all;
+
+                > div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: bottom;
+                }
+            }
         }
     }
 
     .hud__center {
-        background-color: #fff;
         padding: 10px;
-        border-radius: 10px;
-        width: 500px;
+        min-width: 220px;
+        height: 40px;
         display: flex;
         justify-content: center;
         align-items: center;
+        pointer-events: all;
+        position: relative;
+        @include hover-pointer;
+
+        .hud__center--background {
+            position: absolute;
+            width: 100%;
+
+            > img {
+                width: 100%;
+            }
+        }
+        .hud__center--foreground {
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+            text-align: center;
+            position: relative;
+            margin-bottom: 1px;
+        }
     }
 
     .hud__right {
         width: 100%;
         display: flex;
+
+        .hud__right__citizens {
+            @include hover-pointer;
+        }
 
         > div {
             display: flex;
@@ -40,13 +88,31 @@
 
             > div {
                 margin-left: 20px;
-                background-color: #fff;
                 padding: 10px;
                 width: 100px;
                 border-radius: 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                position: relative;
+                pointer-events: all;
+
+                .hud__right--background {
+                    position: absolute;
+                    height: 100%;
+                    width: 100%;
+
+                    > img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+
+                .hud__right--foreground {
+                    position: relative;
+                    width: 100%;
+                    text-align: center;
+                }
             }
         }
     }

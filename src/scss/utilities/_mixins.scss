@@ -1,5 +1,4 @@
 // FONTS //
-
 // Dogica
 @mixin font-dogica {
     font-family: "dogica", monospace;
@@ -44,4 +43,21 @@
     font-size: $font-size-VT323-large;
     line-height: $line-height-VT323-large;
     letter-spacing: $letter-spacing-VT323;
+}
+
+// LINKS //
+
+// Hover
+@mixin hover-pointer {
+    :hover :before {
+        content: "";
+        width: 10px;
+        height: 100%;
+        background-image: url("../../assets/ui/link_pointer.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        z-index: 100;
+        position: absolute;
+        transform: translate(-10px, 2px);
+    }
 }
