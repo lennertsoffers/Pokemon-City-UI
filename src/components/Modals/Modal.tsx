@@ -23,11 +23,10 @@ const Modal = (properties: ModalProperties) => {
     return (
         <div className="modal" onClick={handleClickPage}>
             <div className="modal--inner">
-                <header>
-                    <h1>{properties.title}</h1>
-                    <div onClick={handleClose}>X</div>
-                </header>
-                <div className="modal--inner__children">{properties.children}</div>
+                <div className="modal--inner--background">{properties.imageSource && <img src={properties.imageSource} alt="modal background" />}</div>
+                <div className="modal--inner--foreground">
+                    <div className="modal--inner__children">{properties.children}</div>
+                </div>
             </div>
         </div>
     );

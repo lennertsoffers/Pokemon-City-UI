@@ -16,16 +16,25 @@ const Toolbar = () => {
     return (
         <div className="toolbar">
             <div className="toolbar--inner">
-                <nav>
+                <div className="toolbar--inner__background">
+                    <img src="./assets/ui/toolbar.png" alt="toolbar" />
+                </div>
+                <nav className="toolbar--inner__foreground">
                     <ul>
                         <li>
-                            <button onClick={handleBuildClick}>BUILD</button>
+                            <div>
+                                <button onClick={handleBuildClick}>BUILD</button>
+                            </div>
                         </li>
                         <li>
-                            <button onClick={handleActionsClick}>ACTIONS</button>
+                            <div>
+                                <button onClick={handleActionsClick}>ACTIONS</button>
+                            </div>
                         </li>
                         <li>
-                            <button onClick={handleCitizensClick}>CITIZENS</button>
+                            <div>
+                                <button onClick={handleCitizensClick}>CITIZENS</button>
+                            </div>
                         </li>
                     </ul>
                 </nav>

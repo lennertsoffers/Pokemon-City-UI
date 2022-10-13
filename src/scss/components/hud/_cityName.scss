@@ -1,0 +1,38 @@
+.cityName {
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    pointer-events: all;
+    position: relative;
+
+    > .cityName--background {
+        position: absolute;
+
+        > img {
+            width: 100%;
+        }
+    }
+
+    > .cityName--foreground {
+        width: 100%;
+        z-index: 1;
+        position: relative;
+
+        > input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 3px;
+            text-align: center;
+            background-color: transparent;
+            border: none;
+            line-height: 20px;
+            cursor: pointer;
+        }
+
+        > input:focus {
+            outline: none;
+            color: #fff;
+        }
+    }
+}

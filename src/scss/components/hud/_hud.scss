@@ -1,0 +1,25 @@
+.hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    user-select: none;
+    pointer-events: none;
+    align-items: start;
+
+    .hud__left {
+        width: 100%;
+    }
+
+    .hud__right {
+        width: 100%;
+
+        > div {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

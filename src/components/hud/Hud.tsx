@@ -4,6 +4,9 @@ import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
 import Loading from "../Loading";
+import CityName from "./CityName";
+import UserInfo from "./UserInfo";
+import ValueBox from "./ValueBox";
 
 const Hud = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
@@ -11,10 +14,6 @@ const Hud = () => {
 
     const handleUserClick = () => {
         dispatch(OPEN_MODAL(ModalTypeEnum.STATISTICS_MODAL));
-    };
-
-    const handleCityNameClick = () => {
-        dispatch(OPEN_MODAL(ModalTypeEnum.CHANGE_CITY_NAME_MODAL));
     };
 
     const handleCitizensClick = () => {
@@ -26,19 +25,16 @@ const Hud = () => {
     return (
         <div className="hud">
             <div className="hud__left">
-                <div onClick={handleUserClick}>
-                    <div>{userData.username}</div>
-                    <div>LV. {userData.level}</div>
-                </div>
+                <UserInfo onClick={handleUserClick} username={userData.username} level={userData.level} />
             </div>
-            <div className="hud__center" onClick={handleCityNameClick}>
-                <div>{userData.cityName}</div>
+            <div>
+                <CityName cityName={userData.cityName} />
             </div>
             <div className="hud__right">
                 <div>
-                    <div>€{userData.money}</div>
-                    <div onClick={handleCitizensClick}>👨‍👩‍👦‍👦{userData.citizens}</div>
-                    <div>🌟{userData.satisfaction}</div>
+                    <ValueBox value={`€${userData.money}`} />
+                    <ValueBox value={`👨‍👩‍👦‍👦${userData.citizens}`} onClick={handleCitizensClick} link={true} />
+                    <ValueBox value={`🌟${userData.satisfaction}`} />
                 </div>
             </div>
         </div>
