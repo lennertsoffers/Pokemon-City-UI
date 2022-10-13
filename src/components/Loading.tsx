@@ -3,7 +3,7 @@ const Loading = () => {
         <div className="loading">
             <div>
                 <div>Loading...</div>
-                <img src="./assets/gif/loading.gif" alt="loading-gif" />
+                <img src="./assets/gif/loading.gif" alt="loading-gif"/>
             </div>
         </div>
     );
