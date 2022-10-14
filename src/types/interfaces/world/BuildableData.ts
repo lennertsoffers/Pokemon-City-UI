@@ -14,6 +14,7 @@ interface BuildableData {
     spritesheetLocation: SpritesheetLocation;
     buildableTypeEnum: string;
     specialisationType: string;
+    spritesheet: string;
 }
 
 export default BuildableData;

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
 import CitizenService from "../../../api/CitizenService";
 import DataLoader from "../../../api/DataLoader";
-import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
+import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildableDataActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";

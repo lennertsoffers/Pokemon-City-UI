@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import BuildablePlacementReducer from "./BuildablePlacementReducer";
+import BuildableDataReducer from "./BuildableDataReducer";
 import BuildableSelectorReducer from "./BuildableSelectorReducer";
 import CitizenReducer from "./CitizenReducer";
 import CitizenSelectorReducer from "./CitizenSelectorReducer";
@@ -10,7 +10,7 @@ import StaticDataReducer from "./StaticDataReducer";
 import UserReducer from "./UserReducer";
 
 const CombinedReducer = combineReducers({
-    buildablePlacementState: BuildablePlacementReducer,
+    buildableDataState: BuildableDataReducer,
     buildableSelectorState: BuildableSelectorReducer,
     mapState: MapReducer,
     modalState: ModalReducer,
