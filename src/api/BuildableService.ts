@@ -26,6 +26,15 @@ const BuildableService = (() => {
         }
     };
 
+    const getBuildableById = async (buildableId: number) => {
+        try {
+            const { data } = await axios.get(`/api/buildables/${buildableId}`);
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const buildBuildable = async (position: Position, buildableData: StaticBuildableData, successCallback: Function) => {
         const body = {
             name: StringUtils.toConstantName(buildableData.name),
@@ -76,6 +85,7 @@ const BuildableService = (() => {
     return {
         getStaticBuildableData,
         getBuildables,
+        getBuildableById,
         buildBuildable,
         moveBuildable,
         demolishBuildable,

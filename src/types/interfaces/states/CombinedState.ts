@@ -1,4 +1,4 @@
-import BuildablePlacementState from "./BuildablePlacementState";
+import BuildableDataState from "./BuildableDataState";
 import BuildableSelectorState from "./BuildableSelectorState";
 import CitizenSelectorState from "./CitizenSelectorState";
 import CitizenState from "./CitizenState";
@@ -9,7 +9,7 @@ import StaticDataState from "./StaticDataState";
 import UserState from "./UserState";
 
 interface CombinedState {
-    buildablePlacementState: BuildablePlacementState;
+    buildableDataState: BuildableDataState;
     buildableSelectorState: BuildableSelectorState;
     mapState: MapState;
     modalState: ModalState;

@@ -1,5 +1,5 @@
 import { Store } from "@reduxjs/toolkit";
-import { LOAD_BUILDINGS } from "../redux/actions/BuildablePlacementActions";
+import { LOAD_BUILDINGS, UPDATE_BUILDING } from "../redux/actions/BuildableDataActions";
 import { LOAD_CITIZENS } from "../redux/actions/CitizenActions";
 import { LOAD_STATIC_HOUSE_DATA, LOAD_STATIC_COMPANY_DATA, LOAD_STATIC_DECORATION_DATA } from "../redux/actions/StaticDataActions";
 import { LOAD_USER_DATA } from "../redux/actions/UserActions";
@@ -7,7 +7,7 @@ import StaticCompanyData from "../types/interfaces/static/StaticCompanyData";
 import StaticDecorationData from "../types/interfaces/static/StaticDecorationData";
 import StaticHouseData from "../types/interfaces/static/StaticHouseData";
 import BuildableData from "../types/interfaces/world/BuildableData";
-import BuildablePlacementMapper from "../utils/mappers/BuildablePlacementMapper";
+import BuildableDataMapper from "../utils/mappers/BuildableDataMapper";
 import BuildableService from "./BuildableService";
 import CitizenService from "./CitizenService";
 import UserService from "./UserService";
@@ -33,9 +33,9 @@ const DataLoader = (() => {
         const data = await BuildableService.getBuildables();
         if (!data) return;
 
-        const placements = data.map((buildableData: BuildableData) => BuildablePlacementMapper.toBuildablePlacement(buildableData));
+        const buildableDataList = data.map((buildableData: BuildableData) => BuildableDataMapper.toBuildableData(buildableData));
 
-        store.dispatch(LOAD_BUILDINGS(placements));
+        store.dispatch(LOAD_BUILDINGS(buildableDataList));
     };
 
     const loadCitizens = async () => {
@@ -54,12 +54,18 @@ const DataLoader = (() => {
         store.dispatch(LOAD_USER_DATA(data));
     };
 
+    const updateBuildable = async (buildableId: number) => {
+        const buildableData: BuildableData = await BuildableService.getBuildableById(buildableId);
+        store.dispatch(UPDATE_BUILDING(buildableData));
+    };
+
     return {
         initialize,
         loadStaticBuildableData,
         loadBuildables,
         loadCitizens,
         loadUserData,
+        updateBuildable,
     };
 })();
 

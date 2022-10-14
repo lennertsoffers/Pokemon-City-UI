@@ -5,7 +5,6 @@ import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
 import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSheetDimension";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
-import BuildablePlacement from "../../../types/interfaces/world/BuildablePlacement";
 import LayerData from "../../../types/interfaces/world/LayerData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
@@ -15,12 +14,13 @@ import Buildable from "../buildable/Buildable";
 import Layer from "./Layer";
 import map from "./map";
 import UserService from "../../../api/UserService";
+import BuildableData from "../../../types/interfaces/world/BuildableData";
 
 const World = () => {
     const world = useRef<any>(null);
     const dispatch = useDispatch();
     const mapData = useSelector((state: CombinedState) => state.mapState.mapData);
-    const buildablePlacements = useSelector((state: CombinedState) => state.buildablePlacementState.buildablePlacements);
+    const buildableDataList = useSelector((state: CombinedState) => state.buildableDataState.buildableDataList);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const [sessionTime, setSessionTime] = useState<number>(0);
@@ -119,7 +119,7 @@ const World = () => {
                 ))}
             </div>
             <div className="buildings">
-                {buildablePlacements !== undefined && buildablePlacements.map((placement: BuildablePlacement) => <Buildable buildablePlacement={placement} key={placement.id} />)}
+                {buildableDataList !== undefined && buildableDataList.map((buildableData: BuildableData) => <Buildable buildableData={buildableData} key={buildableData.id} />)}
             </div>
             <div className="buildingActionWrapper"></div>
         </div>

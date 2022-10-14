@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
 import DataLoader from "../../../api/DataLoader";
 import { TILE_WIDTH } from "../../../config/config";
-import { CREATE_BUILDING, MOVE_BUILDING } from "../../../redux/actions/BuildablePlacementActions";
+import { CREATE_BUILDING, MOVE_BUILDING } from "../../../redux/actions/BuildableDataActions";
 import { DESELECT_BUILDING as UNSELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
@@ -12,7 +12,7 @@ import BuildableData from "../../../types/interfaces/world/BuildableData";
 import buildableMoveData from "../../../types/interfaces/world/BuildableMoveData";
 import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
-import BuildablePlacementMapper from "../../../utils/mappers/BuildablePlacementMapper";
+import BuildableDataMapper from "../../../utils/mappers/BuildableDataMapper";
 
 const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: Function }) => {
     const self = useRef<any>(null);
@@ -48,7 +48,7 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         const bottomRightWorldPosition = ChunkUtils.getRightCornerWorldPosition(selectedBuildable.spritesheetLocation, chunkPosition, tileIndex);
 
         BuildableService.buildBuildable(bottomRightWorldPosition, selectedBuildable, (data: BuildableData) => {
-            dispatch(CREATE_BUILDING(BuildablePlacementMapper.toBuildablePlacement(data)));
+            dispatch(CREATE_BUILDING(BuildableDataMapper.toBuildableData(data)));
             dispatch(UNSELECT_BUILDING);
             dispatch(UNSELECT_ACTION);
 
