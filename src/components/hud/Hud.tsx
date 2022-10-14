@@ -13,6 +13,7 @@ const Hud = () => {
     const dispatch = useDispatch();
 
     const handleUserClick = () => {
+        DataLoader.loadUserData();
         dispatch(OPEN_MODAL(ModalTypeEnum.STATISTICS_MODAL));
     };
 

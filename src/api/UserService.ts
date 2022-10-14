@@ -10,8 +10,13 @@ const UserService = (() => {
         }
     };
 
+    const updateStatistics = (time: number) => {
+        axios.post("/users/me/updateStatistics", { sessionTime: time });
+    };
+
     return {
         getUserData,
+        updateStatistics,
     };
 })();
 
