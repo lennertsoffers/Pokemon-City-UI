@@ -5,12 +5,14 @@
     width: 100%;
     height: 100px;
     padding: 10px 25vw;
+    pointer-events: none;
 
     .toolbar--inner {
         height: 100%;
         width: 100%;
         border-radius: 10px;
         position: relative;
+        pointer-events: all;
 
         .toolbar--inner__background {
             position: absolute;
@@ -45,6 +47,7 @@
                     @include hover-pointer;
 
                     > div > button {
+                        cursor: pointer;
                         background-color: transparent;
                         border: none;
                         @include font-dogica-large;

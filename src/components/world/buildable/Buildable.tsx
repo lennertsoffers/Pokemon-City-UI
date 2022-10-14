@@ -13,19 +13,24 @@ import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSh
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildableData from "../../../types/interfaces/world/BuildableData";
 import CompanyData from "../../../types/interfaces/world/CompanyData";
+import CompanyInfoData from "../../../types/interfaces/world/CompanyInfoData";
 import HouseData from "../../../types/interfaces/world/HouseData";
+import HouseInfoData from "../../../types/interfaces/world/HouseInfoData";
 import IncomeBuildingData from "../../../types/interfaces/world/IncomeBuildingData";
 import Position from "../../../types/interfaces/world/Position";
 import BuildableUtils from "../../../utils/BuildableUtils";
 import BuildableDataMapper from "../../../utils/mappers/BuildableDataMapper";
+import BuildableInfoMapper from "../../../utils/mappers/BuildableInfoMapper";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
+import CompanyInfo from "./CompanyInfo";
+import HouseInfo from "./HouseInfo";
 
 const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     const { selectedBuildable, id } = useSelector((state: CombinedState) => state.buildableSelectorState);
     const action = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const dispatch = useDispatch();
-    const [houseInfo, setHouseInfo] = useState<HouseData | null>(null);
-    const [companyInfo, setCompanyInfo] = useState<CompanyData | null>(null);
+    const [houseInfo, setHouseInfo] = useState<HouseInfoData | null>(null);
+    const [companyInfo, setCompanyInfo] = useState<CompanyInfoData | null>(null);
 
     const handleBuildableClick = () => {
         switch (action) {
@@ -41,9 +46,9 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     const handleBuildableMouseEnter = () => {
         switch (buildableData.buildableTypeEnum) {
             case "HOUSE":
-                return setHouseInfo(buildableData as HouseData);
+                return setHouseInfo(BuildableInfoMapper.toHouseInfo(buildableData as HouseData));
             case "COMPANY":
-                return setCompanyInfo(buildableData as CompanyData);
+                return setCompanyInfo(BuildableInfoMapper.toCompanyInfo(buildableData as CompanyData));
         }
     };
 
@@ -80,27 +85,13 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
         const incomeBuildingData: IncomeBuildingData = buildableData as IncomeBuildingData;
         const minutesSinceLastCollection = BuildableUtils.getMinutesSinceLastCollection(incomeBuildingData.lastCollected);
 
-        if (buildableData.buildableTypeEnum === "HOUSE" && getHouseRent() < (buildableData as HouseData).maxRent / 2) return;
+        if (buildableData.buildableTypeEnum === "HOUSE" && BuildableUtils.getHouseRent(buildableData) < (buildableData as HouseData).maxRent / 2) return;
         if (buildableData.buildableTypeEnum === "COMPANY" && minutesSinceLastCollection < 1) return;
 
         IncomeBuildingService.collect(incomeBuildingData.id, () => {
             DataLoader.updateBuildable(incomeBuildingData.id);
             DataLoader.loadUserData();
         });
-    };
-
-    const getHouseRent = () => {
-        if (buildableData.buildableTypeEnum !== "HOUSE") return 0;
-
-        const houseData = buildableData as HouseData;
-        return Math.min(BuildableUtils.getMinutesSinceLastCollection(houseData.lastCollected) * houseData.rentPerMinute, houseData.maxRent);
-    };
-
-    const getCompanyProfit = () => {
-        if (buildableData.buildableTypeEnum !== "COMPANY") return 0;
-
-        const companyData = buildableData as CompanyData;
-        return BuildableUtils.getMinutesSinceLastCollection(companyData.lastCollected) * companyData.incomePerMinute;
     };
 
     const pointerEvents = selectedBuildable ? "none" : "all";
@@ -117,53 +108,50 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     const displayMoveOverlay = action === ActionEnum.MOVE && selectedBuildable !== null && id === buildableData.id;
 
     return (
-        <div
-            onClick={handleBuildableClick}
-            onMouseEnter={handleBuildableMouseEnter}
-            onMouseLeave={handleBuildableMouseLeave}
-            style={{
-                backgroundPosition: `${-dimensions.offsetLeft * TILE_WIDTH}px ${-dimensions.offsetTop}px`,
-                backgroundImage: `url(./assets/spritesheets/${spritesheet}.png)`,
-                transform: `translate(${worldPosition.x * TILE_WIDTH - displayWidth + TILE_WIDTH}px, ${worldPosition.y * TILE_WIDTH - displayHeight + TILE_WIDTH}px)`,
-                width: `${displayWidth}px`,
-                height: `${displayHeight}px`,
-                position: `absolute`,
-                left: `50%`,
-                top: `50%`,
-                display: `flex`,
-                flexDirection: `column`,
-                justifyContent: `end`,
-                alignItems: `center`,
-                pointerEvents: pointerEvents,
-            }}
-        >
-            {displayMoveOverlay && (
-                <div
-                    style={{
-                        border: `4px dashed rgba(0, 0, 150, 0.8)`,
-                        backgroundColor: `rgba(0, 0, 255, 0.3)`,
-                        height: `${selectedBuildable.height * TILE_WIDTH}px`,
-                        width: `${selectedBuildable.width * TILE_WIDTH}px`,
-                    }}
-                />
-            )}
-            {houseInfo && (
-                <div className="hoverInfo hoverInfo--house">
-                    <div>{houseInfo.name}</div>
-                    <div>
-                        {getHouseRent()} - {houseInfo.maxRent}
-                    </div>
-                    <div>{houseInfo.numberOfCitizens}</div>
-                </div>
-            )}
-            {companyInfo && (
-                <div className="hoverInfo hoverInfo--company">
-                    <div className="companyInfo__name">{companyInfo.name}</div>
-                    <div className="companyInfo__profit">{getCompanyProfit()}</div>
-                    <div className="companyInfo__specialisationType">{companyInfo.specialisationType.toLowerCase()}</div>
-                    <div className="companyInfo__employeeMultiplier">Employee multiplier: {companyInfo.employeeMultiplier}</div>
-                </div>
-            )}
+        <div>
+            <div
+                onClick={handleBuildableClick}
+                onMouseEnter={handleBuildableMouseEnter}
+                onMouseLeave={handleBuildableMouseLeave}
+                style={{
+                    backgroundPosition: `${-dimensions.offsetLeft * TILE_WIDTH}px ${-dimensions.offsetTop}px`,
+                    backgroundImage: `url(./assets/spritesheets/${spritesheet}.png)`,
+                    transform: `translate(${worldPosition.x * TILE_WIDTH - displayWidth + TILE_WIDTH}px, ${worldPosition.y * TILE_WIDTH - displayHeight + TILE_WIDTH}px)`,
+                    width: `${displayWidth}px`,
+                    height: `${displayHeight}px`,
+                    position: `absolute`,
+                    left: `50%`,
+                    top: `50%`,
+                    display: `flex`,
+                    flexDirection: `column`,
+                    justifyContent: `end`,
+                    alignItems: `center`,
+                    pointerEvents: pointerEvents,
+                }}
+            >
+                {displayMoveOverlay && (
+                    <div
+                        style={{
+                            border: `4px dashed rgba(0, 0, 150, 0.8)`,
+                            backgroundColor: `rgba(0, 0, 255, 0.3)`,
+                            height: `${selectedBuildable.height * TILE_WIDTH}px`,
+                            width: `${selectedBuildable.width * TILE_WIDTH}px`,
+                        }}
+                    />
+                )}
+            </div>
+            <div
+                className="buildableInfoWrapper"
+                style={{
+                    transform: `translate(${worldPosition.x * TILE_WIDTH - displayWidth / 2 + TILE_WIDTH - 100}px, ${worldPosition.y * TILE_WIDTH + TILE_WIDTH - displayHeight - 100}px)`,
+                    position: `absolute`,
+                    left: `50%`,
+                    top: `50%`,
+                }}
+            >
+                {houseInfo && <HouseInfo houseInfo={houseInfo} />}
+                {companyInfo && <CompanyInfo companyInfo={companyInfo} />}
+            </div>
         </div>
     );
 };

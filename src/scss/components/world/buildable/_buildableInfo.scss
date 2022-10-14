@@ -1,0 +1,12 @@
+.buildableInfoWrapper {
+    z-index: 500;
+    pointer-events: none;
+}
+
+.buildableInfo {
+    padding: 10px;
+    width: 200px;
+    height: 100px;
+    background-color: #fff;
+    pointer-events: none;
+}
