@@ -14,33 +14,33 @@ const Toolbar = () => {
     };
 
     return (
-        <div className="toolbar">
-            <div className="toolbar--inner">
-                <div className="toolbar--inner__background">
-                    <img src="./assets/ui/toolbar.png" alt="toolbar" />
+            <div className="toolbar">
+                <div className="toolbar--inner">
+                    <div className="toolbar--inner__background">
+                        <img src="./assets/ui/toolbar.png" alt="toolbar" />
+                    </div>
+                    <nav className="toolbar--inner__foreground">
+                        <ul>
+                            <li>
+                                <div>
+                                    <button onClick={handleBuildClick}>BUILD</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <button onClick={handleActionsClick}>ACTIONS</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <button onClick={handleCitizensClick}>CITIZENS</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav className="toolbar--inner__foreground">
-                    <ul>
-                        <li>
-                            <div>
-                                <button onClick={handleBuildClick}>BUILD</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <button onClick={handleActionsClick}>ACTIONS</button>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <button onClick={handleCitizensClick}>CITIZENS</button>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
             </div>
-        </div>
-    );
+            );
 };
 
 export default Toolbar;
