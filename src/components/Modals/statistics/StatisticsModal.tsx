@@ -59,7 +59,7 @@ const StatisticsModal = () => {
                         <div>
                             <div className="statisticsModal__data__topic">
                                 <div>Time Played</div>
-                                <div>{userData.statistics.timePlayed} h</div>
+                                <div>{Math.round((userData.statistics.timePlayed / 60) * 100) / 100} h</div>
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Buildings built</div>

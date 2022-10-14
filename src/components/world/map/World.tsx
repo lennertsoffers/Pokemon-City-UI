@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CHUNK_PIXELS, FALLBACK_SPRITESHEET, TILE_WIDTH } from "../../../config/config";
 import { LOAD_MAP_DATA } from "../../../redux/actions/MapActions";
@@ -14,6 +14,7 @@ import Loading from "../../Loading";
 import Buildable from "../buildable/Buildable";
 import Layer from "./Layer";
 import map from "./map";
+import UserService from "../../../api/UserService";
 
 const World = () => {
     const world = useRef<any>(null);
@@ -22,6 +23,7 @@ const World = () => {
     const buildablePlacements = useSelector((state: CombinedState) => state.buildablePlacementState.buildablePlacements);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
+    const [sessionTime, setSessionTime] = useState<number>(0);
 
     const mouseMoveHandler = (event: React.MouseEvent) => {
         if (event.buttons !== 1) return;
@@ -99,6 +101,13 @@ const World = () => {
 
         world.current.querySelector(".buildingActionWrapper").innerHTML = "";
     }, [selectedBuildable]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            UserService.updateStatistics(1);
+            setSessionTime(sessionTime + 1);
+        }, 1000 * 60);
+    }, [sessionTime]);
 
     if (!mapData) return <Loading />;
 
