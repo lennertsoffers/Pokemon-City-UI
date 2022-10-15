@@ -1,0 +1,67 @@
+.buildingCard {
+    flex: 1 1;
+    min-width: 250px;
+    height: 250px;
+    background-color: rgba(100, 100, 100, 0.2);
+    border: 3px solid transparent;
+    margin: 0 10px 10px 0;
+    padding: 10px;
+
+    .buildingCard__row {
+        display: flex;
+        height: 150px;
+
+        .buildingCard__label {
+            width: 80px !important;
+        }
+    }
+
+    .buildingCard__image {
+        margin-right: 10px;
+
+        img {
+            min-width: 100px;
+            max-width: 100px;
+            max-height: 150px;
+        }
+    }
+
+    .buildingCard__name {
+        @include font-dogica-bold;
+
+        margin: 10px 0;
+    }
+
+    .buildingCard__field {
+        display: flex;
+
+        .buildingCard__label {
+            width: 150px;
+        }
+    }
+}
+
+.buildingCard--unlocked:hover {
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 3px solid #782601;
+}
+
+.buildingCard--locked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .buildingCard--locked__center {
+        @include font-dogica-bold-large;
+        font-size: 40px;
+    }
+
+    .buildingCard--locked__bottom {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}

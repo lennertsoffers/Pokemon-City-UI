@@ -9,6 +9,7 @@ const HouseInfo = ({ houseInfo }: { houseInfo: HouseInfoData }) => {
                 <ProgressBar value={houseInfo.rent} max={houseInfo.maxRent} displayMaxValue={true} />
             </div>
             <div className="houseInfo__citizens">{houseInfo.numberOfCitizens}</div>
+            {houseInfo.rent >= houseInfo.maxRent / 2 && <div>Collect</div>}
         </div>
     );
 };
