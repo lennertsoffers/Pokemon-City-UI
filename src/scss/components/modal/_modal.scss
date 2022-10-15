@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: 999;
 
     img {
         margin-top: 50px;
@@ -23,6 +24,7 @@
     display: flex;
     justify-content: center;
     padding-top: 10vh;
+    z-index: 999;
 
     .modal--inner {
         position: relative;
@@ -49,37 +51,7 @@
                 position: relative;
                 width: 100%;
 
-                .buildModal--inner {
-                    border-radius: 10px;
-                    overflow: auto;
-                    background-color: #eee;
-                    height: 100%;
-                    padding: 20px 0;
-
-                    h2 {
-                        margin: 0 20px;
-                    }
-
-                    .buildingSelector {
-                        display: flex;
-                        justify-content: flex-start;
-                        flex-wrap: wrap;
-                    }
-
-                    .buildingCard {
-                        flex: 1 1;
-                        min-width: 300px;
-                        padding: 20px;
-                        border-radius: 10px;
-                        background-color: #fff;
-                        margin: 20px;
-
-                        img {
-                            min-width: 100px;
-                            max-width: 100px;
-                        }
-                    }
-                }
+                
 
                 .citizenModal--inner {
                     border-radius: 10px;

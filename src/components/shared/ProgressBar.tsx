@@ -1,8 +1,8 @@
-const ProgressBar = ({ value, max }: { value: number; max: number }) => {
+const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; max: number; displayMaxValue?: boolean }) => {
     const width = (value / max) * 100;
     const widthPercentage = `${width}%`;
     const getValue = () => {
-        if (value === max) return "MAX";
+        if (!displayMaxValue && value === max) return "MAX";
         if (width < 5) return "";
         return value;
     };
