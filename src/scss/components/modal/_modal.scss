@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: 999;
 
     img {
         margin-top: 50px;
@@ -23,6 +24,7 @@
     display: flex;
     justify-content: center;
     padding-top: 10vh;
+    z-index: 999;
 
     .modal--inner {
         position: relative;

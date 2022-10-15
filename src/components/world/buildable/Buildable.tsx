@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
 import DataLoader from "../../../api/DataLoader";
@@ -44,13 +44,17 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     };
 
     const handleBuildableMouseEnter = () => {
+        setInfo();
+    };
+
+    const setInfo = () => {
         switch (buildableData.buildableTypeEnum) {
             case "HOUSE":
                 return setHouseInfo(BuildableInfoMapper.toHouseInfo(buildableData as HouseData));
-            case "COMPANY":
-                return setCompanyInfo(BuildableInfoMapper.toCompanyInfo(buildableData as CompanyData));
+                case "COMPANY":
+                    return setCompanyInfo(BuildableInfoMapper.toCompanyInfo(buildableData as CompanyData));
         }
-    };
+    }
 
     const handleBuildableMouseLeave = () => {
         setHouseInfo(null);
@@ -93,6 +97,10 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
             DataLoader.loadUserData();
         });
     };
+
+    useEffect(() => {
+        if (houseInfo || companyInfo) setInfo();
+    }, [buildableData]);
 
     const pointerEvents = selectedBuildable ? "none" : "all";
 
