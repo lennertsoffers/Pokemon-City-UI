@@ -1,0 +1,14 @@
+.citizenCard {
+    flex: 1 1;
+    min-width: 250px;
+    height: 250px;
+    background-color: rgba(100, 100, 100, 0.2);
+    border: 3px solid transparent;
+    margin: 10px;
+    padding: 10px;
+}
+
+.citizenCard:hover {
+    background-color: rgba(100, 100, 100, 0.5);
+    border: 3px solid #782601;
+}

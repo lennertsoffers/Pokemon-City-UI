@@ -2,11 +2,13 @@ import Modal from "./Modal";
 
 const LoadingModal = () => {
     return (
-        <Modal>
+        <Modal imageSource="./assets/ui/modal.png">
             <div className="loadingModal">
-                <div>
-                    <div>Loading...</div>
-                    <img src="./assets/gif/loading.gif" alt="loading-gif" />
+                <div className="loadingModal__inner">
+                    <div>
+                        <div>Loading...</div>
+                        <img src="./assets/gif/loading.gif" alt="loading-gif" />
+                    </div>
                 </div>
             </div>
         </Modal>
