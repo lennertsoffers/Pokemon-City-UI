@@ -17,11 +17,10 @@ const CitizenDataCard = ({ citizenData, handleCitizenClick, preSelected }: { cit
             className="citizenCard"
             onClick={handleCitizenDataClick}
             style={{
-                backgroundColor: `${selected ? "rgba(50, 200, 50, 0.7)" : "#fff"}`,
+                backgroundColor: `${selected ? "rgba(200, 100, 100, 0.7)" : "rgba(100, 100, 100, 0.3)"}`,
             }}
         >
-            <div>{citizenData.name}</div>
-            <div>{citizenData.levelSpeed}</div>
+            <div className="citizenCard__name">{citizenData.name}</div>
             <SpecialisationDataView specialisationData={citizenData.specialisationData} maxSpecialisationData={citizenData.maxSpecialisationData} />
         </div>
     );

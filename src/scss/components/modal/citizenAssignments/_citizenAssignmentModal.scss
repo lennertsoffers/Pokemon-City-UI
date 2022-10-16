@@ -14,6 +14,7 @@
             right: 3%;
             cursor: pointer;
             z-index: 2;
+            transition: 0.1s;
 
             > img {
                 height: 60px;
@@ -22,7 +23,6 @@
         }
 
         .citizenAssignmentModal__unassign:hover {
-            transition: transform 0.2s;
             transform: scale(1.03);
         }
 
