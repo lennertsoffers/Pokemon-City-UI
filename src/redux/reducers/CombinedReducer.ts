@@ -3,6 +3,7 @@ import BuildableDataReducer from "./BuildableDataReducer";
 import BuildableSelectorReducer from "./BuildableSelectorReducer";
 import CitizenReducer from "./CitizenReducer";
 import CitizenSelectorReducer from "./CitizenSelectorReducer";
+import ErrorReducer from "./ErrorReducer";
 import MapReducer from "./MapReducer";
 import ModalReducer from "./ModalReducer";
 import SelectedActionReducer from "./SelectedActionReducer";
@@ -19,6 +20,7 @@ const CombinedReducer = combineReducers({
     citizenState: CitizenReducer,
     citizenSelectorState: CitizenSelectorReducer,
     userState: UserReducer,
+    errorState: ErrorReducer,
 });
 
 export default CombinedReducer;

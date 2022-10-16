@@ -1,0 +1,35 @@
+.errorMessage {
+    width: 250px;
+    height: 60px;
+    margin: 20px;
+    pointer-events: all;
+    background-color: #999;
+}
+
+.errorMessage--shown {
+    animation: showError 0.3s ease-in-out forwards;
+}
+
+.errorMessage--hide {
+    animation: hideError 0.3s ease-in-out forwards;
+}
+
+@keyframes showError {
+    from {
+        transform: translateX(300px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes hideError {
+    from {
+        transform: translate(0);
+    }
+
+    to {
+        transform: translateX(300px);
+    }
+}

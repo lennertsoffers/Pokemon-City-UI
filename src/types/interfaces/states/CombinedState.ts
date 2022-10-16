@@ -2,6 +2,7 @@ import BuildableDataState from "./BuildableDataState";
 import BuildableSelectorState from "./BuildableSelectorState";
 import CitizenSelectorState from "./CitizenSelectorState";
 import CitizenState from "./CitizenState";
+import ErrorState from "./ErrorState";
 import MapState from "./MapState";
 import ModalState from "./ModalState";
 import SelectedActionState from "./SelectedActionState";
@@ -18,6 +19,7 @@ interface CombinedState {
     citizenState: CitizenState;
     citizenSelectorState: CitizenSelectorState;
     userState: UserState;
+    errorState: ErrorState;
 }
 
 export default CombinedState;

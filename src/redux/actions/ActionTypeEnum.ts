@@ -27,6 +27,9 @@ enum ActionTypeEnum {
 
     LOAD_USER_DATA = "LOAD_USER_DATA",
     UPDATE_CITY_NAME = "UPDATE_CITY_NAME",
+
+    ADD_ERROR = "ADD_ERROR",
+    REMOVE_ERROR = "REMOVE_ERROR",
 }
 
 export default ActionTypeEnum;
