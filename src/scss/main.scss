@@ -11,7 +11,7 @@
 @import "components/world/world";
 @import "components/world/buildable/buildableInfo";
 @import "components/toolbar/toolbar";
-@import "components/citizen/progressBar";
+@import "components/shared/progressBar";
 @import "components/hud/cityName";
 @import "components/hud/hud";
 @import "components/hud/userInfo";
@@ -21,7 +21,11 @@
 @import "components/modal/building/buildModal";
 @import "components/modal/building/buildableCard";
 @import "components/modal/citizenAssignments/citizenAssignmentModal";
+@import "components/modal/citizenAssignments/citizenAssignmentCard";
 @import "components/modal/citizens/citizensModal";
+@import "components/modal/citizens/citizenCard";
+@import "components/modal/citizens/specialisationDataView";
 @import "components/modal/modal";
+@import "components/modal/loadingModal";
 @import "components/modal/statistics/statisticsModal";
 @import "components/loading";

@@ -5,7 +5,7 @@ import ModalTypeEnum from "../../../types/enums/ModalTypeEnum";
 import CitizenData from "../../../types/interfaces/citizens/CitizenData";
 import SpecialisationDataView from "./SpecialisationDataView";
 
-const CitizenCard = ({ citizenData }: { citizenData: CitizenData }) => {
+const CitizenCard = ({ citizenData, selected }: { citizenData: CitizenData; selected?: boolean }) => {
     const dispatch = useDispatch();
 
     const handleCitizenClick = () => {
@@ -14,10 +14,9 @@ const CitizenCard = ({ citizenData }: { citizenData: CitizenData }) => {
     };
 
     return (
-        <div className="citizenCard" onClick={handleCitizenClick}>
-            <div>{citizenData.name}</div>
-            <div>Level Speed: {citizenData.levelSpeed}</div>
-            <div>Since: {citizenData.assignedSince}</div>
+        <div className={`citizenCard ${selected ? "citizenCard--selected" : ""}`} onClick={handleCitizenClick}>
+            <div className="citizenCard__name">{citizenData.name}</div>
+            <div className="citizenCard__speed">Level Speed: {citizenData.levelSpeed}</div>
             <SpecialisationDataView specialisationData={citizenData.specialisationData} maxSpecialisationData={citizenData.maxSpecialisationData} />
         </div>
     );

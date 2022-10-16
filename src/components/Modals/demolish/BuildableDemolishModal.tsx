@@ -92,14 +92,15 @@ const BuildableDemolishModal = () => {
     };
 
     return (
-        <Modal title={buildTitle()} onClose={handleClose}>
-            <div className="buildableDemolishModal--inner">
-                <div className="citizenDataCards">
+        <Modal imageSource="./assets/ui/modal.png" onClose={handleClose}>
+            <div className="buildableDemolishModal">
+                <div className="buildableDemolishModal__title">{buildTitle()}</div>
+                <div className="buildableDemolishModal__citizenDataCards">
                     {unassignedCitizens.map((citizenData: CitizenData) => (
                         <CitizenDataCard preSelected={selectedCitizens.includes(citizenData.id)} citizenData={citizenData} handleCitizenClick={handleCitizenClick} key={citizenData.id} />
                     ))}
                 </div>
-                <div className="buttons">
+                <div className="buildableDemolishModal__buttons">
                     <button onClick={handleConfirmDemolishClick}>Demolish</button>
                     <button onClick={handleSelectWorstClick}>Select Worst</button>
                 </div>

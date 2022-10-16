@@ -20,7 +20,7 @@ const BuildModal = () => {
     };
 
     return (
-        <Modal title="Build" imageSource="./assets/ui/modal.png">
+        <Modal imageSource="./assets/ui/modal.png">
             <div className="buildModal">
                 <div className="buildModal__typeSelector">
                     <nav>

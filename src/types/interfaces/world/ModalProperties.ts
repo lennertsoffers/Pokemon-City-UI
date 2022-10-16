@@ -1,5 +1,4 @@
 interface ModalProperties {
-    title?: String;
     onClose?: CallableFunction;
     imageSource?: string;
     transparent?: boolean;

@@ -1,0 +1,52 @@
+.buildableDemolishModal {
+    width: 100%;
+    height: calc(80vw / 1276 * 563);
+    overflow: hidden;
+    padding: 2.5%;
+    position: relative;
+
+    .buildableDemolishModal__title {
+        height: 20px;
+        margin: 5px 0 0 10px;
+        @include font-dogica-bold;
+    }
+
+    .buildableDemolishModal__citizenDataCards {
+        overflow: auto;
+        height: calc(100% - 80px);
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        .citizenCard {
+            flex: 1 1;
+            min-width: 300px;
+            height: 230px;
+        }
+    }
+
+    .buildableDemolishModal__citizenDataCards::-webkit-scrollbar {
+        display: none;
+    }
+
+    .buildableDemolishModal__buttons {
+        margin: 0 10px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            margin-left: 20px;
+            border: none;
+            padding: 10px;
+            @include font-dogica-bold;
+            background-color: rgba(100, 100, 100, 0.3);
+            border: 3px solid #782601;
+            transition: 0.1s ease-out;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+    }
+}

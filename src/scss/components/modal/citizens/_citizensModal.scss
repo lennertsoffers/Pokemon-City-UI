@@ -1,0 +1,17 @@
+.citizensModal {
+    width: 100%;
+    height: calc(80vw / 1276 * 563);
+    padding: 3% 2.5%;
+
+    .citizensModal__citizenSelector {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow: auto;
+        height: 100%;
+    }
+
+    .citizensModal__citizenSelector::-webkit-scrollbar {
+        display: none;
+    }
+}

@@ -11,11 +11,13 @@ const CitizensModal = () => {
 
     if (!amountOfCitizens || amountOfCitizens !== citizens.length) return <LoadingModal />;
     return (
-        <Modal title="Citizens">
-            <div className="citizenModal--inner">
-                {citizens.map((citizenData: CitizenData) => (
-                    <CitizenCard citizenData={citizenData} key={citizenData.id} />
-                ))}
+        <Modal imageSource="./assets/ui/modal.png">
+            <div className="citizensModal">
+                <div className="citizensModal__citizenSelector">
+                    {citizens.map((citizenData: CitizenData) => (
+                        <CitizenCard citizenData={citizenData} key={citizenData.id} />
+                    ))}
+                </div>
             </div>
         </Modal>
     );

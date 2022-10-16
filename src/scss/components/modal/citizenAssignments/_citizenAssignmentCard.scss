@@ -1,0 +1,36 @@
+.employeeData {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .assignedCitizens {
+        display: flex;
+
+        .citizenCard {
+            width: 300px;
+            margin: 0;
+            background-color: transparent;
+            border: none;
+            border-right: 3px solid #782601;
+            cursor: pointer;
+        }
+
+        .citizenCard:last-of-type {
+            border-right: 3px solid transparent;
+        }
+
+        .citizenCard:hover {
+            background-color: rgba(100, 100, 100, 0.3);
+            border: none;
+            border-right: 3px solid #782601;
+        }
+
+        .citizenCard:last-of-type:hover {
+            border-right: 3px solid transparent;
+        }
+
+        .citizenCard--selected {
+            background-color: rgba(100, 100, 100, 0.3);
+        }
+    }
+}

@@ -1,0 +1,55 @@
+.progressBar {
+    display: flex;
+    position: relative;
+
+    .progressBar__bar {
+        position: relative;
+        width: 100%;
+
+        .progressBar__bar--background {
+            position: absolute;
+            width: 100%;
+
+            .progressBar__bar--background__frame {
+                position: absolute;
+                display: flex;
+                width: 100%;
+                z-index: 1;
+
+                img:nth-of-type(2) {
+                    flex: 1 1 auto;
+                    width: 100%;
+                    height: 22px;
+                }
+            }
+
+            .progressBar__bar--background__progress {
+                width: 100%;
+                position: absolute;
+                padding-top: 4px;
+                padding-left: 5px;
+                z-index: 0;
+                display: flex;
+                overflow: hidden;
+
+                img:first-of-type {
+                    height: 13px;
+                }
+            }
+        }
+
+        .progressBar__bar--foreground {
+            position: absolute;
+            z-index: 1;
+            padding-top: 3px;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .progressBar__max {
+        width: 30px;
+        padding-top: 3px;
+        text-align: right;
+    }
+}

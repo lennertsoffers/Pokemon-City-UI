@@ -1,43 +1,44 @@
 .buildModal {
-  width: 100%;
-  height: calc(80vw / 1276 * 563);
-  overflow: hidden;
-  padding: 3.5%;
-  display: flex;
-  flex-direction: row-reverse;
-
-  .buildModal__typeSelector {
-    min-width: 15%;
-    margin-left: 20px;
-    height: 100%;
+    width: 100%;
+    height: calc(80vw / 1276 * 563);
     overflow: hidden;
-
-    > nav > ul {
-      list-style-type: none;
-
-      > li {
-        margin-bottom: 10px;
-        @include hover-pointer;
-
-        > div {
-          > button {
-            background-color: transparent;
-            border: none;
-          }
-        }
-      }
-    }
-  }
-
-  .buildModal__buildingSelector {
-    height: 100%;
-    overflow: auto;
+    padding: 3.5%;
     display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
+    flex-direction: row-reverse;
 
-  .buildModal__buildingSelector::-webkit-scrollbar {
-    display: none;
-  }
+    .buildModal__typeSelector {
+        min-width: 15%;
+        margin-left: 20px;
+        height: 100%;
+        overflow: hidden;
+
+        > nav > ul {
+            list-style-type: none;
+
+            > li {
+                margin-bottom: 10px;
+                @include hover-pointer;
+
+                > div {
+                    > button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+
+    .buildModal__buildingSelector {
+        height: 100%;
+        overflow: auto;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .buildModal__buildingSelector::-webkit-scrollbar {
+        display: none;
+    }
 }

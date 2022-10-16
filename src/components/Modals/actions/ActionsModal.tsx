@@ -23,7 +23,7 @@ const ActionsModal = () => {
     const demolishOpacity = action === ActionEnum.DEMOLISH ? "1" : "0.7";
 
     return (
-        <Modal title="Actions" transparent={true}>
+        <Modal transparent={true}>
             <div className="actionsModal">
                 <button
                     onClick={handleMoveClick}

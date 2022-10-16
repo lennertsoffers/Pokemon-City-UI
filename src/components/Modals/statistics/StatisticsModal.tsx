@@ -18,7 +18,7 @@ const StatisticsModal = () => {
 
     if (!userData) return <LoadingModal />;
     return (
-        <Modal title={"Stats"} imageSource="./assets/ui/statistics.png">
+        <Modal imageSource="./assets/ui/statistics.png">
             <div className="statisticsModal">
                 <h2>Stats</h2>
                 <div className="statisticsModal__username">
