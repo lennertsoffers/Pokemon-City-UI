@@ -66,7 +66,6 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         BuildableService.moveBuildable(selectedBuildableId, bottomRightWorldPosition, (buildableMoveData: buildableMoveData) => {
             dispatch(MOVE_BUILDING(buildableMoveData));
             dispatch(UNSELECT_BUILDING);
-            dispatch(UNSELECT_ACTION);
 
             DataLoader.loadUserData();
         });

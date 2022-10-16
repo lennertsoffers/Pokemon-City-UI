@@ -1,27 +1,46 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
-import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
+import { SELECT_ACTION, UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
+import CombinedState from "../../../types/interfaces/states/CombinedState";
 import Modal from "../Modal";
 
 const ActionsModal = () => {
     const dispatch = useDispatch();
+    const action = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
 
     const handleMoveClick = () => {
-        dispatch(SELECT_ACTION(ActionEnum.MOVE));
-        dispatch(CLOSE_MODAL);
+        if (action !== ActionEnum.MOVE) dispatch(SELECT_ACTION(ActionEnum.MOVE));
+        else dispatch(UNSELECT_ACTION);
     };
 
     const handleDemolishClick = () => {
-        dispatch(SELECT_ACTION(ActionEnum.DEMOLISH));
-        dispatch(CLOSE_MODAL);
+        if (action !== ActionEnum.DEMOLISH) dispatch(SELECT_ACTION(ActionEnum.DEMOLISH));
+        else dispatch(UNSELECT_ACTION);
     };
 
+    const moveOpacity = action === ActionEnum.MOVE ? "1" : "0.7";
+    const demolishOpacity = action === ActionEnum.DEMOLISH ? "1" : "0.7";
+
     return (
-        <Modal title="Actions">
-            <div>
-                <button onClick={handleMoveClick}>MOVE</button>
-                <button onClick={handleDemolishClick}>DEMOLISH</button>
+        <Modal title="Actions" transparent={true}>
+            <div className="actionsModal">
+                <button
+                    onClick={handleMoveClick}
+                    style={{
+                        opacity: moveOpacity,
+                    }}
+                >
+                    <img src="./assets/ui/move.png" alt="move" />
+                </button>
+                <button
+                    onClick={handleDemolishClick}
+                    style={{
+                        opacity: demolishOpacity,
+                    }}
+                >
+                    <img src="./assets/ui/demolish.png" alt="demolish" />
+                </button>
             </div>
         </Modal>
     );

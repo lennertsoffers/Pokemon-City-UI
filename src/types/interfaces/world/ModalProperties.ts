@@ -2,9 +2,7 @@ interface ModalProperties {
     title?: String;
     onClose?: CallableFunction;
     imageSource?: string;
-    width?: number;
-    height?: number;
-    blur?: boolean;
+    transparent?: boolean;
     children: JSX.Element;
 }
 

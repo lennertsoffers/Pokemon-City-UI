@@ -20,8 +20,16 @@ const Modal = (properties: ModalProperties) => {
         dispatch(CLOSE_MODAL);
     };
 
+    const backgroundColor = properties.transparent ? "transparent" : "rgba(0, 0, 0, 0.3)";
+
     return (
-        <div className="modal" onClick={handleClickPage}>
+        <div
+            className="modal"
+            onClick={handleClickPage}
+            style={{
+                backgroundColor: backgroundColor,
+            }}
+        >
             <div className="modal--inner">
                 <div className="modal--inner--background">{properties.imageSource && <img src={properties.imageSource} alt="modal background" />}</div>
                 <div className="modal--inner--foreground">
