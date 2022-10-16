@@ -16,11 +16,13 @@ const CitizenAssignmentModal = () => {
     }, []);
 
     return (
-        <Modal title="Companies with Employees">
-            <div className="citizenAssignmentModal--inner">
-                {citizenAssignments.map((citizenAssignmentData: CitizenAssignmentData) => (
-                    <CitizenAssignmentCard citizenAssignmentData={citizenAssignmentData} updateCitizenAssignments={updateCitizenAssignments} key={citizenAssignmentData.id} />
-                ))}
+        <Modal imageSource="./assets/ui/modal.png">
+            <div className="citizenAssignmentModal">
+                <div className="citizenAssignmentModal--inner">
+                    {citizenAssignments.map((citizenAssignmentData: CitizenAssignmentData) => (
+                        <CitizenAssignmentCard citizenAssignmentData={citizenAssignmentData} updateCitizenAssignments={updateCitizenAssignments} key={citizenAssignmentData.id} />
+                    ))}
+                </div>
             </div>
         </Modal>
     );
