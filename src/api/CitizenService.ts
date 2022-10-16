@@ -33,10 +33,20 @@ const CitizenService = (() => {
         }
     };
 
+    const unassignCitizen = async (citizenId: number, successCallback: Function) => {
+        try {
+            await axios.put(`/api/citizens/unAssign/${citizenId}`);
+            successCallback();
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return {
         getCitizens,
         getUnassignedCitizens,
         assignCitizen,
+        unassignCitizen,
     };
 })();
 
