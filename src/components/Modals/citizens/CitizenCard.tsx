@@ -15,9 +15,9 @@ const CitizenCard = ({ citizenData }: { citizenData: CitizenData }) => {
 
     return (
         <div className="citizenCard" onClick={handleCitizenClick}>
-            <div>{citizenData.name}</div>
-            <div>Level Speed: {citizenData.levelSpeed}</div>
-            <div>Since: {citizenData.assignedSince}</div>
+            <div className="citizenCard__name">{citizenData.name}</div>
+            <div className="citizenCard__speed">Level Speed: {citizenData.levelSpeed}</div>
+            {citizenData.assignedSince && <div className="citizenCard__since">Since: {citizenData.assignedSince}</div>}
             <SpecialisationDataView specialisationData={citizenData.specialisationData} maxSpecialisationData={citizenData.maxSpecialisationData} />
         </div>
     );

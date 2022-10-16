@@ -3,28 +3,28 @@ import ProgressBar from "../../shared/ProgressBar";
 
 const SpecialisationDataView = ({ specialisationData, maxSpecialisationData }: { specialisationData: SpecialisationData; maxSpecialisationData: SpecialisationData }) => {
     return (
-        <div>
+        <div className="specialisationDataView">
             <div>
-                <div>
-                    <div>COOKING</div>
+                <div className="specialisationDataView__topic">
+                    <div>Cooking</div>
                     <div>
                         <ProgressBar value={specialisationData.COOKING} max={maxSpecialisationData.COOKING} />
                     </div>
                 </div>
-                <div>
-                    <div>SELLING</div>
+                <div className="specialisationDataView__topic">
+                    <div>Selling</div>
                     <div>
                         <ProgressBar value={specialisationData.SELLING} max={maxSpecialisationData.SELLING} />
                     </div>
                 </div>
-                <div>
-                    <div>SERVICE</div>
+                <div className="specialisationDataView__topic">
+                    <div>Service</div>
                     <div>
                         <ProgressBar value={specialisationData.SERVICE} max={maxSpecialisationData.SERVICE} />
                     </div>
                 </div>
-                <div>
-                    <div>SOCIAL</div>
+                <div className="specialisationDataView__topic">
+                    <div>Social</div>
                     <div>
                         <ProgressBar value={specialisationData.SOCIAL} max={maxSpecialisationData.SOCIAL} />
                     </div>

@@ -6,6 +6,15 @@
     border: 3px solid transparent;
     margin: 10px;
     padding: 10px;
+
+    .citizenCard__name {
+        @include font-dogica-bold;
+        margin-bottom: 5px;
+    }
+
+    .citizenCard__speed {
+        margin-bottom: 5px;
+    }
 }
 
 .citizenCard:hover {
