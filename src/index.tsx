@@ -13,7 +13,8 @@ const store = configureStore({
     middleware: [],
 });
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const rootElem = document.getElementById("root") as HTMLElement;
+const root = ReactDOM.createRoot(rootElem);
 root.render(
     <React.StrictMode>
         <Provider store={store}>

@@ -1,11 +1,15 @@
 import axios from "axios";
 import ErrorHandler from "../error/ErrorHandler";
+import UserData from "../types/interfaces/user/UserData";
 
 const UserService = (() => {
     const getUserData = async () => {
         try {
-            const { data } = await axios.get("/users/me");
-            return data;
+            const { data }: { data: UserData } = await axios.get("/users/me");
+            return {
+                ...data,
+                satisfaction: Math.round(data.satisfaction * 100),
+            };
         } catch (error) {
             ErrorHandler.handle(error);
         }

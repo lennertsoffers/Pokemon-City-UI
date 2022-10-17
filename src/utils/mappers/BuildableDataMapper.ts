@@ -21,6 +21,7 @@ const BuildableDataMapper = (() => {
             type: buildableData.buildableTypeEnum,
             unlockedAtLevel: buildableData.unlockedAtLevel,
             xpWhenFinished: buildableData.xpWhenFinished,
+            satisfactionModifier: buildableData.satisfactionModifier,
         };
     };
 

@@ -7,6 +7,7 @@ import Modal from "../Modal";
 import CompanyDataCard from "./CompanyDataCard";
 import HouseDataCard from "./HouseDataCard";
 import React, { useState } from "react";
+import BuildableCard from "./BuildableCard";
 
 const BuildModal = () => {
     const [selectedType, setSelectedType] = useState<string>("HOUSES");
@@ -46,6 +47,7 @@ const BuildModal = () => {
                 <div className="buildModal__buildingSelector">
                     {selectedType === "HOUSES" && houseData.map((houseData: StaticHouseData, index: number) => <HouseDataCard key={index} houseData={houseData} />)}
                     {selectedType === "COMPANIES" && companyData.map((companyData: StaticCompanyData, index: number) => <CompanyDataCard key={index} companyData={companyData} />)}
+                    {selectedType === "DECORATIONS" && decorationData.map((decorationData: StaticDecorationData, index: number) => <BuildableCard buildableData={decorationData} key={index} />)}
                 </div>
             </div>
         </Modal>

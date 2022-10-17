@@ -1,3 +1,4 @@
+import { relative } from "path";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
@@ -51,10 +52,10 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
         switch (buildableData.buildableTypeEnum) {
             case "HOUSE":
                 return setHouseInfo(BuildableInfoMapper.toHouseInfo(buildableData as HouseData));
-                case "COMPANY":
-                    return setCompanyInfo(BuildableInfoMapper.toCompanyInfo(buildableData as CompanyData));
+            case "COMPANY":
+                return setCompanyInfo(BuildableInfoMapper.toCompanyInfo(buildableData as CompanyData));
         }
-    }
+    };
 
     const handleBuildableMouseLeave = () => {
         setHouseInfo(null);
@@ -135,11 +136,14 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
                     justifyContent: `end`,
                     alignItems: `center`,
                     pointerEvents: pointerEvents,
+                    zIndex: `${200 + worldPosition.y}`,
                 }}
             >
                 {displayMoveOverlay && (
                     <div
                         style={{
+                            zIndex: 800,
+                            position: "relative",
                             border: `4px dashed rgba(0, 0, 150, 0.8)`,
                             backgroundColor: `rgba(0, 0, 255, 0.3)`,
                             height: `${selectedBuildable.height * TILE_WIDTH}px`,
