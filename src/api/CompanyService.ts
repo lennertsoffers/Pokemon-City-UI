@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 
 const CompanyService = (() => {
     const getCompaniesWithEmployees = async () => {
@@ -6,7 +7,7 @@ const CompanyService = (() => {
             const response = await axios.get("/api/companies");
             return response.data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 

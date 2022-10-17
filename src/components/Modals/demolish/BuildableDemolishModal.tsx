@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
 import CitizenService from "../../../api/CitizenService";
 import DataLoader from "../../../api/DataLoader";
+import ErrorHandler from "../../../error/ErrorHandler";
 import { DEMOLISH_BUILDING } from "../../../redux/actions/BuildableDataActions";
 import { DESELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
@@ -75,8 +76,7 @@ const BuildableDemolishModal = () => {
                 selectedCitizens
             );
         } else {
-            // TODO - Handle wrong amount of citizens selected
-            console.log(`Select ${amoutOfCitizensLeftToDelete} citizens more`);
+            ErrorHandler.showError(buildTitle());
         }
     };
 

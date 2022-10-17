@@ -44,7 +44,7 @@ const AuthService = (() => {
 
             return true;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.showError("Please use valid credentials");
             return false;
         }
     };

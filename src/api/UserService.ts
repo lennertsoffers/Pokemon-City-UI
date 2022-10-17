@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 
 const UserService = (() => {
     const getUserData = async () => {
@@ -6,7 +7,7 @@ const UserService = (() => {
             const { data } = await axios.get("/users/me");
             return data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 

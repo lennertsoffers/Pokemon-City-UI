@@ -1,6 +1,5 @@
 import axios from "axios";
 import ErrorHandler from "../error/ErrorHandler";
-import ApiErrorResponse from "../types/interfaces/error/ApiErrorResponse";
 import StaticBuildableData from "../types/interfaces/static/StaticBuildableData";
 import StaticCompanyData from "../types/interfaces/static/StaticCompanyData";
 import StaticDecorationData from "../types/interfaces/static/StaticDecorationData";
@@ -15,7 +14,7 @@ const BuildableService = (() => {
             const { data }: { data: { houses: Array<StaticHouseData>; companies: Array<StaticCompanyData>; decorations: Array<StaticDecorationData> } } = await axios.get("/api/buildables/data");
             return data;
         } catch (error) {
-            await ErrorHandler.handle(error as ApiErrorResponse, getStaticBuildableData);
+            await ErrorHandler.handle(error, getStaticBuildableData);
         }
     };
 
@@ -24,7 +23,7 @@ const BuildableService = (() => {
             const { data } = await axios.get("/api/buildables");
             return data;
         } catch (error) {
-            return await ErrorHandler.handle(error as ApiErrorResponse, getBuildables);
+            ErrorHandler.handle(error, getBuildables);
         }
     };
 
@@ -33,7 +32,7 @@ const BuildableService = (() => {
             const { data } = await axios.get(`/api/buildables/${buildableId}`);
             return data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -49,7 +48,7 @@ const BuildableService = (() => {
             const { data } = await axios.post("/api/buildables/build", body);
             successCallback(data);
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -64,7 +63,7 @@ const BuildableService = (() => {
             await axios.put(`/api/buildables/move`, body);
             successCallback(body);
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -78,7 +77,7 @@ const BuildableService = (() => {
             await axios.delete(`/api/buildables/demolish`, { data: body });
             successCallback();
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         } finally {
             finalCallback();
         }

@@ -2,7 +2,6 @@ import { Store } from "@reduxjs/toolkit";
 import { useState, useCallback, useEffect } from "react";
 import { useSelector, useStore } from "react-redux";
 import { Navigate } from "react-router-dom";
-import AuthService from "../api/AuthService";
 import DataLoader from "../api/DataLoader";
 import Hud from "../components/hud/Hud";
 import Loading from "../components/Loading";

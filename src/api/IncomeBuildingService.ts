@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 
 const IncomeBuildingService = (() => {
     const collect = async (buildableId: number, successCallback?: Function) => {
@@ -6,7 +7,7 @@ const IncomeBuildingService = (() => {
             await axios.get(`/api/incomeBuildings/collectRent/${buildableId}`);
             if (successCallback) successCallback();
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 

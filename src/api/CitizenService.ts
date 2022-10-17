@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 
 const CitizenService = (() => {
     const getCitizens = async () => {
@@ -6,7 +7,7 @@ const CitizenService = (() => {
             const { data } = await axios.get("/api/citizens");
             return data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -15,7 +16,7 @@ const CitizenService = (() => {
             const response = await axios.get("/api/citizens/unassigned");
             return response.data;
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -29,7 +30,7 @@ const CitizenService = (() => {
             await axios.put("/api/citizens/assign", data);
             successCallback();
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
@@ -38,7 +39,7 @@ const CitizenService = (() => {
             await axios.put(`/api/citizens/unAssign/${citizenId}`);
             successCallback();
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 
