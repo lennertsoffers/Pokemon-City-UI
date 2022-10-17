@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 import AuthenticationResponse from "../types/interfaces/response/AuthenticationResponse";
 
 const AuthService = (() => {
@@ -12,8 +13,8 @@ const AuthService = (() => {
             _persistAuthenticationResponse(data);
 
             return true;
-        } catch (error) {
-            console.log(error);
+        } catch (error: any) {
+            ErrorHandler.handle(error, register);
             return false;
         }
     };
@@ -32,12 +33,28 @@ const AuthService = (() => {
         } catch (error) {
             console.log(error);
 
-            return _refresh();
+            return refresh();
         }
     };
 
     const logout = () => {
         localStorage.clear();
+    };
+
+    const refresh = async () => {
+        if (!localStorage.getItem("refresh_token")) return false;
+
+        _setRefreshHeader();
+
+        try {
+            const { data }: { data: AuthenticationResponse } = await axios.get("/auth/refreshToken");
+            _persistAuthenticationResponse(data);
+
+            return true;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
     };
 
     const isLoggedIn = () => {
@@ -58,24 +75,11 @@ const AuthService = (() => {
         setHeader();
     };
 
-    const _refresh = () => {
-        if (!localStorage.getItem("refresh_token")) return false;
-
-        _setRefreshHeader();
-
-        try {
-            axios.get("/auth/refreshToken");
-            return true;
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
-    };
-
     return {
         register,
         login,
         logout,
+        refresh,
         isLoggedIn,
         setHeader,
     };

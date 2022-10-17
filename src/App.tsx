@@ -11,7 +11,6 @@ function App() {
 
     useEffect(() => {
         ErrorHandler.initialize(store);
-        ErrorHandler.showError("test1");
     }, [store]);
 
     return (
