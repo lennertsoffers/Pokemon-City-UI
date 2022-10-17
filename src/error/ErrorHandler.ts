@@ -22,7 +22,7 @@ const ErrorHandler = (() => {
         } else if (error.response.status === 404) {
             const data = error.response.data;
             showError(data.error + ": '" + data.path + "'");
-        } else if (error.response.state === 400) {
+        } else if (error.response.status === 400) {
             showErrors(error.response.data);
         }
     };
