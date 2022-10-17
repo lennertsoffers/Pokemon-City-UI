@@ -1,15 +1,18 @@
 import { Store } from "@reduxjs/toolkit";
 import { useState, useCallback, useEffect } from "react";
-import { useStore } from "react-redux";
+import { useSelector, useStore } from "react-redux";
+import { Navigate } from "react-router-dom";
 import DataLoader from "../api/DataLoader";
 import Hud from "../components/hud/Hud";
 import Loading from "../components/Loading";
 import ModalContainer from "../components/Modals/ModalContainer";
 import Toolbar from "../components/toolbar/Toolbar";
 import World from "../components/world/map/World";
+import CombinedState from "../types/interfaces/states/CombinedState";
 
 const GameScreen = () => {
     const [loading, setLoading] = useState<boolean>(true);
+    const loggedIn = useSelector((state: CombinedState) => state.authState.loggedIn);
 
     const store: Store = useStore();
 
@@ -22,9 +25,14 @@ const GameScreen = () => {
     const loadGame = useCallback(async () => {
         DataLoader.initialize(store);
 
-        await DataLoader.loadStaticBuildableData();
-        await DataLoader.loadBuildables();
-        await DataLoader.loadUserData();
+        const loadedStaticData = await DataLoader.loadStaticBuildableData();
+        if (!loadedStaticData) return;
+
+        const loadedBuildables = await DataLoader.loadBuildables();
+        if (!loadedBuildables) return;
+
+        const loadedUserData = await DataLoader.loadUserData();
+        if (!loadedUserData) return;
 
         setLoading(false);
     }, [store]);
@@ -33,6 +41,7 @@ const GameScreen = () => {
         loadGame();
     }, [loadGame]);
 
+    if (!loggedIn) return <Navigate to="/login" />;
     if (loading) return <Loading />;
     return (
         <div className="game">

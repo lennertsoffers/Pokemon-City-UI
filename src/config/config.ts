@@ -11,3 +11,6 @@ export const SELLING_SPRITESHEET = "selling_spritesheet";
 export const SERVICE_SPRITESHEET = "service_spritesheet";
 export const SOCIAL_SPRITESHEET = "social_spritesheet";
 export const FALLBACK_SPRITESHEET = "unknown_texture";
+
+export const ERROR_VISIBILITY_TIME = 5000;
+export const ERROR_ANIMATION_TIME = 300;

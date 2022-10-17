@@ -1,4 +1,5 @@
 import axios from "axios";
+import ErrorHandler from "../error/ErrorHandler";
 
 const CityService = (() => {
     const changeName = async (newName: string, successCallback: Function) => {
@@ -6,7 +7,7 @@ const CityService = (() => {
             const { data } = await axios.post("/api/city/changeName", { name: newName });
             successCallback(data);
         } catch (error) {
-            console.log(error);
+            ErrorHandler.handle(error);
         }
     };
 

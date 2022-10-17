@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../api/AuthService";
 
 const LoginScreen = () => {
@@ -22,7 +22,6 @@ const LoginScreen = () => {
         if (success) navigate("/");
     };
 
-    if (AuthService.isLoggedIn()) return <Navigate to="/" />;
     return (
         <div className="auth">
             <h2>Login</h2>
