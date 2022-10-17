@@ -10,6 +10,7 @@ interface StaticBuildableData {
     spritesheetLocation: SpritesheetLocation;
     spritesheet: string;
     type: string;
+    satisfactionModifier: number;
 }
 
 export default StaticBuildableData;

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FALLBACK_SPRITESHEET, SPRITESHEET_WIDTH, TILES_IN_ROW, TILE_WIDTH } from "../../../config/config";
+import { FALLBACK_SPRITESHEET, SPRITESHEET_WIDTH, TILE_WIDTH } from "../../../config/config";
 import { SELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
@@ -61,6 +61,10 @@ const BuildableCard = ({ buildableData, children }: { buildableData: StaticBuild
                             <div className="buildingCard__value">
                                 {buildableData.width}x{buildableData.height}
                             </div>
+                        </div>
+                        <div className="buildingCard__field">
+                            <div className="buildingCard__label">🌟:</div>
+                            <div className="buildingCard__value">{buildableData.satisfactionModifier}</div>
                         </div>
                     </div>
                 </div>
