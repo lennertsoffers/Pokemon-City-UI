@@ -71,8 +71,10 @@ const World = () => {
                 justify-content: end;
                 align-items: center;
                 opacity: 0.85;
+                z-index: 800;
             ">
                 <div style="
+                    z-index: 801;
                     border: 4px dashed rgba(150, 0, 0, 0.8);
                     background-color: rgba(255, 0, 0, 0.3);
                     height: ${selectedBuildable.height * TILE_WIDTH}px;

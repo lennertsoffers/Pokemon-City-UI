@@ -27,6 +27,9 @@ const DataLoader = (() => {
         store.dispatch(LOAD_STATIC_HOUSE_DATA(data.houses));
         store.dispatch(LOAD_STATIC_COMPANY_DATA(data.companies));
         store.dispatch(LOAD_STATIC_DECORATION_DATA(data.decorations));
+
+        console.log(data.decorations);
+
         return true;
     };
 
