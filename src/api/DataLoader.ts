@@ -1,4 +1,5 @@
 import { Store } from "@reduxjs/toolkit";
+import { DECORATION_SPRITESHEET, HOUSE_SPRITESHEET } from "../config/config";
 import { LOAD_BUILDINGS, UPDATE_BUILDING } from "../redux/actions/BuildableDataActions";
 import { LOAD_CITIZENS } from "../redux/actions/CitizenActions";
 import { LOAD_STATIC_HOUSE_DATA, LOAD_STATIC_COMPANY_DATA, LOAD_STATIC_DECORATION_DATA } from "../redux/actions/StaticDataActions";
@@ -8,6 +9,7 @@ import StaticDecorationData from "../types/interfaces/static/StaticDecorationDat
 import StaticHouseData from "../types/interfaces/static/StaticHouseData";
 import BuildableData from "../types/interfaces/world/BuildableData";
 import BuildableDataMapper from "../utils/mappers/BuildableDataMapper";
+import SpritesheetUtils from "../utils/SpritesheetUtils";
 import BuildableService from "./BuildableService";
 import CitizenService from "./CitizenService";
 import UserService from "./UserService";
@@ -24,11 +26,37 @@ const DataLoader = (() => {
 
         if (!data) return false;
 
-        store.dispatch(LOAD_STATIC_HOUSE_DATA(data.houses));
-        store.dispatch(LOAD_STATIC_COMPANY_DATA(data.companies));
-        store.dispatch(LOAD_STATIC_DECORATION_DATA(data.decorations));
+        store.dispatch(
+            LOAD_STATIC_HOUSE_DATA(
+                data.houses.map((staticHouseData: StaticHouseData) => {
+                    return {
+                        ...staticHouseData,
+                        spritesheet: HOUSE_SPRITESHEET,
+                    };
+                })
+            )
+        );
 
-        console.log(data.decorations);
+        store.dispatch(
+            LOAD_STATIC_COMPANY_DATA(
+                data.companies.map((staticCompanyData: StaticCompanyData) => {
+                    return {
+                        ...staticCompanyData,
+                        spritesheet: SpritesheetUtils.getCorrespondingSpritesheet("COMPANY", staticCompanyData.specialisationType),
+                    };
+                })
+            )
+        );
+        store.dispatch(
+            LOAD_STATIC_DECORATION_DATA(
+                data.decorations.map((staticDecorationData: StaticDecorationData) => {
+                    return {
+                        ...staticDecorationData,
+                        spritesheet: DECORATION_SPRITESHEET,
+                    };
+                })
+            )
+        );
 
         return true;
     };

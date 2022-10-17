@@ -1,4 +1,16 @@
-import { COOKING_SPRITESHEET, FALLBACK_SPRITESHEET, HOUSE_SPRITESHEET, SELLING_SPRITESHEET, SERVICE_SPRITESHEET, SOCIAL_SPRITESHEET, TILES_IN_ROW } from "../config/config";
+import {
+    COOKING_SPRITESHEET,
+    DECORATION_SPRITESHEET,
+    FALLBACK_SPRITESHEET,
+    HOUSE_SPRITESHEET,
+    SELLING_SPRITESHEET,
+    SERVICE_SPRITESHEET,
+    SOCIAL_SPRITESHEET,
+    SPRITESHEET_WIDTH,
+    TILES_IN_ROW,
+    TILE_WIDTH,
+} from "../config/config";
+import ResizeData from "../types/interfaces/spritesheet/ResizeData";
 import SpritesheetDimension from "../types/interfaces/spritesheet/SpriteSheetDimension";
 import SpritesheetLocation from "../types/interfaces/spritesheet/SpritesheetLocation";
 
@@ -37,14 +49,41 @@ const SpritesheetUtils = (() => {
                     default:
                         return FALLBACK_SPRITESHEET;
                 }
+            case "DECORATION":
+                return DECORATION_SPRITESHEET;
             default:
                 return FALLBACK_SPRITESHEET;
         }
     };
 
+    const resizeToMaxWidthHeight = (maxWidth: number, maxHeight: number, displayWidth: number, displayHeight: number): ResizeData => {
+        let a = 1;
+        let height = displayHeight;
+        let width = displayWidth;
+
+        if (displayWidth > maxWidth) {
+            a = displayWidth / maxWidth;
+            width = maxWidth;
+            height = displayHeight / a;
+        }
+
+        if (height > maxHeight) {
+            a = displayHeight / maxHeight;
+            height = maxHeight;
+            width = displayWidth / a;
+        }
+
+        return {
+            newHeight: height,
+            newWidth: width,
+            resizeFactor: a,
+        };
+    };
+
     return {
         getDimension,
         getCorrespondingSpritesheet,
+        resizeToMaxWidthHeight,
     };
 })();
 

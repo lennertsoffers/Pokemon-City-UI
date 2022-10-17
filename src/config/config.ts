@@ -10,6 +10,7 @@ export const COOKING_SPRITESHEET = "cooking_spritesheet";
 export const SELLING_SPRITESHEET = "selling_spritesheet";
 export const SERVICE_SPRITESHEET = "service_spritesheet";
 export const SOCIAL_SPRITESHEET = "social_spritesheet";
+export const DECORATION_SPRITESHEET = "decoration_spritesheet";
 export const FALLBACK_SPRITESHEET = "unknown_texture";
 
 export const ERROR_VISIBILITY_TIME = 5000;
