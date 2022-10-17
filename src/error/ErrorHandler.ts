@@ -1,6 +1,6 @@
 import { Store } from "@reduxjs/toolkit";
 import AuthService from "../api/AuthService";
-import { BASE_URL } from "../config/config";
+import { SET_LOGGED_IN } from "../redux/actions/AuthActions";
 import { ADD_ERROR } from "../redux/actions/ErrorActions";
 import ApiErrorResponse from "../types/interfaces/error/ApiErrorResponse";
 
@@ -12,12 +12,19 @@ const ErrorHandler = (() => {
     };
 
     const handle = async (error: ApiErrorResponse, reExecuteCallback: Function) => {
-        if (error.response.status === 403 && (error.response.data as { error_message: string }).error_message.startsWith("The Token has expired on ")) {
+        if (error.response.status === 403) {
             const refeshSucceeded = await AuthService.refresh();
 
-            if (!refeshSucceeded) return (window.location.href = BASE_URL + "/login");
-            else return reExecuteCallback();
+            if (!refeshSucceeded) {
+                store.dispatch(SET_LOGGED_IN(false));
+            } else {
+                return reExecuteCallback();
+            }
         }
+    };
+
+    const showErrors = (messages: Array<string>) => {
+        messages.forEach((message: string) => showError(message));
     };
 
     const showError = (message: string) => {
@@ -27,6 +34,7 @@ const ErrorHandler = (() => {
     return {
         initialize,
         handle,
+        showErrors,
         showError,
     };
 })();

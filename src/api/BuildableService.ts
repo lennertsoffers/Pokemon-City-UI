@@ -24,8 +24,6 @@ const BuildableService = (() => {
             const { data } = await axios.get("/api/buildables");
             return data;
         } catch (error) {
-            console.log(error);
-
             return await ErrorHandler.handle(error as ApiErrorResponse, getBuildables);
         }
     };

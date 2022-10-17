@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import AuthReducer from "./AuthReducer";
 import BuildableDataReducer from "./BuildableDataReducer";
 import BuildableSelectorReducer from "./BuildableSelectorReducer";
 import CitizenReducer from "./CitizenReducer";
@@ -21,6 +22,7 @@ const CombinedReducer = combineReducers({
     citizenSelectorState: CitizenSelectorReducer,
     userState: UserReducer,
     errorState: ErrorReducer,
+    authState: AuthReducer,
 });
 
 export default CombinedReducer;

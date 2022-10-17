@@ -1,3 +1,4 @@
+import AuthState from "./AuthState";
 import BuildableDataState from "./BuildableDataState";
 import BuildableSelectorState from "./BuildableSelectorState";
 import CitizenSelectorState from "./CitizenSelectorState";
@@ -20,6 +21,7 @@ interface CombinedState {
     citizenSelectorState: CitizenSelectorState;
     userState: UserState;
     errorState: ErrorState;
+    authState: AuthState;
 }
 
 export default CombinedState;

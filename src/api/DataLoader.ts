@@ -22,36 +22,38 @@ const DataLoader = (() => {
     const loadStaticBuildableData = async () => {
         const data: { houses: Array<StaticHouseData>; companies: Array<StaticCompanyData>; decorations: Array<StaticDecorationData> } | undefined = await BuildableService.getStaticBuildableData();
 
-        if (!data) return;
+        if (!data) return false;
 
         store.dispatch(LOAD_STATIC_HOUSE_DATA(data.houses));
         store.dispatch(LOAD_STATIC_COMPANY_DATA(data.companies));
         store.dispatch(LOAD_STATIC_DECORATION_DATA(data.decorations));
+        return true;
     };
 
     const loadBuildables = async () => {
         const data = await BuildableService.getBuildables();
-        if (!data) return;
+        if (!data) return false;
 
         const buildableDataList = data.map((buildableData: BuildableData) => BuildableDataMapper.toBuildableData(buildableData));
 
         store.dispatch(LOAD_BUILDINGS(buildableDataList));
+        return true;
     };
 
     const loadCitizens = async () => {
         const citizens = await CitizenService.getCitizens();
-
-        if (!citizens) return;
+        if (!citizens) return false;
 
         store.dispatch(LOAD_CITIZENS(citizens));
+        return true;
     };
 
     const loadUserData = async () => {
         const data = await UserService.getUserData();
-
-        if (!data) return;
+        if (!data) return false;
 
         store.dispatch(LOAD_USER_DATA(data));
+        return true;
     };
 
     const updateBuildable = async (buildableId: number) => {
