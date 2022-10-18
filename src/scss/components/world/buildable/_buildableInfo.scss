@@ -1,12 +1,58 @@
 .buildableInfoWrapper {
-    z-index: 500;
+    z-index: 997;
     pointer-events: none;
+
+    .buildableInfo {
+        width: 250px;
+        height: 100px;
+        pointer-events: none;
+    }
+
+    .buildableInfo--background {
+        position: absolute;
+
+        > img {
+            width: 250px;
+        }
+    }
+
+    .buildableInfo--foreground {
+        position: absolute;
+        padding: 20px;
+        width: 250px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .progressBar .progressBar__max {
+            width: 100px !important;
+        }
+
+        .progressBar__bar--background__progress {
+            width: calc(100% + 13px) !important;
+        }
+    }
 }
 
-.buildableInfo {
-    padding: 10px;
-    width: 200px;
-    height: 100px;
-    background-color: #fff;
-    pointer-events: none;
+.houseInfo {
+    .houseInfo__name {
+        margin-bottom: 5px;
+    }
+
+    .houseInfo__collect {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.companyInfo {
+    .companyInfo__name {
+        margin-bottom: 5px;
+    }
+
+    .companyInfo__employees {
+        margin-top: 10px;
+    }
 }

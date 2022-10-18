@@ -155,7 +155,7 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
             <div
                 className="buildableInfoWrapper"
                 style={{
-                    transform: `translate(${worldPosition.x * TILE_WIDTH - displayWidth / 2 + TILE_WIDTH - 100}px, ${worldPosition.y * TILE_WIDTH + TILE_WIDTH - displayHeight - 100}px)`,
+                    transform: `translate(${worldPosition.x * TILE_WIDTH - displayWidth / 2 + TILE_WIDTH - 125}px, ${worldPosition.y * TILE_WIDTH + TILE_WIDTH - displayHeight - 100}px)`,
                     position: `absolute`,
                     left: `50%`,
                     top: `50%`,
