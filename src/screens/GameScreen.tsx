@@ -31,6 +31,9 @@ const GameScreen = () => {
         const loadedBuildables = await DataLoader.loadBuildables();
         if (!loadedBuildables) return;
 
+        const loadedRoads = await DataLoader.loadRoads();
+        if (!loadedRoads) return;
+
         const loadedUserData = await DataLoader.loadUserData();
         if (!loadedUserData) return;
 

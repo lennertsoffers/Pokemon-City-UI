@@ -14,7 +14,7 @@ const BuildableService = (() => {
             const { data }: { data: { houses: Array<StaticHouseData>; companies: Array<StaticCompanyData>; decorations: Array<StaticDecorationData> } } = await axios.get("/api/buildables/data");
             return data;
         } catch (error) {
-            await ErrorHandler.handle(error, getStaticBuildableData);
+            ErrorHandler.handle(error, getStaticBuildableData);
         }
     };
 

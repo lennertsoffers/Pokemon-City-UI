@@ -15,12 +15,15 @@ import Layer from "./Layer";
 import map from "./map";
 import UserService from "../../../api/UserService";
 import BuildableData from "../../../types/interfaces/world/BuildableData";
+import RoadData from "../../../types/interfaces/world/RoadData";
+import Road from "../buildable/Road";
 
 const World = () => {
     const world = useRef<any>(null);
     const dispatch = useDispatch();
     const mapData = useSelector((state: CombinedState) => state.mapState.mapData);
     const buildableDataList = useSelector((state: CombinedState) => state.buildableDataState.buildableDataList);
+    const roadDataList = useSelector((state: CombinedState) => state.roadState.roads);
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const selectedAction = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const [sessionTime, setSessionTime] = useState<number>(0);
@@ -121,6 +124,7 @@ const World = () => {
                 ))}
             </div>
             <div className="buildings">
+                {roadDataList !== undefined && roadDataList.map((roadData: RoadData) => <Road roadData={roadData} key={roadData.id} />)}
                 {buildableDataList !== undefined && buildableDataList.map((buildableData: BuildableData) => <Buildable buildableData={buildableData} key={buildableData.id} />)}
             </div>
             <div className="buildingActionWrapper"></div>

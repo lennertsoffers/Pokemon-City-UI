@@ -6,6 +6,7 @@ import CitizenState from "./CitizenState";
 import ErrorState from "./ErrorState";
 import MapState from "./MapState";
 import ModalState from "./ModalState";
+import RoadState from "./RoadState";
 import SelectedActionState from "./SelectedActionState";
 import StaticDataState from "./StaticDataState";
 import UserState from "./UserState";
@@ -22,6 +23,7 @@ interface CombinedState {
     userState: UserState;
     errorState: ErrorState;
     authState: AuthState;
+    roadState: RoadState;
 }
 
 export default CombinedState;

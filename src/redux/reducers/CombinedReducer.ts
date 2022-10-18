@@ -7,6 +7,7 @@ import CitizenSelectorReducer from "./CitizenSelectorReducer";
 import ErrorReducer from "./ErrorReducer";
 import MapReducer from "./MapReducer";
 import ModalReducer from "./ModalReducer";
+import RoadReducer from "./RoadReducer";
 import SelectedActionReducer from "./SelectedActionReducer";
 import StaticDataReducer from "./StaticDataReducer";
 import UserReducer from "./UserReducer";
@@ -23,6 +24,7 @@ const CombinedReducer = combineReducers({
     userState: UserReducer,
     errorState: ErrorReducer,
     authState: AuthReducer,
+    roadState: RoadReducer,
 });
 
 export default CombinedReducer;
