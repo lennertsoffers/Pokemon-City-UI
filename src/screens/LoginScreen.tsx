@@ -24,18 +24,24 @@ const LoginScreen = () => {
 
     return (
         <div className="auth">
-            <h2>Login</h2>
-            <div>
-                <div className="auth__label">Username</div>
-                <input className="auth__input" type="text" value={username} onChange={onUsernameChange} />
-            </div>
-            <div>
-                <div className="auth__label">Password</div>
-                <input className="auth__input" type="password" value={password} onChange={onPasswordChange} />
-            </div>
-            <button onClick={handleLogin}>Login</button>
-            <div>
-                Don't have an account? <a href="/register">Register</a> now.
+            <div className="auth__container">
+                <h1>Login</h1>
+                <div>
+                    <div className="auth__label">Username</div>
+                    <input className="auth__input" type="text" value={username} onChange={onUsernameChange} />
+                </div>
+                <div>
+                    <div className="auth__label">Password</div>
+                    <input className="auth__input" type="password" value={password} onChange={onPasswordChange} />
+                </div>
+                <div className="auth__submit">
+                    <img src="./assets/ui/link_pointer.png" alt="pointer" />
+                    <button onClick={handleLogin}>Login</button>
+                    <img src="./assets/ui/link_pointer.png" alt="pointer" />
+                </div>
+                <div className="auth__switchAuth">
+                    Don't have an account? <a href="/register">Register</a> now.
+                </div>
             </div>
         </div>
     );

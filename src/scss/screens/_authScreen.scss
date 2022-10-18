@@ -1,0 +1,103 @@
+.auth {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .auth__container {
+        width: 300px;
+        background-color: rgba(100, 100, 100, 0.5);
+        padding: 20px;
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+
+            @include font-dogica-bold-large;
+        }
+
+        .auth__label {
+            @include font-dogica-large;
+            margin-bottom: 5px;
+        }
+
+        .auth__input {
+            background-image: url("../../assets/ui/input.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: none;
+            height: 53px;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .auth__input:focus {
+            outline: none;
+        }
+
+        .auth__submit {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+            margin-bottom: 20px;
+
+            > button {
+                @include font-dogica-large;
+                background-color: transparent;
+                border: none;
+                text-decoration: underline;
+            }
+
+            > img {
+                margin: 10px 0;
+                height: 20px;
+                opacity: 0;
+            }
+        }
+
+        .auth__submit:hover {
+            > img:first-of-type {
+                animation: animateLeftPointer 0.3s ease-out forwards;
+
+                @keyframes animateLeftPointer {
+                    from {
+                        opacity: 0;
+                        transform: translateX(0);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateX(60px);
+                    }
+                }
+            }
+
+            > img:last-of-type {
+                animation: animateRightPointer 0.3s ease-out forwards;
+
+                @keyframes animateRightPointer {
+                    from {
+                        opacity: 0;
+                        transform: translateX(0) rotate(180deg);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateX(-60px) rotate(180deg);
+                    }
+                }
+            }
+        }
+
+        .auth__switchAuth {
+            a {
+                color: #000;
+            }
+        }
+    }
+}
