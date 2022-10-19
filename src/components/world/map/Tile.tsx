@@ -7,7 +7,6 @@ import { TILE_WIDTH } from "../../../config/config";
 import { CREATE_BUILDING, MOVE_BUILDING } from "../../../redux/actions/BuildableDataActions";
 import { DESELECT_BUILDING as UNSELECT_BUILDING } from "../../../redux/actions/BuildableSelectorActions";
 import { LOAD_ROADS } from "../../../redux/actions/RoadActions";
-import { UNSELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildableData from "../../../types/interfaces/world/BuildableData";
@@ -60,9 +59,6 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
 
         BuildableService.buildBuildable(bottomRightWorldPosition, selectedBuildable, (data: BuildableData) => {
             dispatch(CREATE_BUILDING(BuildableDataMapper.toBuildableData(data)));
-            dispatch(UNSELECT_BUILDING);
-            dispatch(UNSELECT_ACTION);
-
             DataLoader.loadUserData();
         });
     };

@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import CitizenService from "../../../api/CitizenService";
-import CompanyService from "../../../api/CompanyService";
 import DataLoader from "../../../api/DataLoader";
 import { TILE_WIDTH, SPRITESHEET_WIDTH } from "../../../config/config";
 import AssignedCitizenData from "../../../types/interfaces/citizens/AssignedCitizenData";

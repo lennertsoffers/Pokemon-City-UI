@@ -1,4 +1,3 @@
-import { relative } from "path";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BuildableService from "../../../api/BuildableService";
@@ -103,7 +102,7 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
         if (houseInfo || companyInfo) setInfo();
     }, [buildableData]);
 
-    const pointerEvents = selectedBuildable ? "none" : "all";
+    const pointerEvents = selectedBuildable || action === ActionEnum.PLACE_ROAD ? "none" : "all";
 
     const location = buildableData.spritesheetLocation;
     const spritesheet = buildableData.spritesheet ? buildableData.spritesheet : FALLBACK_SPRITESHEET;

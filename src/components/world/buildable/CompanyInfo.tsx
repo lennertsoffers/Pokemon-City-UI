@@ -1,4 +1,5 @@
 import CompanyInfoData from "../../../types/interfaces/world/CompanyInfoData";
+import StringUtils from "../../../utils/StringUtils";
 import ProgressBar from "../../shared/ProgressBar";
 
 const CompanyInfo = ({ companyInfo }: { companyInfo: CompanyInfoData }) => {
@@ -14,7 +15,7 @@ const CompanyInfo = ({ companyInfo }: { companyInfo: CompanyInfoData }) => {
                     <div className="companyInfo__name">{companyInfo.name}</div>
                     <ProgressBar value={profit} max={profit} displayMaxValue={true} />
                     <div className="companyInfo__employees">
-                        {companyInfo.assignedCitizens}/{companyInfo.maxAssignedCitizens}
+                        {StringUtils.simplify(companyInfo.assignedCitizens)}/{StringUtils.simplify(companyInfo.maxAssignedCitizens)}
                     </div>
                 </div>
             </div>

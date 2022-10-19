@@ -9,6 +9,7 @@ import SpritesheetDimension from "../../../types/interfaces/spritesheet/SpriteSh
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import StaticBuildableData from "../../../types/interfaces/static/StaticBuildableData";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
+import StringUtils from "../../../utils/StringUtils";
 
 const BuildableCard = ({ buildableData, children }: { buildableData: StaticBuildableData; children?: Array<JSX.Element> }) => {
     const userLevel = useSelector((state: CombinedState) => state.userState.userData?.level);
@@ -28,7 +29,7 @@ const BuildableCard = ({ buildableData, children }: { buildableData: StaticBuild
     const displayWidth = dimensions.width * TILE_WIDTH;
     const displayHeight = dimensions.height * TILE_WIDTH;
 
-    const resizeData: ResizeData = SpritesheetUtils.resizeToMaxWidthHeight(130, 130, displayWidth, displayHeight);
+    const resizeData: ResizeData = SpritesheetUtils.resizeToMaxWidthHeight(120, 120, displayWidth, displayHeight);
     const adjustedBackgroundSize = resizeData.resizeFactor === 1 ? SPRITESHEET_WIDTH : SPRITESHEET_WIDTH / resizeData.resizeFactor;
 
     if (isUnlocked)
@@ -50,11 +51,11 @@ const BuildableCard = ({ buildableData, children }: { buildableData: StaticBuild
                         <div className="buildingCard__name">{buildableData.name}</div>
                         <div className="buildingCard__field">
                             <div className="buildingCard__label">Price:</div>
-                            <div className="buildingCard__value">{buildableData.price}€</div>
+                            <div className="buildingCard__value">{StringUtils.simplify(buildableData.price)} €</div>
                         </div>
                         <div className="buildingCard__field">
                             <div className="buildingCard__label">XP:</div>
-                            <div className="buildingCard__value">{buildableData.xpWhenFinished}xp</div>
+                            <div className="buildingCard__value">{StringUtils.simplify(buildableData.xpWhenFinished)} xp</div>
                         </div>
                         <div className="buildingCard__field">
                             <div className="buildingCard__label">Size:</div>

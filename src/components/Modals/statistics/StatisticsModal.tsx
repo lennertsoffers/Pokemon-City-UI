@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
+import StringUtils from "../../../utils/StringUtils";
 import LoadingModal from "../LoadingModal";
 import Modal from "../Modal";
 
@@ -36,18 +37,18 @@ const StatisticsModal = () => {
                         </div>
                         <div className="statisticsModal__data__topic">
                             <div>Experience</div>
-                            <div>{userData.xp} xp</div>
+                            <div>{StringUtils.simplify(userData.xp)} xp</div>
                         </div>
                     </div>
                     <div className="statisticsModal__data__section">
                         <h3>{userData.cityName}</h3>
                         <div className="statisticsModal__data__topic">
                             <div>Citizens</div>
-                            <div>{userData.citizens}</div>
+                            <div>{StringUtils.simplify(userData.citizens)}</div>
                         </div>
                         <div className="statisticsModal__data__topic">
                             <div>Employed Citizens</div>
-                            <div>{userData.employedCitizens}</div>
+                            <div>{StringUtils.simplify(userData.employedCitizens)}</div>
                         </div>
                         <div className="statisticsModal__data__topic">
                             <div>Satisfaction</div>
@@ -71,23 +72,23 @@ const StatisticsModal = () => {
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Total Value</div>
-                                <div>{userData.statistics.totalValue} eur</div>
+                                <div>{StringUtils.simplify(userData.statistics.totalValue)} €</div>
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Money Collected</div>
-                                <div>{userData.statistics.moneyCollected} eur</div>
+                                <div>{StringUtils.simplify(userData.statistics.moneyCollected)} €</div>
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Money Spent</div>
-                                <div>{userData.statistics.moneySpent} eur</div>
+                                <div>{StringUtils.simplify(userData.statistics.moneySpent)} €</div>
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Income Per Minute</div>
-                                <div>{userData.statistics.incomePerMinute} eur/min</div>
+                                <div>{StringUtils.simplify(userData.statistics.incomePerMinute)} €/min</div>
                             </div>
                             <div className="statisticsModal__data__topic">
                                 <div>Maxed Citizens</div>
-                                <div>{userData.statistics.maxedCitizens}</div>
+                                <div>{StringUtils.simplify(userData.statistics.maxedCitizens)}</div>
                             </div>
                         </div>
                     </div>
