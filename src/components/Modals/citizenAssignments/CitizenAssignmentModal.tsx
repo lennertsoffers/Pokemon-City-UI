@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CitizenService from "../../../api/CitizenService";
 import CompanyService from "../../../api/CompanyService";
+import AssignedCitizenData from "../../../types/interfaces/citizens/AssignedCitizenData";
 import CitizenAssignmentData from "../../../types/interfaces/citizens/CitizenAssignmentData";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import Modal from "../Modal";
@@ -13,6 +14,7 @@ const CitizenAssignmentModal = () => {
 
     const handleUnassingClick = () => {
         if (!citizenId) return;
+        if (!citizenAssignments.some((assignment: CitizenAssignmentData) => assignment.employees.some((assignedCitizen: AssignedCitizenData) => assignedCitizen.id === citizenId))) return;
         CitizenService.unassignCitizen(citizenId, updateCitizenAssignments);
     };
 

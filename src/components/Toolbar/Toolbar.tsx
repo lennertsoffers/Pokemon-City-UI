@@ -1,21 +1,35 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../api/AuthService";
 import DataLoader from "../../api/DataLoader";
+import { DESELECT_BUILDING } from "../../redux/actions/BuildableSelectorActions";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
+import Actions from "../actions/Actions";
 
 const Toolbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [actionsVisible, setActionsVisible] = useState<boolean>(false);
 
-    const handleBuildClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.BUILD_MODAL));
-    const handleActionsClick = () => dispatch(OPEN_MODAL(ModalTypeEnum.ACTIONS_MODAL));
+    const handleBuildClick = () => {
+        setActionsVisible(false);
+        dispatch(OPEN_MODAL(ModalTypeEnum.BUILD_MODAL));
+    };
+    const handleActionsClick = () => {
+        setActionsVisible(!actionsVisible);
+        dispatch(DESELECT_BUILDING);
+    };
     const handleCitizensClick = () => {
+        setActionsVisible(false);
+        dispatch(DESELECT_BUILDING);
         DataLoader.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
     const handleLogoutClick = () => {
+        setActionsVisible(false);
+        dispatch(DESELECT_BUILDING);
         AuthService.logout();
         navigate("/login");
     };
@@ -51,6 +65,7 @@ const Toolbar = () => {
                     </ul>
                 </nav>
             </div>
+            {actionsVisible && <Actions />}
         </div>
     );
 };

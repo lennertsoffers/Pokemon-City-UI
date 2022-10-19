@@ -45,7 +45,7 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     };
 
     const handleBuildableMouseEnter = () => {
-        setInfo();
+        if (action === ActionEnum.NONE) setInfo();
     };
 
     const setInfo = () => {

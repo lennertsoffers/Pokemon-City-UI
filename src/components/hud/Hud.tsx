@@ -3,6 +3,7 @@ import DataLoader from "../../api/DataLoader";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
+import BuildableData from "../../types/interfaces/world/BuildableData";
 import Loading from "../Loading";
 import CityName from "./CityName";
 import UserInfo from "./UserInfo";

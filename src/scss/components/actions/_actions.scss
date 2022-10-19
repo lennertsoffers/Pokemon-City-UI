@@ -1,4 +1,5 @@
-.actionsModal {
+.actions {
+    z-index: 900;
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -7,6 +8,7 @@
 
     > button {
         background-color: transparent;
+        pointer-events: all;
         border: none;
         margin-left: 10px;
         opacity: 0.7;

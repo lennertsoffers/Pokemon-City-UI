@@ -57,11 +57,6 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         if (selectedBuildable == null) return;
 
         let bottomRightWorldPosition = ChunkUtils.getRightCornerWorldPosition(selectedBuildable.spritesheetLocation, chunkPosition, tileIndex);
-        bottomRightWorldPosition = {
-            ...bottomRightWorldPosition,
-            x: bottomRightWorldPosition.x - 1,
-            y: bottomRightWorldPosition.y - 1,
-        };
 
         BuildableService.buildBuildable(bottomRightWorldPosition, selectedBuildable, (data: BuildableData) => {
             dispatch(CREATE_BUILDING(BuildableDataMapper.toBuildableData(data)));
