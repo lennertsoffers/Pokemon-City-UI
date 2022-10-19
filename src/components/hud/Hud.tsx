@@ -3,6 +3,7 @@ import DataLoader from "../../api/DataLoader";
 import { OPEN_MODAL } from "../../redux/actions/ModalActions";
 import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
+import StringUtils from "../../utils/StringUtils";
 import Loading from "../Loading";
 import CityName from "./CityName";
 import UserInfo from "./UserInfo";
@@ -33,8 +34,8 @@ const Hud = () => {
             </div>
             <div className="hud__right">
                 <div>
-                    <ValueBox value={`€${userData.money}`} />
-                    <ValueBox value={`👨‍👩‍👦‍👦${userData.citizens}`} onClick={handleCitizensClick} link={true} />
+                    <ValueBox value={`€ ${StringUtils.simplify(userData.money)}`} />
+                    <ValueBox value={`👨‍👩‍👦‍👦${StringUtils.simplify(userData.citizens)}`} onClick={handleCitizensClick} link={true} />
                     <ValueBox value={`🌟${userData.satisfaction}`} />
                 </div>
             </div>

@@ -1,9 +1,11 @@
+import StringUtils from "../../utils/StringUtils";
+
 const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; max: number; displayMaxValue?: boolean }) => {
     const width = (value / max) * 100;
     const widthPercentage = `${width}%`;
     const getValue = () => {
         if (!displayMaxValue && value === max) return "MAX";
-        return value;
+        return StringUtils.simplify(value);
     };
     const display = value > 0 ? "block" : "none";
 
@@ -37,7 +39,7 @@ const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; m
                     <div className="progressBar__bar__inner__value">{getValue()}</div>
                 </div>
             </div>
-            <div className="progressBar__max">{max}</div>
+            <div className="progressBar__max">{StringUtils.simplify(max)}</div>
         </div>
     );
 };

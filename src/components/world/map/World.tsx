@@ -71,7 +71,7 @@ const World = () => {
                 top: 50%;
                 display: flex;
                 flex-direction: column;
-                justify-content: end;
+                justify-content: flex-end;
                 align-items: center;
                 opacity: 0.85;
                 z-index: 800;
