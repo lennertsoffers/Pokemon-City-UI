@@ -6,14 +6,17 @@ import Position from "../../../types/interfaces/world/Position";
 import RoadData from "../../../types/interfaces/world/RoadData";
 import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 import ActionEnum from "../../../types/enums/ActionEnum";
+import BuildableService from "../../../api/BuildableService";
+import DataLoader from "../../../api/DataLoader";
 
 const Road = ({ roadData }: { roadData: RoadData }) => {
     const action = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
 
     const handleRoadClick = () => {
         if (action === ActionEnum.DEMOLISH) {
-            // TODO - Implement demolish
-            console.log("Demolish");
+            BuildableService.demolishBuildable(roadData.id, () => {
+                DataLoader.loadRoads();
+            });
         }
     };
 

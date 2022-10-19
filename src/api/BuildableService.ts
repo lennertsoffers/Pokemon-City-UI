@@ -67,7 +67,7 @@ const BuildableService = (() => {
         }
     };
 
-    const demolishBuildable = async (buildableId: number, successCallback: Function, finalCallback: Function, citizenIds?: Array<number>) => {
+    const demolishBuildable = async (buildableId: number, successCallback: Function, finalCallback?: Function, citizenIds?: Array<number>) => {
         let body: { buildableId: number; citizenIds?: Array<number> } = {
             buildableId: buildableId,
         };
@@ -79,7 +79,7 @@ const BuildableService = (() => {
         } catch (error) {
             ErrorHandler.handle(error);
         } finally {
-            finalCallback();
+            if (finalCallback) finalCallback();
         }
     };
 
