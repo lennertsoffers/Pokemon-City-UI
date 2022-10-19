@@ -32,6 +32,8 @@ enum ActionTypeEnum {
     REMOVE_ERROR = "REMOVE_ERROR",
 
     SET_LOGGED_IN = "SET_LOGGED_IN",
+
+    LOAD_ROADS = "LOAD_ROADS",
 }
 
 export default ActionTypeEnum;
