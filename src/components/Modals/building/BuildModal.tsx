@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CombinedState from "../../../types/interfaces/states/CombinedState";
 import StaticCompanyData from "../../../types/interfaces/static/StaticCompanyData";
 import StaticDecorationData from "../../../types/interfaces/static/StaticDecorationData";
@@ -8,8 +8,12 @@ import CompanyDataCard from "./CompanyDataCard";
 import HouseDataCard from "./HouseDataCard";
 import React, { useState } from "react";
 import BuildableCard from "./BuildableCard";
+import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
+import ActionEnum from "../../../types/enums/ActionEnum";
+import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 
 const BuildModal = () => {
+    const dispatch = useDispatch();
     const [selectedType, setSelectedType] = useState<string>("HOUSES");
     const houseData: Array<StaticHouseData> = useSelector((state: CombinedState) => state.staticDataState.staticHouseData);
     const companyData: Array<StaticCompanyData> = useSelector((state: CombinedState) => state.staticDataState.staticCompanyData);
@@ -18,6 +22,11 @@ const BuildModal = () => {
     const handleSelectTypeClick = (event: React.MouseEvent) => {
         const type = (event.target as Element).innerHTML.toUpperCase();
         setSelectedType(type);
+    };
+
+    const handleRoadClick = () => {
+        dispatch(SELECT_ACTION(ActionEnum.PLACE_ROAD));
+        dispatch(CLOSE_MODAL);
     };
 
     return (
@@ -39,6 +48,11 @@ const BuildModal = () => {
                             <li>
                                 <div>
                                     <button onClick={handleSelectTypeClick}>Decorations</button>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <button onClick={handleRoadClick}>Road</button>
                                 </div>
                             </li>
                         </ul>

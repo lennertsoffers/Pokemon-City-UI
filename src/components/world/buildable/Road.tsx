@@ -26,6 +26,8 @@ const Road = ({ roadData }: { roadData: RoadData }) => {
     const displayWidth = dimensions.width * TILE_WIDTH;
     const displayHeight = dimensions.height * TILE_WIDTH;
 
+    const pointerEvents = action === ActionEnum.DEMOLISH ? "all" : "none";
+
     return (
         <div
             onClick={handleRoadClick}
@@ -42,7 +44,7 @@ const Road = ({ roadData }: { roadData: RoadData }) => {
                 flexDirection: `column`,
                 justifyContent: `end`,
                 alignItems: `center`,
-                pointerEvents: "all",
+                pointerEvents: pointerEvents,
                 zIndex: `${200 + worldPosition.y}`,
             }}
         ></div>
