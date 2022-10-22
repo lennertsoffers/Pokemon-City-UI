@@ -1,4 +1,8 @@
+/** Component that contains a value with a nice box style provided by the parent */
 const ValueBox = ({ value, onClick, link }: { value: string | number; onClick?: Function; link?: boolean }) => {
+    /**
+     * Triggers the onClick function from the parent if its provided
+     */
     const handleValueBoxClick = () => {
         if (!onClick) return;
 

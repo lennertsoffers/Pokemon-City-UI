@@ -2,9 +2,18 @@ import { useDispatch } from "react-redux";
 import { CLOSE_MODAL } from "../../redux/actions/ModalActions";
 import ModalProperties from "../../types/interfaces/world/ModalProperties";
 
+/**
+ * Parent component that children the modal behaviour
+ * Covers the whole screen and shows the content of the modal in the middle
+ * Clicking somewhere in the screen but not in the modal content box will close the modal
+ */
 const Modal = (properties: ModalProperties) => {
     const dispatch = useDispatch();
 
+    /**
+     * Checks if the user clicked inside or outside of the modal content
+     * Closes the modal if it was outside of the content
+     */
     const handleClickPage = (event: React.MouseEvent) => {
         if (!event.target) return;
         if ((event.target as Element).classList.contains("modal")) {
@@ -12,6 +21,9 @@ const Modal = (properties: ModalProperties) => {
         }
     };
 
+    /**
+     * Executes the callback onClose function from the parent and closes all modals
+     */
     const handleClose = () => {
         if (properties.onClose) {
             properties.onClose();
@@ -20,14 +32,12 @@ const Modal = (properties: ModalProperties) => {
         dispatch(CLOSE_MODAL);
     };
 
-    const backgroundColor = properties.transparent ? "transparent" : "rgba(0, 0, 0, 0.3)";
-
     return (
         <div
             className="modal"
             onClick={handleClickPage}
             style={{
-                backgroundColor: backgroundColor,
+                backgroundColor: "rgba(0, 0, 0, 0.3)",
             }}
         >
             <div className="modal--inner">

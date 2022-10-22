@@ -9,20 +9,28 @@ import CityName from "./CityName";
 import UserInfo from "./UserInfo";
 import ValueBox from "./ValueBox";
 
+/** Component that contains all the hud elements that are shown on top of the game world */
 const Hud = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
     const dispatch = useDispatch();
 
+    /**
+     * Opens the staticstics modal when the user info is clicked
+     */
     const handleUserClick = () => {
         DataLoader.loadUserData();
         dispatch(OPEN_MODAL(ModalTypeEnum.STATISTICS_MODAL));
     };
 
+    /**
+     * Opens the citizens modal when the citizens value box is clicked
+     */
     const handleCitizensClick = () => {
         DataLoader.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
 
+    // Only show the hud if the user data is loaded
     if (!userData) return <Loading />;
     return (
         <div className="hud">

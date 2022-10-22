@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import DataLoader from "../api/DataLoader";
 import Hud from "../components/hud/Hud";
 import Loading from "../components/Loading";
-import ModalContainer from "../components/Modals/ModalContainer";
+import ModalContainer from "../components/modals/ModalContainer";
 import Toolbar from "../components/toolbar/Toolbar";
 import World from "../components/world/map/World";
 import CombinedState from "../types/interfaces/states/CombinedState";

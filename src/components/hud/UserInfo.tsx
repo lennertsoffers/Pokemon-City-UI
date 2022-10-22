@@ -1,7 +1,9 @@
+/** Component containing the name of the user and his/her level */
 const UserInfo = ({ onClick, username, level }: { onClick: Function; username: string; level: number }) => {
+    /**
+     * Triggers the onClick function from the properties
+     */
     const handleClick = () => {
-        if (!onClick) return;
-
         onClick();
     };
 
