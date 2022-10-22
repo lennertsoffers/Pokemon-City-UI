@@ -7,13 +7,19 @@ import CombinedState from "../../../types/interfaces/states/CombinedState";
 import BuildableData from "../../../types/interfaces/world/BuildableData";
 import SpecialisationDataView from "./SpecialisationDataView";
 
+/** Component that shows the data of a citizen and if its selected */
 const CitizenCard = ({ citizenData, selected }: { citizenData: CitizenData; selected?: boolean }) => {
     const dispatch = useDispatch();
+    // Counts the amount of companies in the BuildableDataState
     const amountOfCompanies = useSelector(
         (state: CombinedState) => state.buildableDataState.buildableDataList.filter((buildableData: BuildableData) => buildableData.buildableTypeEnum === "COMPANY").length
     );
 
+    /**
+     * Selects the clicked citizen in the {@link CitizenSelectorState} and opens the {@link CitizenAssignmentModal}
+     */
     const handleCitizenClick = () => {
+        // Its not useful to open the modal or select a citizen when there are no companies to assign the citizen to
         if (amountOfCompanies <= 0) return;
 
         dispatch(SELECT_CITIZEN(citizenData.id));

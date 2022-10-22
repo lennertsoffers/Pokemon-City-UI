@@ -2,6 +2,11 @@ import StaticHouseData from "../../../types/interfaces/static/StaticHouseData";
 import StringUtils from "../../../utils/StringUtils";
 import BuildableCard from "./BuildableCard";
 
+/**
+ * Component that displays generic and specific data for houses
+ *
+ * Extends - {@link BuildableCard}
+ */
 const HouseDataCard = ({ houseData }: { houseData: StaticHouseData }) => {
     return (
         <BuildableCard buildableData={houseData}>

@@ -12,6 +12,12 @@ import { SELECT_ACTION } from "../../../redux/actions/SelectedActionActions";
 import ActionEnum from "../../../types/enums/ActionEnum";
 import { CLOSE_MODAL } from "../../../redux/actions/ModalActions";
 
+/**
+ * Modal container for building that lists the buildables of all types in different tabs
+ * Also provides a menu option to build roads
+ *
+ * Extends - {@link Modal}
+ */
 const BuildModal = () => {
     const dispatch = useDispatch();
     const [selectedType, setSelectedType] = useState<string>("HOUSES");
@@ -19,11 +25,18 @@ const BuildModal = () => {
     const companyData: Array<StaticCompanyData> = useSelector((state: CombinedState) => state.staticDataState.staticCompanyData);
     const decorationData: Array<StaticDecorationData> = useSelector((state: CombinedState) => state.staticDataState.staticDecorationData);
 
+    /**
+     * Shows and selects buildable of the clicked type
+     */
     const handleSelectTypeClick = (event: React.MouseEvent) => {
+        // The type of the buildable is the text in the clicked element to uppercase
         const type = (event.target as Element).innerHTML.toUpperCase();
         setSelectedType(type);
     };
 
+    /**
+     * Selects the {@link ActionEnum.PLACE_ROAD} in the {@link SelectedActionState} and closes the modal
+     */
     const handleRoadClick = () => {
         dispatch(SELECT_ACTION(ActionEnum.PLACE_ROAD));
         dispatch(CLOSE_MODAL);

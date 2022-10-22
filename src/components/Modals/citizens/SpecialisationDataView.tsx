@@ -1,6 +1,7 @@
 import SpecialisationData from "../../../types/interfaces/citizens/SpecialisationData";
 import ProgressBar from "../../shared/ProgressBar";
 
+/** Component that displays the specialisation data of the citizen in a format with {@link ProgressBar} */
 const SpecialisationDataView = ({ specialisationData, maxSpecialisationData }: { specialisationData: SpecialisationData; maxSpecialisationData: SpecialisationData }) => {
     return (
         <div className="specialisationDataView">

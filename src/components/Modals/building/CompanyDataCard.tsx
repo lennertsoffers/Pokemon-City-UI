@@ -2,7 +2,13 @@ import StaticCompanyData from "../../../types/interfaces/static/StaticCompanyDat
 import StringUtils from "../../../utils/StringUtils";
 import BuildableCard from "./BuildableCard";
 
+/**
+ * Component that displays generic and specific data for companies
+ *
+ * Extends - {@link BuildableCard}
+ */
 const CompanyDataCard = ({ companyData }: { companyData: StaticCompanyData }) => {
+    // Transforms the uppercase specialisationType name to a capitalized string
     const displaySpecialisationType = companyData.specialisationType.charAt(0) + companyData.specialisationType.toLowerCase().substring(1);
 
     return (

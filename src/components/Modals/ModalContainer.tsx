@@ -6,6 +6,14 @@ import CitizensModal from "./citizens/CitizensModal";
 import BuildableDemolishModal from "./demolish/BuildableDemolishModal";
 import StatisticsModal from "./statistics/StatisticsModal";
 
+/**
+ * Component that wraps all modals
+ * Only one modal can be displayed at a time
+ * When a new modal is selected by the {@link ActionTypeEnum.OPEN_MODAL} action, all modals are closed and the new modal is shown by setting it in the {@link ModalState}
+ * When {@link ActionTypeEnum.CLOSE_MODAL} is called, all modals are closed by setting the {@link ModalState} to null
+ *
+ * @returns The modal selected in the {@link ModalState}
+ */
 const ModalContainer = () => {
     const modalVisibilityMap = useSelector((state: CombinedState) => state.modalState.modalVisibilityMap);
 

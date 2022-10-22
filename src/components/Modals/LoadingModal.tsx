@@ -1,5 +1,6 @@
 import Modal from "./Modal";
 
+/** Modal that shows the loading animation */
 const LoadingModal = () => {
     return (
         <Modal imageSource="./assets/ui/modal.png">

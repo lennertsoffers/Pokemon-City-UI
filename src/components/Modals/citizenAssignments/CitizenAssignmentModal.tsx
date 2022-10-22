@@ -8,21 +8,36 @@ import CombinedState from "../../../types/interfaces/states/CombinedState";
 import Modal from "../Modal";
 import CitizenAssignmentCard from "./CitizenAssignmentCard";
 
+/**
+ * Modal container for citizen assignments that list all companies together with the citizens that are assigned to these companies
+ * Gives the user the option to assign the selected citizen to a company or un-assign a citizen from a company by clicking the un-assign button
+ *
+ * Extends - {@link Modal}
+ */
 const CitizenAssignmentModal = () => {
     const citizenId = useSelector((state: CombinedState) => state.citizenSelectorState.citizenId);
     const [citizenAssignments, setCitizenAssignments] = useState<Array<CitizenAssignmentData>>([]);
 
+    /**
+     * Un-assigns the citizen that is selected
+     */
     const handleUnassingClick = () => {
+        // Only send the un-assign request to the server if there is a citizen selected and the selecte citizen is indeed assigned to a company
         if (!citizenId) return;
         if (!citizenAssignments.some((assignment: CitizenAssignmentData) => assignment.employees.some((assignedCitizen: AssignedCitizenData) => assignedCitizen.id === citizenId))) return;
+
         CitizenService.unassignCitizen(citizenId, updateCitizenAssignments);
     };
 
+    /**
+     * Get the latest assignment data from the Api
+     */
     const updateCitizenAssignments = () => {
         CompanyService.getCompaniesWithEmployees().then((data) => setCitizenAssignments(data));
     };
 
     useEffect(() => {
+        // Every time the modal gets opened, load in the newest data
         updateCitizenAssignments();
     }, []);
 

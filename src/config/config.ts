@@ -5,6 +5,9 @@ export const TILES_IN_ROW = SPRITESHEET_WIDTH / TILE_WIDTH;
 export const CHUNK_DIMENSION = 16;
 export const CHUNK_PIXELS = TILE_WIDTH * CHUNK_DIMENSION;
 
+export const CARD_IMAGE_MAX_WIDTH = 120;
+export const CARD_IMAGE_MAX_HEIGHT = 120;
+
 export const HOUSE_SPRITESHEET = "house_spritesheet";
 export const COOKING_SPRITESHEET = "cooking_spritesheet";
 export const SELLING_SPRITESHEET = "selling_spritesheet";

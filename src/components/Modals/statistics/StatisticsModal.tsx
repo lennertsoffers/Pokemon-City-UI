@@ -5,18 +5,29 @@ import StringUtils from "../../../utils/StringUtils";
 import LoadingModal from "../LoadingModal";
 import Modal from "../Modal";
 
+/**
+ * Modal container that shows the current user's statistics
+ *
+ * Extends - {@link Modal}
+ */
 const StatisticsModal = () => {
     const userData = useSelector((state: CombinedState) => state.userState.userData);
+    // References the list of statistics
     const modalData = useRef<any>(undefined);
 
+    /**
+     * Handles clicking the arrow pointing down in the modal by scrolling down in the statistics
+     */
     const handleScrollDownClick = () => {
+        // The ref to modalData will only exist if the userData is loaded
         if (!modalData) return;
 
+        // Set the new scroll y position to be 20 more than the previous scroll y position
         const newY = modalData.current.scrollTop + 20;
-
         modalData.current.scrollTo(0, newY);
     };
 
+    // Show the loading modal if the userdata is not loaded yet
     if (!userData) return <LoadingModal />;
     return (
         <Modal imageSource="./assets/ui/statistics.png">
