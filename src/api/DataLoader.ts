@@ -30,7 +30,8 @@ const DataLoader = (() => {
     };
 
     /**
-     * Loads the static game data into the {@Link StaticDataState}
+     * Loads the static game data into the {@link StaticDataState}
+     * @returns True if the static data is successfully loaded into the state
      */
     const loadStaticBuildableData = async () => {
         const data: { houses: Array<StaticHouseData>; companies: Array<StaticCompanyData>; decorations: Array<StaticDecorationData> } | undefined = await BuildableService.getStaticBuildableData();
@@ -77,6 +78,10 @@ const DataLoader = (() => {
         return true;
     };
 
+    /**
+     * Loads the user's buildables (except roads) into the {@link BuildableDataState}
+     * @returns True if the buildables of the user are successfully loaded into the state
+     */
     const loadBuildables = async () => {
         const data = await BuildableService.getBuildables();
         if (!data) return false;
@@ -87,6 +92,10 @@ const DataLoader = (() => {
         return true;
     };
 
+    /**
+     * Loads the user's roads into the {@link RoadState}
+     * @returns True if the roads are successfully loaded in the state
+     */
     const loadRoads = async () => {
         const roads = await RoadService.getRoads();
         if (!roads) return false;
@@ -95,6 +104,10 @@ const DataLoader = (() => {
         return true;
     };
 
+    /**
+     * Loads the user's citizens into the {@link CitizenState}
+     * @returns True if the citizens are successfully loaded into the state
+     */
     const loadCitizens = async () => {
         const citizens = await CitizenService.getCitizens();
         if (!citizens) return false;
@@ -103,14 +116,28 @@ const DataLoader = (() => {
         return true;
     };
 
+    /**
+     * Loads the user's data into the {@link UserState}
+     * Rounds the satisfaction to a whole number between -100 to 100
+     * @returns True if the user's data is successfully loaded into the state
+     */
     const loadUserData = async () => {
         const data = await UserService.getUserData();
         if (!data) return false;
 
-        store.dispatch(LOAD_USER_DATA(data));
+        const userData = {
+            ...data,
+            satisfaction: Math.round(data.satisfaction * 100),
+        };
+
+        store.dispatch(LOAD_USER_DATA(userData));
         return true;
     };
 
+    /**
+     * Updates the buildable with the given id with the true buildable value from the Api
+     * @param buildableId The id of the buildable that should be updated
+     */
     const updateBuildable = async (buildableId: number) => {
         const buildableData: BuildableData = await BuildableService.getBuildableById(buildableId);
         store.dispatch(UPDATE_BUILDING(buildableData));
