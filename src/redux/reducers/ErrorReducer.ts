@@ -5,6 +5,12 @@ import ActionTypeEnum from "../actions/ActionTypeEnum";
 
 const initialState: ErrorState = { errorMessages: [] };
 
+/**
+ * Reducer that contains the {@link ErrorState}
+ * The ErrorState contains a list of {@link ErrorMessageData} of all the errors currently shown
+ * When an error is added by the message, the ErrorMessageData gets an unique uuid
+ * Errors can be removed by there unique uuid
+ */
 const ErrorReducer = (state: ErrorState = initialState, action: { type: ActionTypeEnum; data: string }) => {
     switch (action.type) {
         case ActionTypeEnum.ADD_ERROR:
