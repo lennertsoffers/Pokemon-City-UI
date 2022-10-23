@@ -4,6 +4,11 @@ import ActionTypeEnum from "../actions/ActionTypeEnum";
 
 const initialState: UserState = { userData: null };
 
+/**
+ * Reducer that contains the {@link UserState}
+ * - LOAD_USER_DATA: Saves the new user data in the state
+ * - UPDATE_CITY_NAME: Saves the new city name in the state
+ */
 const UserReducer = (state: UserState = initialState, action: { type: ActionTypeEnum; data: UserData | string }) => {
     switch (action.type) {
         case ActionTypeEnum.LOAD_USER_DATA:

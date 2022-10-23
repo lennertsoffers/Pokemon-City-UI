@@ -6,6 +6,10 @@ import ActionTypeEnum from "../actions/ActionTypeEnum";
 
 const initialState: StaticDataState = { staticHouseData: [], staticCompanyData: [], staticDecorationData: [] };
 
+/**
+ * Reducer that contains the {@link StaticDataState}
+ * The state consists of a list of data for houses, companies and decorations
+ */
 const StaticDataReducer = (state: StaticDataState = initialState, action: { type: ActionTypeEnum; data: Array<StaticHouseData> | Array<StaticCompanyData> | Array<StaticDecorationData> }) => {
     switch (action.type) {
         case ActionTypeEnum.LOAD_STATIC_HOUSE_DATA:

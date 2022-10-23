@@ -5,6 +5,7 @@ import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
 import StringUtils from "../../utils/StringUtils";
 import Loading from "../Loading";
+import Toolbar from "./Toolbar";
 import CityName from "./CityName";
 import UserInfo from "./UserInfo";
 import ValueBox from "./ValueBox";
@@ -47,6 +48,7 @@ const Hud = () => {
                     <ValueBox value={`🌟${userData.satisfaction}`} />
                 </div>
             </div>
+            <Toolbar />
         </div>
     );
 };

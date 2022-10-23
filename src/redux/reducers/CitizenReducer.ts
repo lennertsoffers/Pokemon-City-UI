@@ -4,6 +4,10 @@ import ActionTypeEnum from "../actions/ActionTypeEnum";
 
 const initialState: CitizenState = { citizens: [] };
 
+/**
+ * Reducer that containse the {@link CitizenState}
+ * It holds a list of {@link CitizenData}
+ */
 const CitizenReducer = (state: CitizenState = initialState, action: { type: ActionTypeEnum; data: Array<CitizenData> }) => {
     switch (action.type) {
         case ActionTypeEnum.LOAD_CITIZENS:

@@ -1,12 +1,26 @@
 import StringUtils from "../../utils/StringUtils";
 
-const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; max: number; displayMaxValue?: boolean }) => {
-    const width = (value / max) * 100;
+/**
+ * Component that displays progress in a nice progresbar
+ * - Value: The current value in the bar
+ * - Max: The max value the bar can reach
+ * - DisplayMaxValue: Wether the bar should display the max value if the value has reached its maximum or just "MAX"
+ * - HasMaxValue: Wether there is a max value or the bar should just display the filled bar with the current value
+ */
+const ProgressBar = ({ value, max, displayMaxValue = false, hasMaxValue = true }: { value: number; max: number; displayMaxValue?: boolean; hasMaxValue?: boolean }) => {
+    // The width of the bar the the percentage of the current val in correlation with the max val
+    // Or 100 if there is no max value
+    const width = hasMaxValue ? (value / max) * 100 : 100;
+    // Create a string with the percentage sign
     const widthPercentage = `${width}%`;
+
+    // Get "MAX" or a simplified value from the precise value
     const getValue = () => {
         if (!displayMaxValue && value === max) return "MAX";
         return StringUtils.simplify(value);
     };
+
+    // Don't display the fill bar if the value is 0
     const display = value > 0 ? "block" : "none";
 
     return (
@@ -25,6 +39,7 @@ const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; m
                             }}
                             src="./assets/ui/progressbar_progress_fill.png"
                             alt="progressbar fill"
+                            className={hasMaxValue ? "" : "progressBar__bar--background__progress--fullWidth"}
                         />
                         <img
                             style={{
@@ -39,7 +54,7 @@ const ProgressBar = ({ value, max, displayMaxValue = false }: { value: number; m
                     <div className="progressBar__bar__inner__value">{getValue()}</div>
                 </div>
             </div>
-            <div className="progressBar__max">{StringUtils.simplify(max)}</div>
+            {hasMaxValue && <div className="progressBar__max">{StringUtils.simplify(max)}</div>}
         </div>
     );
 };

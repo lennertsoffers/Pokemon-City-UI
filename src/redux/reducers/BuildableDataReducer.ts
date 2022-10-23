@@ -5,6 +5,15 @@ import ActionTypeEnum from "../actions/ActionTypeEnum";
 
 const initialState: BuildableDataState = { buildableDataList: [] };
 
+/**
+ * Reducer that contains the {@link BuildableDataState}
+ * It holds the list of buildables in the city
+ * - LOAD_BUILDINGS: Saves the buildings provided in the state
+ * - UPDATE_BUILDING: Updates one building in the state
+ * - CREATE_BUILDING: Adds a new building to the state
+ * - MOVE_BUILDING: Updates the of a single building in the state
+ * - DEMOLISH_BUILDING: Removes the building from the state
+ */
 const BuildableDataReducer = (state: BuildableDataState = initialState, action: { type: ActionTypeEnum; data: BuildableData | Array<BuildableData> | buildableMoveData | number }) => {
     switch (action.type) {
         case ActionTypeEnum.LOAD_BUILDINGS:

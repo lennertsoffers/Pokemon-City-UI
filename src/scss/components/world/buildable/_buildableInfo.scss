@@ -30,7 +30,12 @@
         }
 
         .progressBar__bar--background__progress {
-            width: calc(100% + 13px) !important;
+            width: calc(100% + 13px);
+        }
+
+        .progressBar__bar--background__progress--fullWidth {
+            background-color: #fff;
+            width: 100% !important;
         }
     }
 }
@@ -53,6 +58,6 @@
     }
 
     .companyInfo__employees {
-        margin-top: 10px;
+        margin-top: 30px;
     }
 }

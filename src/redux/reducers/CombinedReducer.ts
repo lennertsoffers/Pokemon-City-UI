@@ -12,6 +12,9 @@ import SelectedActionReducer from "./SelectedActionReducer";
 import StaticDataReducer from "./StaticDataReducer";
 import UserReducer from "./UserReducer";
 
+/**
+ * The combinedReducer combines all reducers into one so they can be deployed to one store
+ */
 const CombinedReducer = combineReducers({
     buildableDataState: BuildableDataReducer,
     buildableSelectorState: BuildableSelectorReducer,
