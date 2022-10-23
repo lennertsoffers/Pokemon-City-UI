@@ -11,12 +11,19 @@ import ModalTypeEnum from "../../types/enums/ModalTypeEnum";
 import CombinedState from "../../types/interfaces/states/CombinedState";
 import Actions from "../actions/Actions";
 
+/**
+ * Component that displays the toolbar actions
+ */
 const Toolbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const action = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
     const [actionsVisible, setActionsVisible] = useState<boolean>(false);
 
+    /**
+     * Stops the building action if the user was already building
+     * Opens the building modal if the user wasn't building yet
+     */
     const handleBuildClick = () => {
         setActionsVisible(false);
 
@@ -27,23 +34,39 @@ const Toolbar = () => {
             dispatch(OPEN_MODAL(ModalTypeEnum.BUILD_MODAL));
         }
     };
+
+    /**
+     * Opens the actions menu if it wasn't visible yet
+     * Closes it and deselects the current action if it was already open
+     */
     const handleActionsClick = () => {
         dispatch(UNSELECT_ACTION);
         setActionsVisible(!actionsVisible);
         dispatch(DESELECT_BUILDING);
     };
+
+    /**
+     * Opens the citizens modal and loads the newest data of the citizens
+     */
     const handleCitizensClick = () => {
         reset();
         dispatch(DESELECT_BUILDING);
         DataLoader.loadCitizens();
         dispatch(OPEN_MODAL(ModalTypeEnum.CITIZENS_MODAL));
     };
+
+    /**
+     * Logs the player out and opens the login page
+     */
     const handleLogoutClick = () => {
         reset();
         AuthService.logout();
         navigate("/login");
     };
 
+    /**
+     * Closes the actions menu and deselects the currently selected action
+     */
     const reset = () => {
         setActionsVisible(false);
         dispatch(UNSELECT_ACTION);

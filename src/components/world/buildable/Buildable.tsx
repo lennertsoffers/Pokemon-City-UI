@@ -25,6 +25,11 @@ import SpritesheetUtils from "../../../utils/SpritesheetUtils";
 import CompanyInfo from "./CompanyInfo";
 import HouseInfo from "./HouseInfo";
 
+/**
+ * Component that displays a buildable in the world
+ * -> Buildables with a higher y position get a higher z-index to be shown in front
+ * -> Hovering incomeBuildings shows their current accumulated profit info
+ */
 const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     const { selectedBuildable, id } = useSelector((state: CombinedState) => state.buildableSelectorState);
     const action = useSelector((state: CombinedState) => state.selectedActionState.selectedAction);
@@ -32,6 +37,10 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
     const [houseInfo, setHouseInfo] = useState<HouseInfoData | null>(null);
     const [companyInfo, setCompanyInfo] = useState<CompanyInfoData | null>(null);
 
+    /**
+     * Handles clicking a buildable in the world
+     * Calls the right function per selected action
+     */
     const handleBuildableClick = () => {
         switch (action) {
             case ActionEnum.DEMOLISH:
@@ -43,10 +52,17 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
         }
     };
 
+    /**
+     * Handles entering the building with the mouse
+     * If there is no action selected, show the buildable info
+     */
     const handleBuildableMouseEnter = () => {
         if (action === ActionEnum.NONE) setInfo();
     };
 
+    /**
+     * Sets the right info dialog for the type of building
+     */
     const setInfo = () => {
         switch (buildableData.buildableTypeEnum) {
             case "HOUSE":
@@ -56,63 +72,93 @@ const Buildable = ({ buildableData }: { buildableData: BuildableData }) => {
         }
     };
 
+    /**
+     * Hides the info dialog on leaving the building with the mouse
+     */
     const handleBuildableMouseLeave = () => {
         setHouseInfo(null);
         setCompanyInfo(null);
     };
 
+    /**
+     * Calls the demolish function from the {@link BuildableService}
+     * If the type of the buildable is a house, opens the modal to select citizens to remove too
+     */
     const handleDemolish = () => {
+        // If the type of the buildable is a house, select the buildable and open the citizen removal modal
         if (buildableData.buildableTypeEnum === "HOUSE") {
             dispatch(SELECT_BUILDING(BuildableDataMapper.toStaticBuildableData(buildableData), buildableData.id));
             dispatch(OPEN_MODAL(ModalTypeEnum.SELECT_CITIZEN_TO_DEMOLISH_MODAL));
-        } else {
+        }
+
+        // Call the BuildalbeService otherwise
+        else {
             BuildableService.demolishBuildable(
                 buildableData.id,
                 () => {
+                    // On success we also remove the buildable from the state
                     dispatch(DEMOLISH_BUILDING(buildableData.id));
+                    // The user data gets refreshed
                     DataLoader.loadUserData();
                 },
                 () => {
+                    // Always deselect the building
                     dispatch(DESELECT_BUILDING);
                 }
             );
         }
     };
 
+    /**
+     * Selects the building so that the correct building outline can be show in the world
+     */
     const handleMove = () => {
         dispatch(SELECT_BUILDING({ ...buildableData, type: buildableData.buildableTypeEnum }, buildableData.id));
     };
 
+    /**
+     * Checks if the buildable is ready for collection
+     * If this is the case, collects the money by calling the {@link IncomeBuildingService}
+     */
     const handleCollect = () => {
+        // Only houses and companies can be collected
         if (buildableData.buildableTypeEnum !== "HOUSE" && buildableData.buildableTypeEnum !== "COMPANY") return;
 
+        // Calculate how many minutes since the last collection
         const incomeBuildingData: IncomeBuildingData = buildableData as IncomeBuildingData;
         const minutesSinceLastCollection = BuildableUtils.getMinutesSinceLastCollection(incomeBuildingData.lastCollected);
 
+        // The accumulated income has to be more than half the max for houses
         if (buildableData.buildableTypeEnum === "HOUSE" && BuildableUtils.getHouseRent(buildableData) < (buildableData as HouseData).maxRent / 2) return;
+        // You can collect companies only oncee a minute
         if (buildableData.buildableTypeEnum === "COMPANY" && minutesSinceLastCollection < 1) return;
 
+        // Collect the money
+        // Updated the buildable data and user data if the collection was a success
         IncomeBuildingService.collect(incomeBuildingData.id, () => {
             DataLoader.updateBuildable(incomeBuildingData.id);
             DataLoader.loadUserData();
         });
     };
 
+    // Update the info modal if the buildableData changes
+    // For example the amount of employees in a company
     useEffect(() => {
         if (houseInfo || companyInfo) setInfo();
     }, [buildableData]);
 
+    // The user should be able to click through the buildable if he/she is placing a road, building, or moving a buildable
     const pointerEvents = selectedBuildable || action === ActionEnum.PLACE_ROAD ? "none" : "all";
 
+    // Create the buildable image on the grid
     const location = buildableData.spritesheetLocation;
     const spritesheet = buildableData.spritesheet ? buildableData.spritesheet : FALLBACK_SPRITESHEET;
-
     const dimensions: SpritesheetDimension = SpritesheetUtils.getDimension(location);
     const worldPosition: Position = buildableData.location;
-
     const displayWidth = dimensions.width * TILE_WIDTH;
     const displayHeight = dimensions.height * TILE_WIDTH;
 
+    // Only display the move overlay (blue indicator that the user is moving this building) when the action is move and there is a building selected by id
     const displayMoveOverlay = action === ActionEnum.MOVE && selectedBuildable !== null && id === buildableData.id;
 
     return (

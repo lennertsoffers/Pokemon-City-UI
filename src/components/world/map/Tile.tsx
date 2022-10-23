@@ -15,6 +15,11 @@ import Position from "../../../types/interfaces/world/Position";
 import ChunkUtils from "../../../utils/ChunkUtils";
 import BuildableDataMapper from "../../../utils/mappers/BuildableDataMapper";
 
+/**
+ * Component that makes one tile in the world living in a chunk component
+ * The background of the tile is set to the terrain spritesheet and then positioned that the right tile is shown
+ * Tiles are clickable and will handle the click correspondent to the selected action
+ */
 const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { tileId: number; tileIndex: number; chunkPosition: Position; showLocationForBuildable: Function }) => {
     const self = useRef<any>(null);
     const [showLocationForRoad, setShowLocationForRoad] = useState<boolean>(false);
@@ -22,8 +27,12 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
     const selectedBuildable = useSelector((state: CombinedState) => state.buildableSelectorState.selectedBuildable);
     const selectedBuildableId = useSelector((state: CombinedState) => state.buildableSelectorState.id);
     const dispatch = useDispatch();
+    // X = the x position on the terrain spritesheet
     const x = (tileId - 1) * -TILE_WIDTH;
 
+    /**
+     * Handles clicking the tile by executing the function that corresponds to the selected action
+     */
     const tileClickHandler = () => {
         switch (selectedAction) {
             case ActionEnum.BUILD:
@@ -38,19 +47,27 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         }
     };
 
+    /**
+     * Handles entering the tile with the mouse
+     * -> Sets the showLocationForRoad to true if the selected action is placing roads
+     * -> Calls the showLocationForBuildalbe from the parent if a buildable is selected
+     */
     const mouseEnterHandler = () => {
         if (self.current == null) return;
-        if (selectedAction === ActionEnum.PLACE_ROAD) {
-            setShowLocationForRoad(true);
-            console.log("hover");
-
-            return;
-        }
+        if (selectedAction === ActionEnum.PLACE_ROAD) return setShowLocationForRoad(true);
         if (selectedBuildable !== null) return showLocationForBuildable(tileIndex, chunkPosition);
     };
 
+    /**
+     * Hide the road placement preview if the mouse leaves the tile
+     */
     const mouseLeaveHandler = () => setShowLocationForRoad(false);
 
+    /**
+     * Tries to build the selected buildable on the current position
+     * -> First calculates the bottom right position from the current location of the priview (the mouse is positioned in the center of the preview but to send the build request, you need the bottom right position)
+     * -> Calls the Api to try to build on that location
+     */
     const tryBuild = () => {
         if (self.current == null) return;
         if (selectedBuildable == null) return;
@@ -63,6 +80,9 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         });
     };
 
+    /**
+     * Tries to build the road on the current clicked position
+     */
     const tryBuildRoad = async () => {
         if (self.current == null) return;
 
@@ -73,6 +93,11 @@ const Tile = ({ tileId, tileIndex, chunkPosition, showLocationForBuildable }: { 
         dispatch(LOAD_ROADS(roads));
     };
 
+    /**
+     * Tries to move the selected buildable to the current position
+     * -> First calculates the bottom right position from the current location of the priview (the mouse is positioned in the center of the preview but to send the build request, you need the bottom right position)
+     * -> Calls the Api to try to move to that location
+     */
     const tryMove = () => {
         if (self.current == null) return;
         if (selectedBuildable == null) return;

@@ -1,6 +1,11 @@
 import HouseInfoData from "../../../types/interfaces/world/HouseInfoData";
 import ProgressBar from "../../shared/ProgressBar";
 
+/**
+ * Component that shows a brief info about the house
+ * -> How much money is already accumulated out of the maximum
+ * -> If the money can be collected already
+ */
 const HouseInfo = ({ houseInfo }: { houseInfo: HouseInfoData }) => {
     return (
         <div className="buildableInfo houseInfo">
