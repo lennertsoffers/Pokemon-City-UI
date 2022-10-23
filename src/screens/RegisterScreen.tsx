@@ -32,6 +32,14 @@ const RegisterScreen = () => {
         if (success) navigate("/");
     };
 
+    /**
+     * Handles clicking on the login button
+     * Navigates to the login screen
+     */
+    const handleLoginClick = () => {
+        navigate("/login");
+    };
+
     return (
         <div className="auth">
             <div className="auth__container">
@@ -50,7 +58,7 @@ const RegisterScreen = () => {
                     <img src="./assets/ui/link_pointer.png" alt="pointer" />
                 </div>
                 <div className="auth__switchAuth">
-                    Already have an account? <a href="/login">Login</a>.
+                    Already have an account? <span onClick={handleLoginClick}>Login</span>.
                 </div>
             </div>
         </div>

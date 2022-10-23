@@ -1,3 +1,4 @@
+import moment from "moment-timezone";
 import BuildableData from "../types/interfaces/world/BuildableData";
 import CompanyData from "../types/interfaces/world/CompanyData";
 import HouseData from "../types/interfaces/world/HouseData";
@@ -9,7 +10,8 @@ const BuildableUtils = (() => {
      */
     const getMinutesSinceLastCollection = (lastCollected: string) => {
         // Get difference in milliseconds by subtratcting the epoch differences
-        const milisecondsSinceLastCollection = new Date().getTime() - new Date(lastCollected).getTime();
+        // Epoch is in GMT so subtract the difference with the GMT to work in every timezone
+        const milisecondsSinceLastCollection = moment().valueOf() - moment(lastCollected).subtract(new Date().getTimezoneOffset(), "minutes").valueOf();
         // Convert the milliseconds to minutes
         const minutesSinceLastCollection = Math.round(milisecondsSinceLastCollection / 1000 / 60);
 

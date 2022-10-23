@@ -1,7 +1,8 @@
 {
-    "name": "Pokemon-City-Ui",
-    "version": "0.1.0",
+    "name": "pokemon-city",
+    "version": "1.0.0",
     "private": true,
+    "homepage": "/pokemon-city",
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.5",
         "@testing-library/jest-dom": "^5.16.5",
@@ -12,6 +13,8 @@
         "@types/react": "^18.0.21",
         "@types/react-dom": "^18.0.6",
         "axios": "^1.0.0",
+        "moment": "^2.29.4",
+        "moment-timezone": "^0.5.38",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.4",

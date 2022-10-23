@@ -7,7 +7,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 /** Component that handles the routes in the app */
 const Routes = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/pokemon-city/">
             <Switch>
                 <Route path="/" element={<ProtectedComponent />}>
                     <Route path="" element={<GameScreen />} />
