@@ -1,10 +1,18 @@
+/** Module containing util functions concerning strings */
 const StringUtils = (() => {
+    // List containing abbreviations for thousand - million - billion and trillion
     const NUMBER_LETTERS = ["k", "m", "b", "t"];
 
+    /**
+     * Converts the capitalized name of a building containing special characters to the uppercase characters separated by underscores
+     */
     const toConstantName = (name: string): string => {
         return name.replaceAll(/[ -]/gi, "_").replaceAll("'", "").toUpperCase();
     };
 
+    /**
+     * Simplifies a number so that thousands are shown by letters instead of all zeros
+     */
     const simplify = (number: number) => {
         let divisionsBy1000 = 0;
 

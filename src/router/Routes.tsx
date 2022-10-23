@@ -4,6 +4,7 @@ import GameScreen from "../screens/GameScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 
+/** Component that handles the routes in the app */
 const Routes = () => {
     return (
         <BrowserRouter>
