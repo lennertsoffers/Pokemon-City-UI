@@ -9,6 +9,7 @@ import ModalContainer from "../components/modals/ModalContainer";
 import World from "../components/world/map/World";
 import CombinedState from "../types/interfaces/states/CombinedState";
 
+/** The main game screen */
 const GameScreen = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const loggedIn = useSelector((state: CombinedState) => state.authState.loggedIn);
@@ -19,6 +20,7 @@ const GameScreen = () => {
      * Initializes all services that need the store
      * Loads the static data for buildables
      * Loads the buildables of the user
+     * Loads the roads of the user
      * Loads the data of the logged in user
      */
     const loadGame = useCallback(async () => {
@@ -39,11 +41,14 @@ const GameScreen = () => {
         setLoading(false);
     }, [store]);
 
+    // Load the data on startup of the game
     useEffect(() => {
         loadGame();
     }, [loadGame]);
 
+    // If the user is not authenticated, redirect to the login page
     if (!loggedIn) return <Navigate to="/login" />;
+    // If the game is still loading, show the loading screen
     if (loading) return <Loading />;
     return (
         <div className="game">

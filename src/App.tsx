@@ -6,8 +6,6 @@ import Loading from "./components/Loading";
 import ErrorHandler from "./error/ErrorHandler";
 import Routes from "./router/Routes";
 
-// TODO - When dragging, do not listen to other events that use the mouse
-
 function App() {
     const [loading, setLoading] = useState<boolean>(true);
     const store = useStore();

@@ -49,7 +49,7 @@ const BuildableDemolishModal = () => {
 
     useEffect(() => {
         loadCitizens();
-    });
+    }, [loadCitizens]);
 
     // Return the load modal if there is data that is not loaded yet
     if (!selectedBuildable || !selectedBuildableId || !staticHouseData || loading) return <LoadingModal />;

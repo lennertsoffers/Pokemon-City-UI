@@ -95,8 +95,9 @@
         }
 
         .auth__switchAuth {
-            a {
+            span {
                 color: #000;
+                text-decoration: underline;
             }
         }
     }

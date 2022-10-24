@@ -2,23 +2,42 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../api/AuthService";
 
+/** Screen that shows the registration form */
 const RegisterScreen = () => {
     const navigate = useNavigate();
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    /**
+     * Changes the username state when the user changes the content of the input
+     */
     const onUsernameChange = (event: React.FormEvent<HTMLInputElement>) => {
         setUsername(event.currentTarget.value);
     };
 
+    /**
+     * Changes the password state when the user changes the content of the input
+     */
     const onPasswordChange = (event: React.FormEvent<HTMLInputElement>) => {
         setPassword(event.currentTarget.value);
     };
 
+    /**
+     * Handles clicking on the registration button
+     * Navigates to the main game screen if the registration was successful
+     */
     const handleRegister = async () => {
         const success = await AuthService.register(username, password);
         if (success) navigate("/");
+    };
+
+    /**
+     * Handles clicking on the login button
+     * Navigates to the login screen
+     */
+    const handleLoginClick = () => {
+        navigate("/login");
     };
 
     return (
@@ -39,7 +58,7 @@ const RegisterScreen = () => {
                     <img src="./assets/ui/link_pointer.png" alt="pointer" />
                 </div>
                 <div className="auth__switchAuth">
-                    Already have an account? <a href="/login">Login</a>.
+                    Already have an account? <span onClick={handleLoginClick}>Login</span>.
                 </div>
             </div>
         </div>
