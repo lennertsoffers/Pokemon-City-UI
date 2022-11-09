@@ -64,7 +64,7 @@ const BuildableService = (() => {
             y: position.y,
             buildableType: buildableData.type,
         };
-
+        
         try {
             const { data } = await axios.post("/api/buildables/build", body);
 
