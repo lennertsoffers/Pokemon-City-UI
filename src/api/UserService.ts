@@ -10,7 +10,7 @@ const UserService = (() => {
      */
     const getUserData = async () => {
         try {
-            const { data }: { data: UserData } = await axios.get("/users/me");
+            const { data }: { data: UserData } = await axios.get("/api/users/me");
             return data;
         } catch (error) {
             ErrorHandler.handle(error);
@@ -22,7 +22,7 @@ const UserService = (() => {
      * @param time The time to be added to the current playTime in minutes
      */
     const updateStatistics = (time: number) => {
-        axios.post("/users/me/updateStatistics", { sessionTime: time });
+        axios.post("/api/users/me/updateStatistics", { sessionTime: time });
     };
 
     return {
